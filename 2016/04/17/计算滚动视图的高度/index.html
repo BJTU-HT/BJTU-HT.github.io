@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Home
           </a>
         </li>
       
@@ -103,7 +103,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -119,7 +119,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -127,7 +127,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            About
           </a>
         </li>
       
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-17
+          Posted on 2016-04-17
         </span>
 
         
@@ -185,8 +185,9 @@
       
         <p>ios在开发中，需要将多种组件放在一个UIscrollView中，其中包含固定高度的部分，以及不固定高度的部分（比如UITableView）。如下所示，</p>
 <p><img src="/images/boker.gif" alt="Mou icon"></p>
-<p>下面的留言部分是一个UITableView,留言部分高度并不固定。由于UITableView是UIScrollView的子类，所以可以通过UIScrollView的contentSize的高度来获取。</p>
+<p>整个界面由两部分组成，上面一部分是从顶端到灰色条块张，这一部分高度不变；下面是一个UITableView留言部分。留言部分高度并不固定，由于UITableView是UIScrollView的子类，所以可以通过UIScrollView的contentSize的高度来获取。</p>
 <p>所以当前UIScrollView的contentSize的高度就是（固定组件的总高度 + 可变高度的tableView的contentSize.height）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 整个UIScroll页面contentSize设置, partBar是页面固定部分的最后一个组件，messageTableView是评论tableView</span><br><span class="line">self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(partBar.frame) + self.messageTableView.contentSize.height);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -249,10 +250,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -267,21 +268,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -321,7 +322,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -350,7 +351,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
