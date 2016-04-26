@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Home
+            Startseite
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            About
+            Über
           </a>
         </li>
       
@@ -170,7 +170,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-26
+          Veröffentlicht am 2016-04-26
         </span>
 
         
@@ -193,16 +193,12 @@
 <p>rman下恢复archive log到一定的sequence</p>
 <h3 id="ogg日志报错："><a href="#ogg日志报错：" class="headerlink" title="ogg日志报错："></a>ogg日志报错：</h3><p>2016-04-26 00:53:39  ERROR   OGG-00446  Could not find archived log for sequence 4 thread 1 under default destinations SQL</p>
 <p>SELECT name FROM v$archived_log WHERE sequence# = :ora_seq_no AND thread# = :ora_thread AND resetlogs_id = :ora_resetlog_id AND archived = ‘YES’ AND deleted = ‘NO’ AND name not like ‘+%’ AND standby_dest = ‘NO’, </p>
-<p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.</p>
-<h3 id="查看对应的archivelog是否存在"><a href="#查看对应的archivelog是否存在" class="headerlink" title="查看对应的archivelog是否存在"></a>查看对应的archivelog是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sequence#,thread#,status from v$archived_log;</span><br></pre></td></tr></table></figure>
-<p>查询结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">NAME				SEQUENCE#    THREAD# S</span><br><span class="line">------------------------------ ---------- ---------- -</span><br><span class="line">					2	   1 D</span><br><span class="line">					3	   1 D</span><br><span class="line">					4	   1 D</span><br><span class="line">					5	   1 D</span><br><span class="line">					6	   1 D</span><br><span class="line">					7	   1 D</span><br><span class="line">					8	   1 D</span><br><span class="line">					9	   1 D</span><br><span class="line">				       10	   1 D</span><br><span class="line">				       11	   1 D</span><br><span class="line">				       12	   1 D</span><br><span class="line">				       13	   1 D</span><br><span class="line">				       14	   1 D</span><br><span class="line">				       15	   1 D</span><br><span class="line">				       16	   1 D</span><br><span class="line">				       17	   1 D</span><br><span class="line">				       18	   1 D</span><br><span class="line">				       19	   1 D</span><br><span class="line">				       20	   1 D</span><br><span class="line">				       21	   1 D</span><br><span class="line">				       22	   1 D</span><br><span class="line">				       23	   1 Deo</span><br><span class="line">				       24	   1 D</span><br><span class="line">				       25	   1 D</span><br><span class="line">				       26	   1 D</span><br><span class="line">				       27	   1 D</span><br><span class="line">				       28	   1 D</span><br><span class="line">				       29	   1 D</span><br><span class="line">				       30	   1 D</span><br><span class="line">				       31	   1 D</span><br><span class="line">30 rows selected</span><br></pre></td></tr></table></figure></p>
-<p>sequence为4的archivelog已经被删除了，需要从备份中恢复。</p>
-<h3 id="rman恢复sequence-从4开始的archivelog"><a href="#rman恢复sequence-从4开始的archivelog" class="headerlink" title="rman恢复sequence#从4开始的archivelog"></a>rman恢复sequence#从4开始的archivelog</h3><p>可以先查看一下rman备份的归档日志的情况:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt;list backup of archivelog all;</span><br></pre></td></tr></table></figure>
-<p>确保归档日志的备份存在，然后进行恢复。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt; restore archivelog from sequence 4 thread 1;</span><br></pre></td></tr></table></figure>
-<h3 id="重新启动进程"><a href="#重新启动进程" class="headerlink" title="重新启动进程"></a>重新启动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start eora</span><br></pre></td></tr></table></figure>
-
+<p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -242,7 +238,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-25
+          Veröffentlicht am 2016-04-25
         </span>
 
         
@@ -308,7 +304,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-17
+          Veröffentlicht am 2016-04-17
         </span>
 
         
@@ -328,12 +324,12 @@
         
           <p>date: 2016-04-17 17:47:19</p>
 <h2 id="tags-ios-UIScrollView-contentSize"><a href="#tags-ios-UIScrollView-contentSize" class="headerlink" title="tags: ios, UIScrollView, contentSize"></a>tags: ios, UIScrollView, contentSize</h2><p>ios在开发中，需要将多种组件放在一个UIscrollView中，其中包含固定高度的部分，以及不固定高度的部分（比如UITableView）。如下所示，</p>
-<p><img src="/images/boker.gif" alt="Mou icon"></p>
-<p>整个界面由两部分组成，上面一部分是从顶端到灰色条块，这一部分高度不变；下面一部分是一个UITableView的留言。由于留言部分高度不固定，UITableView是UIScrollView的子类，所以需要通过UIScrollView的contentSize的高度来获取。</p>
-<p>所以当前UIScrollView的contentSize的高度就是（固定组件的总高度 + 可变高度的tableView的contentSize.height）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 整个UIScroll页面contentSize设置, partBar是页面固定部分的最后一个组件，messageTableView是评论tableView</span><br><span class="line">self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(partBar.frame) + self.messageTableView.contentSize.height);</span><br></pre></td></tr></table></figure>
-<p>从示意图中可以看出，下拉当前ScrollView时，拉到最后一条评论时就无法继续下拉，所以上面的方法解决了该问题。</p>
-
+<p><img src="/images/boker.gif" alt="Mou icon"><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/17/计算滚动视图的高度/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -373,7 +369,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-12
+          Veröffentlicht am 2016-04-12
         </span>
 
         
@@ -454,21 +450,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">Kategorien</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -526,7 +522,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
