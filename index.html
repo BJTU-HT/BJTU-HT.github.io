@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Accueil
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            A propos
           </a>
         </li>
       
@@ -160,6 +160,75 @@
           
           
             
+              <a class="post-title-link" href="/2016/04/26/OGG-00446-OGG缺archive-log/">
+                OGG-00446 OGG缺archive log
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posté le 2016-04-26
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>date: 2016-04-26 15:58:44</p>
+<h3 id="tags-ogg-ogg-00446"><a href="#tags-ogg-ogg-00446" class="headerlink" title="tags: ogg, ogg-00446"></a>tags: ogg, ogg-00446</h3><hr>
+<p>rman下恢复archive log到一定的sequence</p>
+<h3 id="ogg日志报错："><a href="#ogg日志报错：" class="headerlink" title="ogg日志报错："></a>ogg日志报错：</h3><p>2016-04-26 00:53:39  ERROR   OGG-00446  Could not find archived log for sequence 4 thread 1 under default destinations SQL</p>
+<p>SELECT name FROM v$archived_log WHERE sequence# = :ora_seq_no AND thread# = :ora_thread AND resetlogs_id = :ora_resetlog_id AND archived = ‘YES’ AND deleted = ‘NO’ AND name not like ‘+%’ AND standby_dest = ‘NO’, </p>
+<p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.</p>
+<h3 id="查看对应的archivelog是否存在"><a href="#查看对应的archivelog是否存在" class="headerlink" title="查看对应的archivelog是否存在"></a>查看对应的archivelog是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sequence#,thread#,status from v$archived_log;</span><br></pre></td></tr></table></figure>
+<p>查询结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">NAME				SEQUENCE#    THREAD# S</span><br><span class="line">------------------------------ ---------- ---------- -</span><br><span class="line">					2	   1 D</span><br><span class="line">					3	   1 D</span><br><span class="line">					4	   1 D</span><br><span class="line">					5	   1 D</span><br><span class="line">					6	   1 D</span><br><span class="line">					7	   1 D</span><br><span class="line">					8	   1 D</span><br><span class="line">					9	   1 D</span><br><span class="line">				       10	   1 D</span><br><span class="line">				       11	   1 D</span><br><span class="line">				       12	   1 D</span><br><span class="line">				       13	   1 D</span><br><span class="line">				       14	   1 D</span><br><span class="line">				       15	   1 D</span><br><span class="line">				       16	   1 D</span><br><span class="line">				       17	   1 D</span><br><span class="line">				       18	   1 D</span><br><span class="line">				       19	   1 D</span><br><span class="line">				       20	   1 D</span><br><span class="line">				       21	   1 D</span><br><span class="line">				       22	   1 D</span><br><span class="line">				       23	   1 Deo</span><br><span class="line">				       24	   1 D</span><br><span class="line">				       25	   1 D</span><br><span class="line">				       26	   1 D</span><br><span class="line">				       27	   1 D</span><br><span class="line">				       28	   1 D</span><br><span class="line">				       29	   1 D</span><br><span class="line">				       30	   1 D</span><br><span class="line">				       31	   1 D</span><br><span class="line">30 rows selected</span><br></pre></td></tr></table></figure></p>
+<p>sequence为4的archivelog已经被删除了，需要从备份中恢复。</p>
+<h3 id="rman恢复sequence-从4开始的archivelog"><a href="#rman恢复sequence-从4开始的archivelog" class="headerlink" title="rman恢复sequence#从4开始的archivelog"></a>rman恢复sequence#从4开始的archivelog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt; restore archivelog from sequence 4 thread 1;</span><br></pre></td></tr></table></figure>
+<h3 id="重新启动进程"><a href="#重新启动进程" class="headerlink" title="重新启动进程"></a>重新启动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start eora</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/04/25/oracle-record-is-locked-by-another-user/">
                 oracle record is locked by another user
               </a>
@@ -170,7 +239,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-25
+          Posté le 2016-04-25
         </span>
 
         
@@ -236,7 +305,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-17
+          Posté le 2016-04-17
         </span>
 
         
@@ -301,7 +370,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-12
+          Posté le 2016-04-12
         </span>
 
         
@@ -381,22 +450,22 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">articles</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -454,11 +523,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Theme -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
