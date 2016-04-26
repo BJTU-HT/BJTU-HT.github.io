@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Home
           </a>
         </li>
       
@@ -103,7 +103,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -119,7 +119,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -127,7 +127,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            About
           </a>
         </li>
       
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-26
+          Posted on 2016-04-26
         </span>
 
         
@@ -192,7 +192,10 @@
 <h3 id="查看对应的archivelog是否存在"><a href="#查看对应的archivelog是否存在" class="headerlink" title="查看对应的archivelog是否存在"></a>查看对应的archivelog是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sequence#,thread#,status from v$archived_log;</span><br></pre></td></tr></table></figure>
 <p>查询结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">NAME				SEQUENCE#    THREAD# S</span><br><span class="line">------------------------------ ---------- ---------- -</span><br><span class="line">					2	   1 D</span><br><span class="line">					3	   1 D</span><br><span class="line">					4	   1 D</span><br><span class="line">					5	   1 D</span><br><span class="line">					6	   1 D</span><br><span class="line">					7	   1 D</span><br><span class="line">					8	   1 D</span><br><span class="line">					9	   1 D</span><br><span class="line">				       10	   1 D</span><br><span class="line">				       11	   1 D</span><br><span class="line">				       12	   1 D</span><br><span class="line">				       13	   1 D</span><br><span class="line">				       14	   1 D</span><br><span class="line">				       15	   1 D</span><br><span class="line">				       16	   1 D</span><br><span class="line">				       17	   1 D</span><br><span class="line">				       18	   1 D</span><br><span class="line">				       19	   1 D</span><br><span class="line">				       20	   1 D</span><br><span class="line">				       21	   1 D</span><br><span class="line">				       22	   1 D</span><br><span class="line">				       23	   1 Deo</span><br><span class="line">				       24	   1 D</span><br><span class="line">				       25	   1 D</span><br><span class="line">				       26	   1 D</span><br><span class="line">				       27	   1 D</span><br><span class="line">				       28	   1 D</span><br><span class="line">				       29	   1 D</span><br><span class="line">				       30	   1 D</span><br><span class="line">				       31	   1 D</span><br><span class="line">30 rows selected</span><br></pre></td></tr></table></figure></p>
 <p>sequence为4的archivelog已经被删除了，需要从备份中恢复。</p>
-<h3 id="rman恢复sequence-从4开始的archivelog"><a href="#rman恢复sequence-从4开始的archivelog" class="headerlink" title="rman恢复sequence#从4开始的archivelog"></a>rman恢复sequence#从4开始的archivelog</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt; restore archivelog from sequence 4 thread 1;</span><br></pre></td></tr></table></figure>
+<h3 id="rman恢复sequence-从4开始的archivelog"><a href="#rman恢复sequence-从4开始的archivelog" class="headerlink" title="rman恢复sequence#从4开始的archivelog"></a>rman恢复sequence#从4开始的archivelog</h3><p>可以先查看一下rman备份的归档日志的情况:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt;list backup of archivelog all;</span><br></pre></td></tr></table></figure>
+<p>确保归档日志的备份存在，然后进行恢复。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt; restore archivelog from sequence 4 thread 1;</span><br></pre></td></tr></table></figure>
 <h3 id="重新启动进程"><a href="#重新启动进程" class="headerlink" title="重新启动进程"></a>重新启动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start eora</span><br></pre></td></tr></table></figure>
 
       
@@ -256,10 +259,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -274,21 +277,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">4</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -357,7 +360,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
