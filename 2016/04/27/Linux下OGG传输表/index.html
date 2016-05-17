@@ -47,7 +47,7 @@
 
 
 
-  <title> OGG-00446 OGG缺失archive log // 知其然知其所以然 </title>
+  <title>  // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              OGG-00446 OGG缺失archive log
+              
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-26
+          Posted on 2016-04-27
         </span>
 
         
@@ -183,20 +183,20 @@
       
 
       
-        <p>date: 2016-04-26 15:58:44</p>
-<h3 id="tags-ogg-ogg-00446"><a href="#tags-ogg-ogg-00446" class="headerlink" title="tags: ogg, ogg-00446"></a>tags: ogg, ogg-00446</h3><hr>
-<p>rman下恢复archive log到一定的sequence</p>
-<h3 id="ogg日志报错："><a href="#ogg日志报错：" class="headerlink" title="ogg日志报错："></a>ogg日志报错：</h3><p>2016-04-26 00:53:39  ERROR   OGG-00446  Could not find archived log for sequence 4 thread 1 under default destinations SQL</p>
-<p>SELECT name FROM v$archived_log WHERE sequence# = :ora_seq_no AND thread# = :ora_thread AND resetlogs_id = :ora_resetlog_id AND archived = ‘YES’ AND deleted = ‘NO’ AND name not like ‘+%’ AND standby_dest = ‘NO’, </p>
-<p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br><a id="more"></a></p>
-<h3 id="查看对应的archivelog是否存在"><a href="#查看对应的archivelog是否存在" class="headerlink" title="查看对应的archivelog是否存在"></a>查看对应的archivelog是否存在</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sequence#,thread#,status from v$archived_log;</span><br></pre></td></tr></table></figure>
-<p>查询结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">NAME				SEQUENCE#    THREAD# S</span><br><span class="line">------------------------------ ---------- ---------- -</span><br><span class="line">					2	   1 D</span><br><span class="line">					3	   1 D</span><br><span class="line">					4	   1 D</span><br><span class="line">					5	   1 D</span><br><span class="line">					6	   1 D</span><br><span class="line">					7	   1 D</span><br><span class="line">					8	   1 D</span><br><span class="line">					9	   1 D</span><br><span class="line">				       10	   1 D</span><br><span class="line">				       11	   1 D</span><br><span class="line">				       12	   1 D</span><br><span class="line">				       13	   1 D</span><br><span class="line">				       14	   1 D</span><br><span class="line">				       15	   1 D</span><br><span class="line">				       16	   1 D</span><br><span class="line">				       17	   1 D</span><br><span class="line">				       18	   1 D</span><br><span class="line">				       19	   1 D</span><br><span class="line">				       20	   1 D</span><br><span class="line">				       21	   1 D</span><br><span class="line">				       22	   1 D</span><br><span class="line">				       23	   1 Deo</span><br><span class="line">				       24	   1 D</span><br><span class="line">				       25	   1 D</span><br><span class="line">				       26	   1 D</span><br><span class="line">				       27	   1 D</span><br><span class="line">				       28	   1 D</span><br><span class="line">				       29	   1 D</span><br><span class="line">				       30	   1 D</span><br><span class="line">				       31	   1 D</span><br><span class="line">30 rows selected</span><br></pre></td></tr></table></figure></p>
-<p>sequence为4的archivelog已经被删除了，需要从备份中恢复。</p>
-<h3 id="rman恢复sequence-从4开始的archivelog"><a href="#rman恢复sequence-从4开始的archivelog" class="headerlink" title="rman恢复sequence#从4开始的archivelog"></a>rman恢复sequence#从4开始的archivelog</h3><p>可以先查看一下rman备份的归档日志的情况:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt;list backup of archivelog all;</span><br></pre></td></tr></table></figure>
-<p>确保归档日志的备份存在，然后进行恢复。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rman&gt; restore archivelog from sequence 4 thread 1;</span><br></pre></td></tr></table></figure>
-<h3 id="重新启动进程"><a href="#重新启动进程" class="headerlink" title="重新启动进程"></a>重新启动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start eora</span><br></pre></td></tr></table></figure>
+        <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
+<a id="more"></a>
+<h4 id="添加表级trandata"><a href="#添加表级trandata" class="headerlink" title="添加表级trandata"></a>添加表级trandata</h4><p>添加表级的trandata可以理解为你需要将源端的哪些schema下的哪些表传输到目标库中，那么你就需要手动添加这些trandata。添加之前需要dblogin登录数据库，然后添加表的trandata。</p>
+<p>我们在scott下添加一张表:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create table test(id number, name varchar2(30));</span><br></pre></td></tr></table></figure>
+<p>查看一下scott.test的trandata信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (localhost.localdomain) 9&gt; info trandata scott.test</span><br><span class="line"></span><br><span class="line">Logging of supplemental redo log data is disabled for table SCOTT.TEST.</span><br></pre></td></tr></table></figure>
+<p>这就需要添加trandata，我们这里添加trandata:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add trandata scott.test</span><br><span class="line">GGSCI (localhost.localdomain) 10&gt; add trandata scott.test</span><br><span class="line">2016-04-26 19:08:33  WARNING OGG-00869  No unique key is defined for table &apos;TEST&apos;. All viable columns will be used to represent the key, but may not guarantee uniqueness.  KEYCOLS may be used to define the key.</span><br><span class="line">Logging of supplemental redo data enabled for table SCOTT.TEST.</span><br></pre></td></tr></table></figure>
+<p>这时查看目标端的进程，发现目标端接受进程abended</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MANAGER     RUNNING                                           </span><br><span class="line">REPLICAT    ABENDED     REP1        00:00:00      00:13:18</span><br></pre></td></tr></table></figure>
+<p>查看报错信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2016-04-26 19:14:44  WARNING OGG-00869  Oracle GoldenGate Delivery for Oracle, rep1.prm:  Failed to retrieve column list handle for table SCOTT.TEST.</span><br><span class="line">2016-04-26 19:14:44  ERROR   OGG-00199  Oracle GoldenGate Delivery for Oracle, rep1.prm:  Table scott.TEST does not exist in target database.</span><br><span class="line">2016-04-26 19:14:44  ERROR   OGG-01668  Oracle GoldenGate Delivery for Oracle, rep1.prm:  PROCESS ABENDING.</span><br></pre></td></tr></table></figure>
+<p>报错信息告诉我们需要在目标端将source的表创建好。所以在目标端同样创建scott.test表，这时目标端的replicat进程恢复正常。</p>
 
       
     </div>
@@ -208,13 +208,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/27/Linux下OGG传输表/"></a>
+              <a href="/2016/05/06/Linux下OGG搭建/"></a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/25/oracle-record-is-locked-by-another-user/">oracle record is locked by another user</a>
+              <a href="/2016/04/26/OGG-00446-OGG缺失archive-log/">OGG-00446 OGG缺失archive log</a>
             
           </div>
         </div>
@@ -333,7 +333,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tags-ogg-ogg-00446"><span class="nav-number">1.</span> <span class="nav-text">tags: ogg, ogg-00446</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ogg日志报错："><span class="nav-number">2.</span> <span class="nav-text">ogg日志报错：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看对应的archivelog是否存在"><span class="nav-number">3.</span> <span class="nav-text">查看对应的archivelog是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rman恢复sequence-从4开始的archivelog"><span class="nav-number">4.</span> <span class="nav-text">rman恢复sequence#从4开始的archivelog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新启动进程"><span class="nav-number">5.</span> <span class="nav-text">重新启动进程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加表级trandata"><span class="nav-number">1.</span> <span class="nav-text">添加表级trandata</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
