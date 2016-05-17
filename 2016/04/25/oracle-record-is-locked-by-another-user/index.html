@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Home
+            Домой
           </a>
         </li>
       
@@ -103,7 +103,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Categories
+            Категории
           </a>
         </li>
       
@@ -111,7 +111,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             <i class="menu-item-icon icon-tags"></i> <br />
-            Tags
+            Тэги
           </a>
         </li>
       
@@ -119,7 +119,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archives
+            Архив
           </a>
         </li>
       
@@ -127,7 +127,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            About
+            О сайте
           </a>
         </li>
       
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-25
+          отправлено 2016-04-25
         </span>
 
         
@@ -184,9 +184,7 @@
 
       
         <p>date: 2016-04-25 17:06:38</p>
-<h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><hr>
-<p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。</p>
-<a id="more"></a>
+<h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。<br><a id="more"></a></p>
 <h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><h3 id="状况"><a href="#状况" class="headerlink" title="状况"></a>状况</h3><p>当表锁之后，再进行增删改时，提示如下错误:<br><img src="/images/table_lock.png" alt="Mou icon"></p>
 <h3 id="查询锁"><a href="#查询锁" class="headerlink" title="查询锁"></a>查询锁</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select t2.username,t2.sid,t2.serial#,t2.logon_time from v$locked_object t1,v$session t2 where t1.session_id=t2.sid;</span><br></pre></td></tr></table></figure>
 <p>该SQL语句可以查看到相关的锁。</p>
@@ -256,10 +254,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Of Contents
+            Содержание
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            Обзор
           </li>
         </ul>
       
@@ -274,21 +272,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">записи</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">категории</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">тэги</span>
               </a>
           </div>
 

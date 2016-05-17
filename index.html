@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Home
+            Домой
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Categories
+            Категории
           </a>
         </li>
       
@@ -113,7 +113,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags">
             <i class="menu-item-icon icon-tags"></i> <br />
-            Tags
+            Тэги
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archives
+            Архив
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            About
+            О сайте
           </a>
         </li>
       
@@ -161,7 +161,7 @@
           
             
               <a class="post-title-link" href="/2016/05/06/Linux下OGG搭建/">
-                Untitled
+                Без имени
               </a>
             
           
@@ -170,7 +170,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-05-06
+          отправлено 2016-05-06
         </span>
 
         
@@ -188,31 +188,13 @@
 
       
         
-          <hr>
-<h2 id="Linux下OGG搭建"><a href="#Linux下OGG搭建" class="headerlink" title="Linux下OGG搭建"></a>Linux下OGG搭建</h2><p>date: 2016-05-06 17:15:07</p>
-<p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
-<p>###源端：<br>操作系统: 64位redhat 6.2 </p>
-<p>OGG版本: 11.2.1.0.1</p>
-<p>###目标端：<br>操作系统: 64位redhat 6.2 </p>
-<p>OGG版本: 11.2.1.0.1</p>
-<p>##数据库配置<br>开启归档</p>
-<p>打开数据库级别的补充日志(supplemental log)</p>
-<p>##源端配置<br>Manager进程</p>
-<p>Extract进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params ext1</span><br></pre></td></tr></table></figure>
-<hr>
-<p>extract ext1<br>dynamicresolution<br>userid ogg,password ogg<br>setenv(ORACLE_SID=orcl)<br>exttrail /ogg/dirdat/et</p>
-<h2 id="table-scott-dept"><a href="#table-scott-dept" class="headerlink" title="table scott.dept;"></a>table scott.dept;</h2><p>GGSCI&gt; add extract ext1,tranlog,begin now<br>GGSCI&gt; add exttrail /ogg/dirdat/et, extract ext1, MEGABYTES 20</p>
-<p>Pump进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params pump1</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>extract pump1<br>rmthost 192.168.54.134,mgrport 7500<br>userid ogg,password ogg<br>setenv(ORACLE_SID=orcl)<br>rmttrail /ogg/dirdat/et</p>
-<h2 id="table-scott-dept-1"><a href="#table-scott-dept-1" class="headerlink" title="table scott.dept;"></a>table scott.dept;</h2><p>GGSCI&gt; add extract pump1, exttrailsource /ogg/dirdat/et<br>GGSCI&gt; add rmttrail /ogg/dirdat/et, extract pump1, megabytes 20</p>
-<p>##目标端配置<br>Manager进程</p>
-<p>Replicat进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params repl1</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>replicat repl1<br>userid ogg,password ogg<br>assumetargetdefs<br>reperror default,discard<br>discardfile /ogg/dirrpt/replicat1.dsc, append, megabytes 50<br>dynamicresolution</p>
-<h2 id="map-scott-dept-target-scott-dept"><a href="#map-scott-dept-target-scott-dept" class="headerlink" title="map scott.dept, target scott.dept;"></a>map scott.dept, target scott.dept;</h2><p>GGSCI&gt; add replicat repl1, exttrail /ogg/dirdat/et, checkpointtable ogg.checkpoint</p>
-
+          <h2 id="Linux下OGG搭建"><a href="#Linux下OGG搭建" class="headerlink" title="Linux下OGG搭建"></a>Linux下OGG搭建</h2><p>date: 2016-05-06 17:15:07</p>
+<p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/06/Linux下OGG搭建/#more">
+              Читать дальше &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -243,7 +225,7 @@
           
             
               <a class="post-title-link" href="/2016/04/27/Linux下OGG传输表/">
-                Untitled
+                Без имени
               </a>
             
           
@@ -252,7 +234,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-27
+          отправлено 2016-04-27
         </span>
 
         
@@ -273,7 +255,7 @@
           <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/27/Linux下OGG传输表/#more">
-              Read more &raquo;
+              Читать дальше &raquo;
             </a>
           </div>
         
@@ -315,7 +297,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-26
+          отправлено 2016-04-26
         </span>
 
         
@@ -341,7 +323,7 @@
 <p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
-              Read more &raquo;
+              Читать дальше &raquo;
             </a>
           </div>
         
@@ -383,7 +365,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-25
+          отправлено 2016-04-25
         </span>
 
         
@@ -402,11 +384,10 @@
       
         
           <p>date: 2016-04-25 17:06:38</p>
-<h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><hr>
-<p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。</p>
+<h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/25/oracle-record-is-locked-by-another-user/#more">
-              Read more &raquo;
+              Читать дальше &raquo;
             </a>
           </div>
         
@@ -448,7 +429,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-17
+          отправлено 2016-04-17
         </span>
 
         
@@ -471,7 +452,7 @@
 <p><img src="/images/boker.gif" alt="Mou icon"><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/17/计算滚动视图的高度/#more">
-              Read more &raquo;
+              Читать дальше &raquo;
             </a>
           </div>
         
@@ -513,7 +494,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-12
+          отправлено 2016-04-12
         </span>
 
         
@@ -534,7 +515,7 @@
           <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/12/hello-world/#more">
-              Read more &raquo;
+              Читать дальше &raquo;
             </a>
           </div>
         
@@ -590,21 +571,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">6</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">записи</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">категории</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">тэги</span>
               </a>
           </div>
 
