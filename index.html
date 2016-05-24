@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Home
+            Startseite
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            About
+            Über
           </a>
         </li>
       
@@ -170,7 +170,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-05-24
+          Veröffentlicht am 2016-05-24
         </span>
 
         
@@ -193,10 +193,11 @@
 <p>OGG目的端复制进程异常，查看进程报告，报如下错误：</p>
 <hr>
 <p> 2016-05-24 15:44:27  WARNING OGG-00869  OCI Error ORA-02291: integrity constraint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 229<br>1). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE”,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VER<br>SION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:a7,:a8,:a9,:a10,:a11,:a12).</p>
-<p>2016-05-24 15:44:27  WARNING OGG-01004  Aborted grouped transaction on ‘NM_BAK.SNSLOTTYPE’, Database error 2291 (OCI Error ORA-02291: integrity const<br>raint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 2291). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE<br>“,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VERSION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:<br>a7,:a8,:a9,:a10,:a11,:a12)).</p>
-<hr>
-<p>发现是目标端的表NM_BAK.SNSLOTTYPE上的外键约束NM_BAK.SYS_C0053657引起的，将这个外键约束删除就好了。</p>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/24/外键导致OGG进程异常/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -236,7 +237,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-05-17
+          Veröffentlicht am 2016-05-17
         </span>
 
         
@@ -257,7 +258,7 @@
           <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/17/搭建OGG/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -299,7 +300,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-27
+          Veröffentlicht am 2016-04-27
         </span>
 
         
@@ -321,7 +322,7 @@
 <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/27/Linux下OGG传输表/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -363,7 +364,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-26
+          Veröffentlicht am 2016-04-26
         </span>
 
         
@@ -389,7 +390,7 @@
 <p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -431,7 +432,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-25
+          Veröffentlicht am 2016-04-25
         </span>
 
         
@@ -453,7 +454,7 @@
 <h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/25/oracle-record-is-locked-by-another-user/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -495,7 +496,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-17
+          Veröffentlicht am 2016-04-17
         </span>
 
         
@@ -518,7 +519,7 @@
 <p><img src="/images/boker.gif" alt="Mou icon"><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/17/计算滚动视图的高度/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -560,7 +561,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-12
+          Veröffentlicht am 2016-04-12
         </span>
 
         
@@ -581,7 +582,7 @@
           <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/12/hello-world/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -637,21 +638,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">7</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">Kategorien</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -709,7 +710,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
