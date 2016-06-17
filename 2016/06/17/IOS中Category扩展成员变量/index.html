@@ -47,7 +47,7 @@
 
 
 
-  <title> Linux下OGG传输表 // 知其然知其所以然 </title>
+  <title> IOS中Category扩展成员变量 // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              Linux下OGG传输表
+              IOS中Category扩展成员变量
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-27
+          Posted on 2016-06-17
         </span>
 
         
@@ -183,21 +183,24 @@
       
 
       
-        <p>date: 2016-04-27 09:38:03</p>
-<p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
-<a id="more"></a>
-<h4 id="添加表级trandata"><a href="#添加表级trandata" class="headerlink" title="添加表级trandata"></a>添加表级trandata</h4><p>添加表级的trandata可以理解为你需要将源端的哪些schema下的哪些表传输到目标库中，那么你就需要手动添加这些trandata。添加之前需要dblogin登录数据库，然后添加表的trandata。</p>
-<p>我们在scott下添加一张表:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create table test(id number, name varchar2(30));</span><br></pre></td></tr></table></figure>
-<p>查看一下scott.test的trandata信息:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GGSCI (localhost.localdomain) 9&gt; info trandata scott.test</span><br><span class="line"></span><br><span class="line">Logging of supplemental redo log data is disabled for table SCOTT.TEST.</span><br></pre></td></tr></table></figure>
-<p>这就需要添加trandata，我们这里添加trandata:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add trandata scott.test</span><br><span class="line">GGSCI (localhost.localdomain) 10&gt; add trandata scott.test</span><br><span class="line">2016-04-26 19:08:33  WARNING OGG-00869  No unique key is defined for table &apos;TEST&apos;. All viable columns will be used to represent the key, but may not guarantee uniqueness.  KEYCOLS may be used to define the key.</span><br><span class="line">Logging of supplemental redo data enabled for table SCOTT.TEST.</span><br></pre></td></tr></table></figure>
-<p>这时查看目标端的进程，发现目标端接受进程abended</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MANAGER     RUNNING                                           </span><br><span class="line">REPLICAT    ABENDED     REP1        00:00:00      00:13:18</span><br></pre></td></tr></table></figure>
-<p>查看报错信息:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2016-04-26 19:14:44  WARNING OGG-00869  Oracle GoldenGate Delivery for Oracle, rep1.prm:  Failed to retrieve column list handle for table SCOTT.TEST.</span><br><span class="line">2016-04-26 19:14:44  ERROR   OGG-00199  Oracle GoldenGate Delivery for Oracle, rep1.prm:  Table scott.TEST does not exist in target database.</span><br><span class="line">2016-04-26 19:14:44  ERROR   OGG-01668  Oracle GoldenGate Delivery for Oracle, rep1.prm:  PROCESS ABENDING.</span><br></pre></td></tr></table></figure>
-<p>报错信息告诉我们需要在目标端将source的表创建好。所以在目标端同样创建scott.test表，这时目标端的replicat进程恢复正常。</p>
+        <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br><a id="more"></a></p>
+<p>####obj_setAssociatedObject<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void objc_setAssociatedObject(id object, void *key, id value, objc_AssociationPolicy policy)</span><br></pre></td></tr></table></figure></p>
+<p>参数object就是被附加成员变量的对象，在category中object参数一般使用self；<br>参数key就是这个“成员变量附加”的key，当获取这个成员变量时，就需要通过这个key来获取;<br>参数id就是这个变量的值；<br>参数policy的类型是objc_AssociationPolicy,文档是这么解释的,”Type to specify the behavior of an association.”</p>
+<p>object_AssociationPolicy有5种值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum &#123;</span><br><span class="line">   OBJC_ASSOCIATION_ASSIGN = 0,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,</span><br><span class="line">   OBJC_ASSOCIATION_COPY_NONATOMIC = 3,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN = 01401,</span><br><span class="line">   OBJC_ASSOCIATION_COPY = 01403</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中，OBJC_ASSOCIATION_RETAIN_NONATOMIC是“Specifies a strong reference to the associated object, and that the association is not made atomically”.<br>这个参数的作用就是描述我们要添加的成员变量的”@property (nonatomic, strong)”之类的属性。</p>
+<p>####obj_getAssociatedObject<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id objc_getAssociatedObject(id object, void *key)</span><br></pre></td></tr></table></figure></p>
+<p>参数object指明要从哪个对象获取成员变量，在category中object一般使用self；<br>参数key就是在obj_setAssociatedObject中指明的key。</p>
+<p>####Example<br>下边这个例子是创建一个UITextField的category，使在创建UITextField的时候可以指定一个自定的UIView作为键盘。</p>
+<p>UITextField+RYNumberKeyboard.h<br>引用头文件：#import <uikit uikit.h="">，#import “RYNumberKeyboard.h”</uikit></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">@property (nonatomic, assign) RYInputType ry_inputType;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>UITextField+RYNumberKeyboard.m<br>引用头文件：#import “UITextField+RYNumberKeyboard.h”，#import <objc runtime.h=""></objc></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@implementation UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">- (void)setRy_inputType:(RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    RYNumberKeyboard *inputView = [[RYNumberKeyboard alloc] initWithInputType:ry_inputType];</span><br><span class="line">    self.inputView = inputView;</span><br><span class="line">    objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    return [objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在设置成员变量中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br></pre></td></tr></table></figure>
+<p>其中的”_cmd” is a hidden argument passed to every method that is the current selector.就相当于self之于当前类一样。<br>@(ry_inputType)将int类型的ry_inputType转换成NSString。<br>读取成员变量中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue]</span><br></pre></td></tr></table></figure>
+<p>通过@selector(setRy_inputType:)来获取响应成员函数的_cmd。</p>
 
       
     </div>
@@ -209,13 +212,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/17/搭建OGG/">搭建OGG</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/OGG-00446-OGG缺失archive-log/">OGG-00446 OGG缺失archive log</a>
+              <a href="/2016/05/24/外键导致OGG进程异常/">外键导致OGG进程异常</a>
             
           </div>
         </div>
@@ -334,7 +335,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加表级trandata"><span class="nav-number">1.</span> <span class="nav-text">添加表级trandata</span></a></li></ol></div>
+              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
