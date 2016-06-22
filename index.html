@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Home
+            Startseite
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            About
+            Über
           </a>
         </li>
       
@@ -170,7 +170,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-06-22
+          Veröffentlicht am 2016-06-22
         </span>
 
         
@@ -190,10 +190,11 @@
         
           <p>使用CAShapeLayer画圆圈，效果如下：</p>
 <p><img src="/images/circle.png" alt="Mou icon"></p>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CGFloat radius = 80.0f;</span><br><span class="line">   CGFloat lineWidth = 10.0f;</span><br><span class="line">   CGRect foreCircle_frame = CGRectMake(0,0,radius*2,radius*2);</span><br><span class="line">   </span><br><span class="line">   CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">   layer.frame = foreCircle_frame;</span><br><span class="line">   UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius, radius)</span><br><span class="line">                                                       radius:radius-lineWidth/2</span><br><span class="line">                                                   startAngle:0</span><br><span class="line">                                                     endAngle:M_PI*2</span><br><span class="line">                                                    clockwise:YES];</span><br><span class="line">   layer.path = path.CGPath;</span><br><span class="line">   layer.fillColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.backgroundColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.strokeColor = [UIColor blueColor].CGColor;</span><br><span class="line">   layer.lineWidth = lineWidth;</span><br><span class="line">   layer.lineCap = @&quot;round&quot;;</span><br><span class="line">   layer.strokeStart = 0;</span><br><span class="line">   layer.strokeEnd = 1.0;</span><br><span class="line">   [self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure>
-<p>直接将代码复制进ViewDidLoad函数中进行测试。<br>圆圈通常用于制作进度条，那么一个常用的进度条制作就是先使用上面代码画一个背景圆圈，然后在相同位置为画上一个前景圆圈。通过设置layer的<kbd>strokeEnd</kbd>属性来设置加载进度，如果设置为1，则表示加载完成。</p>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/22/使用CAShapeLayer画圆/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -233,7 +234,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-06-17
+          Veröffentlicht am 2016-06-17
         </span>
 
         
@@ -254,7 +255,7 @@
           <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/17/IOS中Category扩展成员变量/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -296,7 +297,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-05-24
+          Veröffentlicht am 2016-05-24
         </span>
 
         
@@ -321,7 +322,7 @@
 <p> 2016-05-24 15:44:27  WARNING OGG-00869  OCI Error ORA-02291: integrity constraint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 229<br>1). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE”,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VER<br>SION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:a7,:a8,:a9,:a10,:a11,:a12).</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/24/外键导致OGG进程异常/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -363,7 +364,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-05-17
+          Veröffentlicht am 2016-05-17
         </span>
 
         
@@ -384,7 +385,7 @@
           <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/17/搭建OGG/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -426,7 +427,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-27
+          Veröffentlicht am 2016-04-27
         </span>
 
         
@@ -448,7 +449,7 @@
 <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/27/Linux下OGG传输表/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -490,7 +491,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-26
+          Veröffentlicht am 2016-04-26
         </span>
 
         
@@ -516,7 +517,7 @@
 <p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -558,7 +559,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-25
+          Veröffentlicht am 2016-04-25
         </span>
 
         
@@ -580,7 +581,7 @@
 <h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/25/oracle-record-is-locked-by-another-user/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -622,7 +623,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-17
+          Veröffentlicht am 2016-04-17
         </span>
 
         
@@ -645,7 +646,7 @@
 <p><img src="/images/boker.gif" alt="Mou icon"><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/17/计算滚动视图的高度/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -687,7 +688,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-04-12
+          Veröffentlicht am 2016-04-12
         </span>
 
         
@@ -708,7 +709,7 @@
           <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/12/hello-world/#more">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
         
@@ -764,21 +765,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">9</span>
-              <span class="site-state-item-name">posts</span>
+              <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
+              <span class="site-state-item-name">Kategorien</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">tags</span>
+              <span class="site-state-item-name">Tags</span>
               </a>
           </div>
 
@@ -836,7 +837,7 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
