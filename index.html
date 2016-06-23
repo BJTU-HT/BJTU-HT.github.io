@@ -189,12 +189,11 @@
       
         
           <p>UITextView不提供Placeholder属性，但可以通过自定义来实现，核心思想是UITextView中添加一个UILabel，让UILabel现实Placeholder的内容；当UITextView中输入文字时，让这个UILabel隐藏，可以通过为UITextView添加UITextViewTextDidChangeNotification类型的监听来实现捕获文字的输入。</p>
-<p>效果如下：</p>
-<p><img src="/images/placeholdergif.gif" alt="Mou icon"></p>
-<p>Github源代码连接：<a href="https://github.com/BJTU-HT/PlaceholdUITextView.git" target="_blank" rel="external">点击下载</a></p>
-<p>使用方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PlaceholderTextView *textView = [[PlaceholderTextView alloc] initWithFrame:CGRectMake(50, 50, 200, 300)];</span><br><span class="line">[self.view addSubview:textView];</span><br><span class="line">textView.myPlaceholder = @&quot;输入文字的asdasdasdasdsad...&quot;;</span><br><span class="line">textView.myPlaceholderColor = [UIColor lightGrayColor];</span><br></pre></td></tr></table></figure>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/23/自定义带Placeholder的UITextView/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
