@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Home
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            About
           </a>
         </li>
       
@@ -160,6 +160,66 @@
           
           
             
+              <a class="post-title-link" href="/2016/06/28/UINavigationController返回上上级/">
+                UINavigationController返回上上级
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2016-06-28
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long index= [[self.navigationController viewControllers] indexOfObject:self];</span><br><span class="line">[self.navigationController popToViewController [self.navigationController.viewControllers objectAtIndex:index-2] animated:YES];</span><br></pre></td></tr></table></figure>
+<p>[self.navigationController viewControllers]中的“viewControllers”是“The view controllers currently on the navigation stack.”</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/06/23/自定义带Placeholder的UITextView/">
                 自定义带Placeholder的UITextView
               </a>
@@ -170,7 +230,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-23
+          Posted on 2016-06-23
         </span>
 
         
@@ -191,7 +251,7 @@
           <p>UITextView不提供Placeholder属性，但可以通过自定义来实现，核心思想是UITextView中添加一个UILabel，让UILabel现实Placeholder的内容；当UITextView中输入文字时，让这个UILabel隐藏，可以通过为UITextView添加UITextViewTextDidChangeNotification类型的监听来实现捕获文字的输入。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/23/自定义带Placeholder的UITextView/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -233,7 +293,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-22
+          Posted on 2016-06-22
         </span>
 
         
@@ -255,7 +315,7 @@
 <p><img src="/images/circle.png" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/22/使用CAShapeLayer画圆/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -297,7 +357,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-17
+          Posted on 2016-06-17
         </span>
 
         
@@ -318,7 +378,7 @@
           <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/17/IOS中Category扩展成员变量/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -360,7 +420,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-24
+          Posted on 2016-05-24
         </span>
 
         
@@ -385,7 +445,7 @@
 <p> 2016-05-24 15:44:27  WARNING OGG-00869  OCI Error ORA-02291: integrity constraint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 229<br>1). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE”,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VER<br>SION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:a7,:a8,:a9,:a10,:a11,:a12).</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/24/外键导致OGG进程异常/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -427,7 +487,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-17
+          Posted on 2016-05-17
         </span>
 
         
@@ -448,7 +508,7 @@
           <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/17/搭建OGG/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -490,7 +550,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-27
+          Posted on 2016-04-27
         </span>
 
         
@@ -512,7 +572,7 @@
 <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/27/Linux下OGG传输表/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -554,7 +614,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-26
+          Posted on 2016-04-26
         </span>
 
         
@@ -580,7 +640,7 @@
 <p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -622,7 +682,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-25
+          Posted on 2016-04-25
         </span>
 
         
@@ -644,7 +704,7 @@
 <h2 id="tags-锁"><a href="#tags-锁" class="headerlink" title="tags: 锁"></a>tags: 锁</h2><p>oracle中，一旦一张表被更新，删除，修改而没有commit，那么PL/SQL就会执行锁命令，将这张表锁住，从而只能对这张表进行查询，无法进行增删改。这时需要对标进行解锁。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/25/oracle-record-is-locked-by-another-user/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -686,7 +746,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-17
+          Posted on 2016-04-17
         </span>
 
         
@@ -709,70 +769,7 @@
 <p><img src="/images/boker.gif" alt="Mou icon"><br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/17/计算滚动视图的高度/#more">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/04/12/hello-world/">
-                Hello World
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Veröffentlicht am 2016-04-12
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/12/hello-world/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -796,6 +793,10 @@
   </div>
 
   
+  <div class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+  </div>
+
 
         </div>
 
@@ -827,22 +828,22 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -900,7 +901,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
