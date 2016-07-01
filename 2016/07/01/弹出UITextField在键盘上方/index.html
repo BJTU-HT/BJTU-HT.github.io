@@ -47,7 +47,7 @@
 
 
 
-  <title> IOS中Category扩展成员变量 // 知其然知其所以然 </title>
+  <title> 弹出UITextField在键盘上方 // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              IOS中Category扩展成员变量
+              弹出UITextField在键盘上方
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-17
+          Veröffentlicht am 2016-07-01
         </span>
 
         
@@ -183,24 +183,15 @@
       
 
       
-        <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br><a id="more"></a></p>
-<h4 id="obj-setAssociatedObject"><a href="#obj-setAssociatedObject" class="headerlink" title="obj_setAssociatedObject"></a>obj_setAssociatedObject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void objc_setAssociatedObject(id object, void *key, id value, objc_AssociationPolicy policy)</span><br></pre></td></tr></table></figure>
-<p>参数object就是被附加成员变量的对象，在category中object参数一般使用self；<br>参数key就是这个“成员变量附加”的key，当获取这个成员变量时，就需要通过这个key来获取;<br>参数id就是这个变量的值；<br>参数policy的类型是objc_AssociationPolicy,文档是这么解释的,”Type to specify the behavior of an association.”</p>
-<p>object_AssociationPolicy有5种值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum &#123;</span><br><span class="line">   OBJC_ASSOCIATION_ASSIGN = 0,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,</span><br><span class="line">   OBJC_ASSOCIATION_COPY_NONATOMIC = 3,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN = 01401,</span><br><span class="line">   OBJC_ASSOCIATION_COPY = 01403</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>其中，OBJC_ASSOCIATION_RETAIN_NONATOMIC是“Specifies a strong reference to the associated object, and that the association is not made atomically”.<br>这个参数的作用就是描述我们要添加的成员变量的”@property (nonatomic, strong)”之类的属性。</p>
-<h4 id="obj-getAssociatedObject"><a href="#obj-getAssociatedObject" class="headerlink" title="obj_getAssociatedObject"></a>obj_getAssociatedObject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id objc_getAssociatedObject(id object, void *key)</span><br></pre></td></tr></table></figure>
-<p>参数object指明要从哪个对象获取成员变量，在category中object一般使用self；<br>参数key就是在obj_setAssociatedObject中指明的key。</p>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>下边这个例子是创建一个UITextField的category，使在创建UITextField的时候可以指定一个自定的UIView作为键盘。</p>
-<p>UITextField+RYNumberKeyboard.h<br>引用头文件：#import <uikit uikit.h="">，#import “RYNumberKeyboard.h”</uikit></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">@property (nonatomic, assign) RYInputType ry_inputType;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>UITextField+RYNumberKeyboard.m<br>引用头文件：#import “UITextField+RYNumberKeyboard.h”，#import <objc runtime.h=""></objc></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@implementation UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">- (void)setRy_inputType:(RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    RYNumberKeyboard *inputView = [[RYNumberKeyboard alloc] initWithInputType:ry_inputType];</span><br><span class="line">    self.inputView = inputView;</span><br><span class="line">    objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    return [objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在设置成员变量中:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br></pre></td></tr></table></figure>
-<p>其中的”_cmd” is a hidden argument passed to every method that is the current selector.就相当于self之于当前类一样。<br>@(ry_inputType)将int类型的ry_inputType转换成NSString。<br>读取成员变量中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue]</span><br></pre></td></tr></table></figure>
-<p>通过@selector(setRy_inputType:)来获取响应成员函数的_cmd。</p>
+        <p>效果图：<br><img src="/images/键盘_gif_01.gif" alt="Mou icon"></p>
+<a id="more"></a>
+<p>思路是获取键盘弹出和收回的通知，然后从通知中获取键盘的动画，然后将键盘的动画应用到UITextField上。</p>
+<h3 id="Step1-获取键盘弹出和回收通知"><a href="#Step1-获取键盘弹出和回收通知" class="headerlink" title="Step1 获取键盘弹出和回收通知"></a>Step1 获取键盘弹出和回收通知</h3><p>注册键盘弹出和回收通知</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidAppear:(BOOL)animated</span><br><span class="line">&#123;</span><br><span class="line">    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];</span><br><span class="line">    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)keyboardWillShow:(NSNotification *)notification</span><br><span class="line">&#123;</span><br><span class="line">    NSDictionary *userInfo = [notification userInfo];</span><br><span class="line">    [self adjustTextViewByKeyboardState:YES keyboardInfo:userInfo];</span><br><span class="line">&#125;</span><br><span class="line">- (void)keyboardWillHide:(NSNotification *)notification</span><br><span class="line">&#123;</span><br><span class="line">    NSDictionary *userInfo = [notification userInfo];</span><br><span class="line">    [self adjustTextViewByKeyboardState:NO keyboardInfo:userInfo];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Step2-获取键盘动画并应用到UITextField"><a href="#Step2-获取键盘动画并应用到UITextField" class="headerlink" title="Step2 获取键盘动画并应用到UITextField"></a>Step2 获取键盘动画并应用到UITextField</h3><p>键盘的动画信息保存在notifaction的userInfo中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">- (void)adjustTextViewByKeyboardState:(BOOL)showKeyboard keyboardInfo:(NSDictionary *)info</span><br><span class="line">&#123;</span><br><span class="line">    // 获取键盘的弹出动画</span><br><span class="line">    UIViewAnimationCurve animationCurve = [info[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];</span><br><span class="line">    </span><br><span class="line">    // 为self.inputField创建动画</span><br><span class="line">    UIViewAnimationOptions animationOptions = UIViewAnimationOptionBeginFromCurrentState;</span><br><span class="line">    </span><br><span class="line">    // 把键盘动画合并到inputField动画上</span><br><span class="line">    if (animationCurve == UIViewAnimationCurveEaseIn) &#123;</span><br><span class="line">        animationOptions |= UIViewAnimationOptionCurveEaseIn;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (animationCurve == UIViewAnimationCurveEaseInOut) &#123;</span><br><span class="line">        animationOptions |= UIViewAnimationOptionCurveEaseInOut;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (animationCurve == UIViewAnimationCurveEaseOut) &#123;</span><br><span class="line">        animationOptions |= UIViewAnimationOptionCurveEaseOut;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (animationCurve == UIViewAnimationCurveLinear) &#123;</span><br><span class="line">        animationOptions |= UIViewAnimationOptionCurveLinear;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 获取键盘动画的持续时间</span><br><span class="line">    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];</span><br><span class="line">    </span><br><span class="line">    // 通过获取键盘frame来获取键盘的高度</span><br><span class="line">    NSValue *keyboardFrameVal = [info objectForKey:UIKeyboardFrameEndUserInfoKey];</span><br><span class="line">    CGRect keyboardFrame = [keyboardFrameVal CGRectValue];</span><br><span class="line">    CGFloat keyboardHeight = keyboardFrame.size.height;</span><br><span class="line">    </span><br><span class="line">    if (showKeyboard) &#123;</span><br><span class="line">        // 设置弹出self.inputField动画</span><br><span class="line">        [UIView animateWithDuration:animationDuration delay:0 options:animationOptions animations:^&#123;</span><br><span class="line">            self.inputField.hidden = NO;</span><br><span class="line">            CGFloat W = self.view.frame.size.width;</span><br><span class="line">            CGFloat H = 40;</span><br><span class="line">            CGFloat X = 0;</span><br><span class="line">            CGFloat Y = self.view.frame.size.height - keyboardHeight - H;</span><br><span class="line">            self.inputField.frame = CGRectMake(X, Y, W, H);</span><br><span class="line">        &#125; completion:nil];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 设置收回self.inputField动画</span><br><span class="line">        [UIView animateWithDuration:animationDuration delay:0 options:animationOptions animations:^&#123;</span><br><span class="line">            CGFloat W = self.view.frame.size.width;</span><br><span class="line">            CGFloat H = 40;</span><br><span class="line">            CGFloat X = 0;</span><br><span class="line">            CGFloat Y = self.view.frame.size.height;</span><br><span class="line">            self.inputField.frame = CGRectMake(X, Y, W, H);</span><br><span class="line">            self.inputField.hidden = YES;</span><br><span class="line">        &#125; completion:nil];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Github源码下载：<a href="https://github.com/BJTU-HT/TextFieldOnKeyboard.git" target="_blank" rel="external">点击下载</a></p>
 
       
     </div>
@@ -212,13 +203,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/22/使用CAShapeLayer画圆/">使用CAShapeLayer画圆</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/外键导致OGG进程异常/">外键导致OGG进程异常</a>
+              <a href="/2016/06/28/UINavigationController返回上上级/">UINavigationController返回上上级</a>
             
           </div>
         </div>
@@ -337,7 +326,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#obj-setAssociatedObject"><span class="nav-number">1.</span> <span class="nav-text">obj_setAssociatedObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#obj-getAssociatedObject"><span class="nav-number">2.</span> <span class="nav-text">obj_getAssociatedObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step1-获取键盘弹出和回收通知"><span class="nav-number">1.</span> <span class="nav-text">Step1 获取键盘弹出和回收通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step2-获取键盘动画并应用到UITextField"><span class="nav-number">2.</span> <span class="nav-text">Step2 获取键盘动画并应用到UITextField</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
