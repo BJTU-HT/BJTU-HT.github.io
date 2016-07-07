@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Accueil
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            A propos
           </a>
         </li>
       
@@ -160,6 +160,70 @@
           
           
             
+              <a class="post-title-link" href="/2016/07/07/IOS单例/">
+                IOS单例
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posté le 2016-07-07
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>IOS单例目前的写法：</p>
+<p>Singleton.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Singleton : NSObject</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>Singleton.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Singleton.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Singleton</span><br><span class="line"></span><br><span class="line">static Singleton *sharedManager = nil;</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager</span><br><span class="line">&#123;</span><br><span class="line">    static dispatch_once_t once;</span><br><span class="line">    dispatch_once(&amp;once, ^&#123;</span><br><span class="line">        sharedManager = [[self alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>static的sharedManager，保证对象的生命周期与程序相同。<br>void dispatch_once(<br>    dispatch_once_t *predicate,<br>    dispatch_block_t block);<br>保证block只执行一次。    </p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/07/06/storyboard布局示例/">
                 storyboard布局示例
               </a>
@@ -170,7 +234,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-06
+          Posté le 2016-07-06
         </span>
 
         
@@ -191,7 +255,7 @@
           <p>coursera ios课程上面使用约束布局的过程记录，结果如下：<br><img src="/images/layout.png" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/06/storyboard布局示例/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -233,7 +297,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-01
+          Posté le 2016-07-01
         </span>
 
         
@@ -254,7 +318,7 @@
           <p>效果图：<br><img src="/images/键盘_gif_01.gif" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/01/弹出UITextField在键盘上方/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -296,7 +360,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-28
+          Posté le 2016-06-28
         </span>
 
         
@@ -356,7 +420,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-23
+          Posté le 2016-06-23
         </span>
 
         
@@ -377,7 +441,7 @@
           <p>UITextView不提供Placeholder属性，但可以通过自定义来实现，核心思想是UITextView中添加一个UILabel，让UILabel现实Placeholder的内容；当UITextView中输入文字时，让这个UILabel隐藏，可以通过为UITextView添加UITextViewTextDidChangeNotification类型的监听来实现捕获文字的输入。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/23/自定义带Placeholder的UITextView/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -419,7 +483,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-22
+          Posté le 2016-06-22
         </span>
 
         
@@ -441,7 +505,7 @@
 <p><img src="/images/circle.png" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/22/使用CAShapeLayer画圆/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -483,7 +547,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-17
+          Posté le 2016-06-17
         </span>
 
         
@@ -504,7 +568,7 @@
           <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/17/IOS中Category扩展成员变量/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -546,7 +610,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-24
+          Posté le 2016-05-24
         </span>
 
         
@@ -571,7 +635,7 @@
 <p> 2016-05-24 15:44:27  WARNING OGG-00869  OCI Error ORA-02291: integrity constraint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 229<br>1). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE”,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VER<br>SION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:a7,:a8,:a9,:a10,:a11,:a12).</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/24/外键导致OGG进程异常/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -613,7 +677,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-17
+          Posté le 2016-05-17
         </span>
 
         
@@ -634,7 +698,7 @@
           <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/17/搭建OGG/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -676,7 +740,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-04-27
+          Posté le 2016-04-27
         </span>
 
         
@@ -698,75 +762,7 @@
 <p>版本11.2<br>先附上11.2的下载链接：<br><a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/04/27/Linux下OGG传输表/#more">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/04/26/OGG-00446-OGG缺失archive-log/">
-                OGG-00446 OGG缺失archive log
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Veröffentlicht am 2016-04-26
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>date: 2016-04-26 15:58:44</p>
-<h3 id="tags-ogg-ogg-00446"><a href="#tags-ogg-ogg-00446" class="headerlink" title="tags: ogg, ogg-00446"></a>tags: ogg, ogg-00446</h3><hr>
-<p>rman下恢复archive log到一定的sequence</p>
-<h3 id="ogg日志报错："><a href="#ogg日志报错：" class="headerlink" title="ogg日志报错："></a>ogg日志报错：</h3><p>2016-04-26 00:53:39  ERROR   OGG-00446  Could not find archived log for sequence 4 thread 1 under default destinations SQL</p>
-<p>SELECT name FROM v$archived_log WHERE sequence# = :ora_seq_no AND thread# = :ora_thread AND resetlogs_id = :ora_resetlog_id AND archived = ‘YES’ AND deleted = ‘NO’ AND name not like ‘+%’ AND standby_dest = ‘NO’, </p>
-<p>error retrieving redo file name for sequence 4, archived = 1, use_alternate = 0Not able to establish initial position for sequence 4, rba 22626320.<br>2016-04-26 00:53:39  ERROR   OGG-01668  PROCESS ABENDING.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/26/OGG-00446-OGG缺失archive-log/#more">
-              Weiterlesen &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -825,22 +821,22 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">articles</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -898,11 +894,11 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  Theme -
+  Thème -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
