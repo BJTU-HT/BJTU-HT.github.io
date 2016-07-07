@@ -95,7 +95,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Accueil
+            Home
           </a>
         </li>
       
@@ -127,7 +127,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            A propos
+            About
           </a>
         </li>
       
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posté le 2016-07-07
+          Posted on 2016-07-07
         </span>
 
         
@@ -186,6 +186,7 @@
         <p>IOS单例目前的写法：</p>
 <p>Singleton.h</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Singleton : NSObject</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>Singleton.m</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Singleton.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Singleton</span><br><span class="line"></span><br><span class="line">static Singleton *sharedManager = nil;</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager</span><br><span class="line">&#123;</span><br><span class="line">    static dispatch_once_t once;</span><br><span class="line">    dispatch_once(&amp;once, ^&#123;</span><br><span class="line">        sharedManager = [[self alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
 <p>static的sharedManager，保证对象的生命周期与程序相同。<br>void dispatch_once(<br>    dispatch_once_t *predicate,<br>    dispatch_block_t block);<br>保证block只执行一次。    </p>
@@ -251,10 +252,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Des Matières
+            Table Of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Ensemble
+            Overview
           </li>
         </ul>
       
@@ -269,7 +270,7 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">articles</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -356,7 +357,7 @@
 </div>
 
 <div class="theme-info">
-  Thème -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
