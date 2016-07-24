@@ -196,50 +196,11 @@
 <li>Concurrent Dispatch Queue</li>
 </ul>
 <p>dispatch_queue_T myConcurrentDispatchQueue = dispatch_queue_create(“xxxx”, DISPATCH_QUEUE_CONCURRENT);</p>
-<p>自己创建的dispatch queue必须自己释放，dispatch_release(myConcurrentDispatchQueue);</p>
-<ul>
-<li>获取主线程</li>
-</ul>
-<p>dispatch_queue_t mainDispatchQueue = dispatch_get_main_queue();</p>
-<ul>
-<li>获取global dispatch queue</li>
-</ul>
-<p>dispatch_queue_t globalDispatchQueueHigh = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH,0);</p>
-<ul>
-<li><p>使用Global Dispatch Queue和Main Queue的一个范式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">    // 并行处理</span><br><span class="line">    // ...</span><br><span class="line">    // 处理完成之后再main线程上显示</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        // 界面上的更新</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Dispatch Group</p>
-</li>
-</ul>
-<p>在concurrent Dispatch Queue中，等待多个block都处理完成后做一个处理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_group_t group = dispatch_group_create();</span><br><span class="line"></span><br><span class="line">dispatch_group_async(group, queue, ^&#123;NSLog(@&quot;blk0&quot;);&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;NSLog(@&quot;blk0&quot;);&#125;);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;NSLog(@&quot;blk0&quot;);&#125;);</span><br><span class="line"></span><br><span class="line">dispatch_group_notify(group, dispatch_get_main_queue(), ^&#123;</span><br><span class="line">    NSLog(@&quot;done&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>dispatch_barrier_async<br>在concurrent Dispatch Queue中，当前block执行完之后，后边的block才会执行</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">    // dong something</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>dispatch_sync</li>
-</ul>
-<p>同步可能会引起死锁</p>
-<ul>
-<li>dispatch apply</li>
-</ul>
-<p>同步地等待所有处理执行结束；因为是同步的，所以一般会放在异步的队列里面去中，如下所示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    dispatch_apply(10000000, queue, ^(size_t index) &#123;</span><br><span class="line">        NSLog(@&quot;%zu&quot;, index);</span><br><span class="line">    &#125;);</span><br><span class="line">    NSLog(@&quot;done&quot;);</span><br><span class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">        NSLog(@&quot;done&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>dispatch Semaphore</li>
-</ul>
-<p>PV操作</p>
-<ul>
-<li>dispatch once</li>
-</ul>
-<p>只执行一次，用于单例之类的..</p>
-<ul>
-<li>dispatch I/O</li>
-</ul>
-<p>分块并列读取</p>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/24/Objective-C高级编程之多线程/#more">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
