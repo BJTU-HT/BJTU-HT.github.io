@@ -97,7 +97,7 @@
         <li class="menu-item menu-item-home">
           <a href="/">
             <i class="menu-item-icon icon-home"></i> <br />
-            Startseite
+            Home
           </a>
         </li>
       
@@ -105,7 +105,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories">
             <i class="menu-item-icon icon-categories"></i> <br />
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -121,7 +121,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives">
             <i class="menu-item-icon icon-archives"></i> <br />
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -129,7 +129,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about">
             <i class="menu-item-icon icon-about"></i> <br />
-            Über
+            About
           </a>
         </li>
       
@@ -170,7 +170,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-27
+          Posted on 2016-07-27
         </span>
 
         
@@ -190,9 +190,11 @@
         
           <p>翻译自官方文档。</p>
 <p>@synchronized提供了一种代替mutext locks的简便方法，它阻止不同的线程同时获取相同的锁。在下面的这个例子中，你不必创建锁去锁住对象，你仅仅需要使用任何一个Objective-C object作为lock token, 像下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)myMethod:(id)anObj</span><br><span class="line">&#123;</span><br><span class="line">	@synchronized(anObj)</span><br><span class="line">	&#123;</span><br><span class="line">		// Everything between the braces is protected by the @synchronized directive.</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>传递给@synchronized的对象是一个区别不同受保护的程序块的唯一标识符。如果你使用两个线程，并且每个线程使用不同的anObj参数执行上面的代码，那么这两个线程会获取到自己的锁去执行，相互之间不会阻塞。如果两个线程使用的是相同的anObj参数，那么一个线程就会获取锁先执行，另一个线程会等待直到锁释放掉再执行。</p>
-
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/27/使用-synchronized指南/#more">
+              Read more &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -232,7 +234,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-24
+          Posted on 2016-07-24
         </span>
 
         
@@ -260,7 +262,7 @@
 <p>dispatch_queue_T myConcurrentDispatchQueue = dispatch_queue_create(“xxxx”, DISPATCH_QUEUE_CONCURRENT);</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/24/Objective-C高级编程之多线程/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -302,7 +304,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-07
+          Posted on 2016-07-07
         </span>
 
         
@@ -325,7 +327,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Singleton : NSObject</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/07/IOS单例/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -367,7 +369,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-06
+          Posted on 2016-07-06
         </span>
 
         
@@ -388,7 +390,7 @@
           <p>coursera ios课程上面使用约束布局的过程记录，结果如下：<br><img src="/images/layout.png" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/06/storyboard布局示例/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -430,7 +432,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-07-01
+          Posted on 2016-07-01
         </span>
 
         
@@ -451,7 +453,7 @@
           <p>效果图：<br><img src="/images/键盘_gif_01.gif" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/07/01/弹出UITextField在键盘上方/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -493,7 +495,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-28
+          Posted on 2016-06-28
         </span>
 
         
@@ -553,7 +555,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-23
+          Posted on 2016-06-23
         </span>
 
         
@@ -574,7 +576,7 @@
           <p>UITextView不提供Placeholder属性，但可以通过自定义来实现，核心思想是UITextView中添加一个UILabel，让UILabel现实Placeholder的内容；当UITextView中输入文字时，让这个UILabel隐藏，可以通过为UITextView添加UITextViewTextDidChangeNotification类型的监听来实现捕获文字的输入。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/23/自定义带Placeholder的UITextView/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -616,7 +618,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-22
+          Posted on 2016-06-22
         </span>
 
         
@@ -638,7 +640,7 @@
 <p><img src="/images/circle.png" alt="Mou icon"></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/22/使用CAShapeLayer画圆/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -680,7 +682,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-06-17
+          Posted on 2016-06-17
         </span>
 
         
@@ -701,7 +703,7 @@
           <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/06/17/IOS中Category扩展成员变量/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -743,7 +745,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-24
+          Posted on 2016-05-24
         </span>
 
         
@@ -768,7 +770,7 @@
 <p> 2016-05-24 15:44:27  WARNING OGG-00869  OCI Error ORA-02291: integrity constraint (NM_BAK.SYS_C0053657) violated - parent key not found (status = 229<br>1). INSERT INTO “NM_BAK”.”SNSLOTTYPE” (“ID”,”SNSUBNETYPEID”,”CASCADESEQUENCE”,”SEQUENCE”,”DISPLAYLABEL”,”LEFTTOPX”,”LEFTTOPY”,”WIDTH”,”COMMENTS”,”VER<br>SION”,”HEIGHT”,”MIGDATE”,”SLOTTYPEID”) VALUES (:a0,:a1,:a2,:a3,:a4,:a5,:a6,:a7,:a8,:a9,:a10,:a11,:a12).</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/24/外键导致OGG进程异常/#more">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
         
@@ -828,21 +830,21 @@
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">16</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Kategorien</span>
+              <span class="site-state-item-name">categories</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
               <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">Tags</span>
+              <span class="site-state-item-name">tags</span>
               </a>
           </div>
 
@@ -900,7 +902,7 @@
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
