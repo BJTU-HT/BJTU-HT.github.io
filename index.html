@@ -160,6 +160,68 @@
           
           
             
+              <a class="post-title-link" href="/2016/07/27/使用-synchronized指南/">
+                使用@synchronized指南
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Veröffentlicht am 2016-07-27
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>翻译自官方文档。</p>
+<p>@synchronized提供了一种代替mutext locks的简便方法，它阻止不同的线程同时获取相同的锁。在下面的这个例子中，你不必创建锁去锁住对象，你仅仅需要使用任何一个Objective-C object作为lock token, 像下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)myMethod:(id)anObj</span><br><span class="line">&#123;</span><br><span class="line">	@synchronized(anObj)</span><br><span class="line">	&#123;</span><br><span class="line">		// Everything between the braces is protected by the @synchronized directive.</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传递给@synchronized的对象是一个区别不同受保护的程序块的唯一标识符。如果你使用两个线程，并且每个线程使用不同的anObj参数执行上面的代码，那么这两个线程会获取到自己的锁去执行，相互之间不会阻塞。如果两个线程使用的是相同的anObj参数，那么一个线程就会获取锁先执行，另一个线程会等待直到锁释放掉再执行。</p>
+
+        
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </div>
+  </div>
+
+
+    
+      
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/07/24/Objective-C高级编程之多线程/">
                 Objective-C高级编程之多线程
               </a>
@@ -727,69 +789,6 @@
 
 
     
-      
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2016/05/17/搭建OGG/">
-                搭建OGG
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Veröffentlicht am 2016-05-17
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </div>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/17/搭建OGG/#more">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </div>
-  </div>
-
-
-    
   </div>
 
   
@@ -828,7 +827,7 @@
         <div class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
