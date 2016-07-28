@@ -47,7 +47,7 @@
 
 
 
-  <title> 搭建OGG // 知其然知其所以然 </title>
+  <title> SDWebImage框架大致流程 // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              搭建OGG
+              SDWebImage框架大致流程
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Veröffentlicht am 2016-05-17
+          Veröffentlicht am 2016-07-28
         </span>
 
         
@@ -183,26 +183,20 @@
       
 
       
-        <p>OGG下载地址: <a href="http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/testcontent/index-100295-zhs.html</a></p>
+        <p>SDWebImage框架的代码调用大致流程，先上一张手画图：<br><img src="/images/IMG_0569.JPG" alt="Mou icon"></p>
 <a id="more"></a>
-<h3 id="源端："><a href="#源端：" class="headerlink" title="源端："></a>源端：</h3><p>操作系统: 64位redhat 6.2</p>
-<p>OGG版本: 11.2.1.0.1</p>
-<h3 id="目标端："><a href="#目标端：" class="headerlink" title="目标端："></a>目标端：</h3><p>操作系统: 64位redhat 6.2</p>
-<p>OGG版本: 11.2.1.0.1</p>
-<h2 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h2><p>开启归档</p>
-<p>打开数据库级别的补充日志(supplemental log)</p>
-<h2 id="源端配置"><a href="#源端配置" class="headerlink" title="源端配置"></a>源端配置</h2><p>Manager进程</p>
-<p>Extract进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params ext1</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">extract ext1</span><br><span class="line">dynamicresolution</span><br><span class="line">userid ogg,password ogg</span><br><span class="line">setenv(ORACLE_SID=orcl)</span><br><span class="line">exttrail /ogg/dirdat/et</span><br><span class="line">table scott.dept;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; add extract ext1,tranlog,begin now</span><br><span class="line">GGSCI&gt; add exttrail /ogg/dirdat/et, extract ext1, MEGABYTES 20</span><br></pre></td></tr></table></figure>
-<p>Pump进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params pump1</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">extract pump1</span><br><span class="line">rmthost 192.168.54.134,mgrport 7500</span><br><span class="line">userid ogg,password ogg</span><br><span class="line">setenv(ORACLE_SID=orcl)</span><br><span class="line">rmttrail /ogg/dirdat/et</span><br><span class="line">table scott.dept;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; add extract pump1, exttrailsource /ogg/dirdat/et</span><br><span class="line">GGSCI&gt; add rmttrail /ogg/dirdat/et, extract pump1, megabytes 20</span><br></pre></td></tr></table></figure>
-<h2 id="目标端配置"><a href="#目标端配置" class="headerlink" title="目标端配置"></a>目标端配置</h2><p>Manager进程</p>
-<p>Replicat进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit params repl1</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">replicat repl1</span><br><span class="line">userid ogg,password ogg</span><br><span class="line">assumetargetdefs</span><br><span class="line">reperror default,discard</span><br><span class="line">discardfile /ogg/dirrpt/replicat1.dsc, append, megabytes 50</span><br><span class="line">dynamicresolution</span><br><span class="line">map scott.dept, target scott.dept;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GGSCI&gt; add replicat repl1, exttrail /ogg/dirdat/et, checkpointtable ogg.checkpoint</span><br></pre></td></tr></table></figure>
+<p>####左边图<br>使用SDWebImage，最简单的方式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[imageView sd_setImageWithURL:url]</span><br></pre></td></tr></table></figure>
+<p>上面涉及的到sd_setImageWithURL就是手画图左边UIImageView+WebCache中的【- (void)sd_setImageWithURL:(NSURL *)url】方法，而该方法会直接调用左图下面的那个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder </span><br><span class="line">                                                 options:(SDWebImageOptions)options </span><br><span class="line">                                    progress:(SDWebImageDownloaderProgressBlock)progressBlock </span><br><span class="line">                             completed(SDWebImageCompletionBlock)completedBlock </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">	id &lt;SDWebImageOperation&gt; operation = </span><br><span class="line">	[SDWebImageManager.sharedManager downloadImageWithURL:url </span><br><span class="line">	                                              options:options </span><br><span class="line">	                                             progress:progressBlock </span><br><span class="line">	                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) &#123;</span><br><span class="line">	...</span><br><span class="line">	 wself.image = image;</span><br><span class="line">     [wself setNeedsLayout];</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面调用的SDWebImageManager的【downloadImageWithURL…】定义了它的completed block, 该函数在中间图中定义。</p>
+<p>###中间图<br>左边图会调用中间图SDWebImageManager中的【downloadImageWithURL…】方法，而在这个方法中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url</span><br><span class="line">                                         options:(SDWebImageOptions)options</span><br><span class="line">                                        progress:(SDWebImageDownloaderProgressBlock)progressBlock</span><br><span class="line">                                       completed:(SDWebImageCompletionWithFinishedBlock)completedBlock </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) &#123;</span><br><span class="line">    	...</span><br><span class="line">    	completedBlock(image, nil, cacheType, YES, url); // 回调左边图中定义的completed block</span><br><span class="line">    	...</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面调用了SDImageCache中的【queryDiskCacheForKey…】方法，并营地了它的done block，该函数在右边图定义</p>
+<p>###右边图<br>中间图调用了SDImageCache的【queryDiskCacheForKey…】方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (NSOperation *)queryDiskCacheForKey:(NSString *)key </span><br><span class="line">                                 done:(SDWebImageQueryCompletedBlock)doneBlock &#123;</span><br><span class="line">    </span><br><span class="line">    ...                             </span><br><span class="line">   	// 在内存缓存中查找到</span><br><span class="line">    UIImage *image = [self imageFromMemoryCacheForKey:key];</span><br><span class="line">    if (image) &#123;</span><br><span class="line">        doneBlock(image, SDImageCacheTypeMemory);    // 回调中间图定义的done block</span><br><span class="line">        return nil;</span><br><span class="line">    &#125;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###总结<br>SDWebImage的主调用框架是使用block来实现的，看上去比较复杂，基本思想就是在调用一个函数A时，定义好A的block参数，在函数A中处理完成后，回调block。</p>
+
       
     </div>
 
@@ -213,13 +207,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/24/外键导致OGG进程异常/">外键导致OGG进程异常</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/27/Linux下OGG传输表/">Linux下OGG传输表</a>
+              <a href="/2016/07/27/使用-synchronized指南/">使用@synchronized指南</a>
             
           </div>
         </div>
@@ -338,7 +330,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#源端："><span class="nav-number">1.</span> <span class="nav-text">源端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目标端："><span class="nav-number">2.</span> <span class="nav-text">目标端：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库配置"><span class="nav-number"></span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源端配置"><span class="nav-number"></span> <span class="nav-text">源端配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目标端配置"><span class="nav-number"></span> <span class="nav-text">目标端配置</span></a></div>
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
