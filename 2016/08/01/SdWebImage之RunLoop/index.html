@@ -47,7 +47,7 @@
 
 
 
-  <title> 使用CAShapeLayer画圆 // 知其然知其所以然 </title>
+  <title> SdWebImage之RunLoop // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              使用CAShapeLayer画圆
+              SdWebImage之RunLoop
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-06-22
+          Posted on 2016-08-01
         </span>
 
         
@@ -183,12 +183,13 @@
       
 
       
-        <p>使用CAShapeLayer画圆圈，效果如下：</p>
-<p><img src="/images/circle.png" alt="Mou icon"></p>
-<a id="more"></a>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CGFloat radius = 80.0f;</span><br><span class="line">   CGFloat lineWidth = 10.0f;</span><br><span class="line">   CGRect foreCircle_frame = CGRectMake(0,0,radius*2,radius*2);</span><br><span class="line">   </span><br><span class="line">   CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">   layer.frame = foreCircle_frame;</span><br><span class="line">   UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius, radius)</span><br><span class="line">                                                       radius:radius-lineWidth/2</span><br><span class="line">                                                   startAngle:0</span><br><span class="line">                                                     endAngle:M_PI*2</span><br><span class="line">                                                    clockwise:YES];</span><br><span class="line">   layer.path = path.CGPath;</span><br><span class="line">   layer.fillColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.backgroundColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.strokeColor = [UIColor blueColor].CGColor;</span><br><span class="line">   layer.lineWidth = lineWidth;</span><br><span class="line">   layer.lineCap = @&quot;round&quot;;</span><br><span class="line">   layer.strokeStart = 0;</span><br><span class="line">   layer.strokeEnd = 1.0;</span><br><span class="line">   [self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure>
-<p>直接将代码复制进ViewDidLoad函数中进行测试。<br>圆圈通常用于制作进度条，那么一个常用的进度条制作就是先使用上面代码画一个背景圆圈，然后在相同位置为画上一个前景圆圈。通过设置layer的<kbd>strokeEnd</kbd>属性来设置加载进度，如果设置为1，则表示加载完成。</p>
+        <p>在SDWebImage中的SDWebImageDownloaderOperation的start函数中，调用了CFRunLoopRun()，我们来看一下CFRunLoopRun到底是做什么的，起到了什么作用。</p>
+<p>每一个线程有一个runloop,既不可以创建，也不能销毁线程的runloop。Core Foundation根据需求为你创建，通过<code>CFRunLoopGetMain</code>可以获得当前线程的runloop。调用CFRunLoopRun可以使当前线程的runloop以默认模式运行起来，知道调用<code>CFRunLoopStop</code>来停止runloop。你也可以调用<code>CFRunLoopRunInMode</code>来使当前线程的runloop以指定模式运行起来一段时间或者知道runloop被停止。【runloop只能在请求模式至少有一个source或者timer可监控的情况下运行起来。】</p>
+<p>一般主线程会自动运行runloop，我们一般情况下不会去管。在其他子线程中，如果需要我们需要去管理。使用runloop后，可以把线程想象成进入了一个循环；如果没有这个循环，子线程完成任务后，这个线程就结束了。所以如果需要一个线程处理各种事件而不让它结束，就需要运行runloop。</p>
+<p>在SDWebImageDownloaderOperation中，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (void)start&#123;</span><br><span class="line">	...</span><br><span class="line">	self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	if(self.connection)&#123;</span><br><span class="line">		...</span><br><span class="line">		CFRunLoopRun()</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)cancelInternalAndStop &#123;</span><br><span class="line">    if (self.isFinished) return;</span><br><span class="line">    [self cancelInternal];</span><br><span class="line">    CFRunLoopStop(CFRunLoopGetCurrent());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在创建self.connection成功后，执行了CFRunLoopRun()，开启了runloop。在failed或finished的时候会调用CFRunLoopStop停止runloop。如果不开启runloop的话，在执行完start()后任务就完成了，NSURLConnection的代理就不会执行了。runloop相当于子线程的循环，可以灵活控制子线程的生命周期。</p>
 
       
     </div>
@@ -200,13 +201,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/23/自定义带Placeholder的UITextView/">自定义带Placeholder的UITextView</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/17/IOS中Category扩展成员变量/">IOS中Category扩展成员变量</a>
+              <a href="/2016/07/30/IOS之深拷贝与浅拷贝/">IOS之深拷贝与浅拷贝【转】</a>
             
           </div>
         </div>

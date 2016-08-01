@@ -1,0 +1,598 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.3"/>
+
+
+
+
+  <meta name="keywords" content="tom555cat's site." />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.3" />
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    analytics: {
+      google: ''
+    },
+    sidebar: 'always'
+  };
+</script>
+
+
+
+
+  <title> SDWebImage之下载图片 // 知其然知其所以然 </title>
+</head>
+
+<body>
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">知其然知其所以然</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<div class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            <i class="menu-item-icon icon-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            <i class="menu-item-icon icon-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              SDWebImage之下载图片
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on 2016-07-29
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>在上一篇文章中介绍了使用SDWebImage的方法，以及大致的流程。文本主要介绍当图片不存在缓存中或存储介质中，需要从网络上下载的情形。</p>
+<h2 id="SDWebImageDownloader"><a href="#SDWebImageDownloader" class="headerlink" title="SDWebImageDownloader"></a>SDWebImageDownloader</h2><h4 id="成员变量介绍"><a href="#成员变量介绍" class="headerlink" title="成员变量介绍"></a>成员变量介绍</h4><h5 id="property-assign-nonatomic-Class-operationClass"><a href="#property-assign-nonatomic-Class-operationClass" class="headerlink" title="@property (assign, nonatomic) Class operationClass;"></a>@property (assign, nonatomic) Class operationClass;</h5><p>这里的“Class”是”An opaque type that represents an Objective-C class.”,通过如下方式声明的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objt_class *Class</span><br></pre></td></tr></table></figure>
+<p>operationClass成员被初始化为[SDWebImageDownloaderOperation class]</p>
+<h5 id="property-strong-nonatomic-NSOperationQueue-downloadQueue"><a href="#property-strong-nonatomic-NSOperationQueue-downloadQueue" class="headerlink" title="@property (strong, nonatomic) NSOperationQueue *downloadQueue;"></a>@property (strong, nonatomic) NSOperationQueue *downloadQueue;</h5><p>downloadQueue就是下载图片operation队列。</p>
+<h5 id="property-strong-nonatomic-NSMutableDictionary-HTTPHeaders"><a href="#property-strong-nonatomic-NSMutableDictionary-HTTPHeaders" class="headerlink" title="@property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;"></a>@property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;</h5><p>该成员变量初始化为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_HTTPHeaders = [@&#123;@&quot;Accept&quot;: @&quot;image/*;q=0.8&quot;&#125; mutableCopy];</span><br></pre></td></tr></table></figure>
+<h4 id="成员函数介绍"><a href="#成员函数介绍" class="headerlink" title="成员函数介绍"></a>成员函数介绍</h4><p>下载图片调用的函数是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url </span><br><span class="line">                                         options:(SDWebImageDownloaderOptions)options </span><br><span class="line">                                     progress:(SDWebImageDownloaderProgressBlock)progressBlock               </span><br><span class="line">                                 completed:(SDWebImageDownloaderCompletedBlock)completedBlock</span><br></pre></td></tr></table></figure>
+<p>函数中首先声明了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__block SDWebImageDownloaderOperation *operation;</span><br></pre></td></tr></table></figure>
+<p>__block类型的变量，可以在block内部做赋值操作；如果没有__block，可以想operation发送消息，但是不能对operation做赋值操作。</p>
+<p>然后定义了createCallback block，调用了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)addProgressCallback:(SDWebImageDownloaderProgressBlock)progressBlock </span><br><span class="line">        completedBlock:(SDWebImageDownloaderCompletedBlock)completedBlock </span><br><span class="line">        forURL:(NSURL *)url </span><br><span class="line">        createCallback:(SDWebImageNoParamsBlock)createCallback</span><br></pre></td></tr></table></figure>
+<p>这个函数从功能上来说对相同URL的请求，只做一次下载。另外这个函数使用了dispatch_barrier_sync，作用是在并发队列中，需要等待当前的block完成后，才能继续做之后的任务，起到了一个保护block内成员变量线程安全的一个作用。如果是第一次下载，那么就会调用createCallback。</p>
+<p>在createCallback中，创建了NSMutableURLRequest，设置了HTTP Accept字段:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.allHTTPHeaderFields = wself.HTTPHeaders;</span><br></pre></td></tr></table></figure>
+<p>表示只接受图片类型。</p>
+<p>然后使用这个NSMutableURLRequest创建了一个SDWebImageDownloaderOperation,并定义了progressBlock,completeBlock,cancelBlock; 加入了downloadQueue中。</p>
+<h2 id="SDWebImageDownloaderOperation"><a href="#SDWebImageDownloaderOperation" class="headerlink" title="SDWebImageDownloaderOperation"></a>SDWebImageDownloaderOperation</h2><p>初始化成员函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (id)initWithRequest:(NSURLRequest *)request</span><br><span class="line">              options:(SDWebImageDownloaderOptions)options</span><br><span class="line">             progress:(SDWebImageDownloaderProgressBlock)progressBlock</span><br><span class="line">            completed:(SDWebImageDownloaderCompletedBlock)completedBlock</span><br><span class="line">            cancelled:(SDWebImageNoParamsBlock)cancelBlock &#123;</span><br><span class="line"></span><br><span class="line">		...</span><br><span class="line">        _progressBlock = [progressBlock copy];</span><br><span class="line">        _completedBlock = [completedBlock copy];</span><br><span class="line">        _cancelBlock = [cancelBlock copy];</span><br><span class="line">		...            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面在给block类型成员变量赋值时，采用的是copy，因为在“向方法或函数的参数传递block时，编译器不能判断是否应该使用copy”，所以手动使用copy将block从栈复制到堆上是没有问题的。</p>
+<p>自定义了start(), 在其中创建了NSURLConnection，在创建成功后，启用了当前线程的runloop,使能够调用NSURLConnection的代理，如果不适用runloop，在执行完start()之后，当前operation就结束了，详情可参考本博客的另一篇文章【SDWebImage之runloop】。</p>
+<p>作者实现了下列NSURLConnection代理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 当接收到服务器的响应（联通了服务器）时会调用</span><br><span class="line">- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response&#123;</span><br><span class="line">	...</span><br><span class="line">	[(NSHTTPURLResponse *)response status]...     // 获取返回代码</span><br><span class="line">	response.expectedContentLength...             // 获取返回数据量大小</span><br><span class="line">	self.imageData = [][NSMutableData alloc] initWithCapacity:expected];    </span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 当接收到服务器的数据时会调用（可能会调用多次，每次只传递部分数据）</span><br><span class="line">- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data &#123;</span><br><span class="line">	[self.imageData appendData:data];     // 将新返回数据追加到imageData中</span><br><span class="line">	...</span><br><span class="line">	if (self.progressBlock) &#123;</span><br><span class="line">        self.progressBlock(self.imageData.length, self.expectedSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 当服务器的数据加载完毕时就会调用</span><br><span class="line">- (void)connectionDidFinishLoading:(NSURLConnection *)aConnection &#123;</span><br><span class="line">	@synchronized(self) &#123;</span><br><span class="line">        CFRunLoopStop(CFRunLoopGetCurrent());       // 数据下载完毕，关闭runloop</span><br><span class="line">    	...</span><br><span class="line">    &#125;</span><br><span class="line">	UIImage *image = [UIImage sd_imageWithData:self.imageData];</span><br><span class="line">	...</span><br><span class="line">	completeBlock(image, self.imageData), nil, YES;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 请求错误（失败）的时候调用（请求超时\断网\没有网\,一般指客户端错误）</span><br><span class="line">- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error &#123;</span><br><span class="line">	@synchronized(self) &#123;</span><br><span class="line">        CFRunLoopStop(CFRunLoopGetCurrent());      // 当请求遇到错误时，关闭runloop</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/30/IOS之深拷贝与浅拷贝/">IOS之深拷贝与浅拷贝【转】</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/28/SDWebImage框架大致流程/">SDWebImage框架大致流程</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+
+    
+      <div class="comments" id="comments">
+        
+      </div>
+    
+  </div>
+
+
+        </div>
+
+        
+      </div>
+
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/images/bkdefault_avatar.jpg" alt="tom555cat" />
+          <p class="site-author-name">tom555cat</p>
+        </div>
+        <p class="site-description motion-element"></p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </div>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+              <a href="https://appsto.re/cn/GcrJab.i" target="_blank">第一个作品"Poker2048"</a>
+            </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.wangchenlong.org" target="_blank">王辰龙的博客</a>
+              </span>
+            
+          
+        </div>
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SDWebImageDownloader"><span class="nav-number">1.</span> <span class="nav-text">SDWebImageDownloader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#成员变量介绍"><span class="nav-number">1.0.1.</span> <span class="nav-text">成员变量介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#property-assign-nonatomic-Class-operationClass"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">@property (assign, nonatomic) Class operationClass;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#property-strong-nonatomic-NSOperationQueue-downloadQueue"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">@property (strong, nonatomic) NSOperationQueue *downloadQueue;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#property-strong-nonatomic-NSMutableDictionary-HTTPHeaders"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">@property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员函数介绍"><span class="nav-number">1.0.2.</span> <span class="nav-text">成员函数介绍</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDWebImageDownloaderOperation"><span class="nav-number">2.</span> <span class="nav-text">SDWebImageDownloaderOperation</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+
+    </div>
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">tom555cat</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<div class="powered-by">
+</div>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<!--
+<div class="powered-by">
+</div>
+
+<span id="busuanzi_container_site_pv">
+    您是小站的第<span id="busuanzi_value_site_uv"></span>个小伙伴
+</span>
+-->
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.3"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.3"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.3" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.3" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+  
+
+  
+
+
+
+
+  
+  
+
+</body>
+</html>
