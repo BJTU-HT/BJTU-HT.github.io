@@ -184,6 +184,7 @@
 
       
         <p>在上一篇文章中介绍了使用SDWebImage的方法，以及大致的流程。文本主要介绍当图片不存在缓存中或存储介质中，需要从网络上下载的情形。</p>
+<a id="more"></a>
 <h2 id="SDWebImageDownloader"><a href="#SDWebImageDownloader" class="headerlink" title="SDWebImageDownloader"></a>SDWebImageDownloader</h2><h4 id="成员变量介绍"><a href="#成员变量介绍" class="headerlink" title="成员变量介绍"></a>成员变量介绍</h4><h5 id="property-assign-nonatomic-Class-operationClass"><a href="#property-assign-nonatomic-Class-operationClass" class="headerlink" title="@property (assign, nonatomic) Class operationClass;"></a>@property (assign, nonatomic) Class operationClass;</h5><p>这里的“Class”是”An opaque type that represents an Objective-C class.”,通过如下方式声明的:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objt_class *Class</span><br></pre></td></tr></table></figure>
 <p>operationClass成员被初始化为[SDWebImageDownloaderOperation class]</p>
