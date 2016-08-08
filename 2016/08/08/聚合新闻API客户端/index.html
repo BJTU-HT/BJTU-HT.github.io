@@ -47,7 +47,7 @@
 
 
 
-  <title> IOS单例 // 知其然知其所以然 </title>
+  <title> 聚合新闻API客户端 // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              IOS单例
+              聚合新闻API客户端
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-07-07
+          Posted on 2016-08-08
         </span>
 
         
@@ -183,13 +183,20 @@
       
 
       
-        <p>IOS单例目前的写法：</p>
-<p>Singleton.h</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Singleton : NSObject</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+        <p>聚合新闻API调用IOS客户端</p>
+<p><img src="/images/news.gif" alt="Mou icon"></p>
 <a id="more"></a>
-<p>Singleton.m</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Singleton.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Singleton</span><br><span class="line"></span><br><span class="line">static Singleton *sharedManager = nil;</span><br><span class="line"></span><br><span class="line">+ (Singleton *)shareManager</span><br><span class="line">&#123;</span><br><span class="line">    static dispatch_once_t once;</span><br><span class="line">    dispatch_once(&amp;once, ^&#123;</span><br><span class="line">        sharedManager = [[self alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    return sharedManager;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>static的sharedManager，保证对象的生命周期与程序相同。<br>void dispatch_once(<br>    dispatch_once_t *predicate,<br>    dispatch_block_t block);<br>保证block只执行一次。    </p>
+<p>聚合新闻API地址：<a href="https://www.juhe.cn/docs/api/id/235" target="_blank" rel="external">https://www.juhe.cn/docs/api/id/235</a></p>
+<p>请求URL格式：<a href="http://v.juhe.cn/toutiao/index?type=top&amp;key=APPKEY" target="_blank" rel="external">http://v.juhe.cn/toutiao/index?type=top&amp;key=APPKEY</a><br>top是新闻类型，APPKEY是申请的个人KEY。</p>
+<p>返回数据为JSON格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;reason&quot;: &quot;成功的返回&quot;,</span><br><span class="line">    &quot;result&quot;: &#123;</span><br><span class="line">        &quot;stat&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;data&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;title&quot;: &quot;巫山云雨枉断肠：女摄影师Erika Lust记录的性爱&quot;,/*标题*/</span><br><span class="line">                &quot;date&quot;: &quot;2016-06-13 10:31&quot;,/*时间*/</span><br><span class="line">                &quot;author_name&quot;: &quot;POCO摄影&quot;,/*作者*/</span><br><span class="line">                &quot;thumbnail_pic_s&quot;: &quot;&quot;,/*图片1*/</span><br><span class="line">                &quot;thumbnail_pic_s02&quot;: &quot;&quot;,/*图片2*/</span><br><span class="line">                &quot;thumbnail_pic_s03&quot;: &quot;&quot;,/*图片3*/</span><br><span class="line">                &quot;url&quot;: &quot;&quot;,/*新闻链接*/</span><br><span class="line">                &quot;uniquekey&quot;: &quot;160613103108379&quot;,/*唯一标识*/</span><br><span class="line">                &quot;type&quot;: &quot;头条&quot;,/*类型一*/</span><br><span class="line">                &quot;realtype&quot;: &quot;娱乐&quot;/*类型二*/</span><br><span class="line">            &#125;,</span><br><span class="line">...]&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>该项目使用了仿网易新闻的界面框架，在每一个新闻标签页，使用AFNetworking获取相关的新闻：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)getNews</span><br><span class="line">&#123;</span><br><span class="line">    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];</span><br><span class="line">    NSDictionary *parameters = @&#123;@&quot;type&quot;:self.urlTag,@&quot;key&quot;:@&quot;4aff81d23b8e830f41df3f90eb3c0b53&quot;&#125;;</span><br><span class="line">    NSString *urlStr1 = @&quot;http://v.juhe.cn/toutiao/index&quot;;</span><br><span class="line">    [manager GET:urlStr1 parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) &#123;</span><br><span class="line">        NSDictionary *newDic = [responseObject valueForKeyPath:@&quot;result&quot;];</span><br><span class="line">        NSArray *newsArray = newDic[@&quot;data&quot;];</span><br><span class="line">        [self extractNewsData:newsArray];</span><br><span class="line">    &#125; failure:^(NSURLSessionTask *operation, NSError *error) &#123;</span><br><span class="line">        NSLog(@&quot;Error: %@&quot;, error);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解析JSON：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (void)extractNewsData:(NSArray *)newsArray</span><br><span class="line">&#123;</span><br><span class="line">    for (NSInteger i = 0; i &lt; [newsArray count]; i++) &#123;</span><br><span class="line">        NewsModel *model = [[NewsModel alloc] init];</span><br><span class="line">        model.title = newsArray[i][@&quot;title&quot;];</span><br><span class="line">        model.date = newsArray[i][@&quot;date&quot;];</span><br><span class="line">        model.authorName = newsArray[i][@&quot;author_name&quot;];</span><br><span class="line">        model.thumbnailPicS01 = newsArray[i][@&quot;thumbnail_pic_s&quot;];</span><br><span class="line">        model.thumbnailPicS02 = newsArray[i][@&quot;thumbnail_pic_s02&quot;];</span><br><span class="line">        model.thumbnailPicS03 = newsArray[i][@&quot;thumbnail_pic_s03&quot;];</span><br><span class="line">        model.url = newsArray[i][@&quot;url&quot;];</span><br><span class="line">        model.uniqueKey = newsArray[i][@&quot;uniquekey&quot;];</span><br><span class="line">        model.type = newsArray[i][@&quot;type&quot;];</span><br><span class="line">        model.realType = newsArray[i][@&quot;realtype&quot;];</span><br><span class="line">        </span><br><span class="line">        [self.newsArray addObject:model];</span><br><span class="line">    &#125;</span><br><span class="line">    self.newsFrameArray = [NewsFrameModel frameModelWithArray:self.newsArray];</span><br><span class="line">    </span><br><span class="line">    [self.tableView reloadData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用仿网易新闻的界面框架时，在每一个标签页内，点击tableView中的一项时，无法获取到self.navigationController，所以将对应的UIViewController取出来，让上一层的UIViewController去push。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    NewsModel *model = self.newsArray[indexPath.row];</span><br><span class="line">    NewsViewController *newsVC = [[NewsViewController alloc] init];</span><br><span class="line">    newsVC.urlStr = model.url;</span><br><span class="line">    [self.delegate pushNewsVC:newsVC];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Github源码下载地址：<a href="https://github.com/tom555cat/JuheNews.git" target="_blank" rel="external">点击下载</a></p>
 
       
     </div>
@@ -201,13 +208,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/24/Objective-C高级编程之多线程/">Objective-C高级编程之多线程</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/06/storyboard布局示例/">storyboard布局示例</a>
+              <a href="/2016/08/02/SDWebImage之图片缓存/">SDWebImage之图片缓存</a>
             
           </div>
         </div>
