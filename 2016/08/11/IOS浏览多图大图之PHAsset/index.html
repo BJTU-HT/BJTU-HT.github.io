@@ -47,7 +47,7 @@
 
 
 
-  <title> storyboard布局示例 // 知其然知其所以然 </title>
+  <title> IOS浏览多图大图之PHAsset // 知其然知其所以然 </title>
 </head>
 
 <body>
@@ -158,7 +158,7 @@
           
           
             
-              storyboard布局示例
+              IOS浏览多图大图之PHAsset
             
           
         </h1>
@@ -166,7 +166,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          Posted on 2016-07-06
+          Posted on 2016-08-11
         </span>
 
         
@@ -183,22 +183,11 @@
       
 
       
-        <p>coursera ios课程上面使用约束布局的过程记录，结果如下：<br><img src="/images/layout.png" alt="Mou icon"></p>
+        <p><img src="/images/缩略图_大图.gif" alt="Mou icon"></p>
 <a id="more"></a>
-<ol>
-<li><p>title label，顶部距离standard，到左边的距离为-10，宽度为64</p>
-</li>
-<li><p>title textField，设置titleField的左边与title label左边对齐，选中 textField和title label，选择leading edge；选择textField的右边距为-10；选中title label，按住ctrl拖拽到textField，选择vertical spacing，查看约束，确保textField与title label的距离是standard，如果是常量，可以从右边栏修改；【option+command+=】</p>
-</li>
-<li><p>detail label,  设置detail label与title textField的左边对齐；设置它的宽度为当前的宽度；设置它与上面的textField的距离，选择standard；【option+command+=】</p>
-</li>
-<li><p>detail text, 设置detail text与detail label的左端对齐；与detail label距离为standard，设置右边距为-10；设置高度与date picker的高度一致；【option+command+=】</p>
-</li>
-<li><p>due date label, 设置due date label与detail text的左端对齐；设置due date label与detail text的距离为standard；【option+command+=】</p>
-</li>
-<li><p>date picker, 设置date picker与due date label的左端对齐；设置date picker的右边距为-10，顶部为standard，底部为0；【option+command+=】</p>
-</li>
-</ol>
+<p>在上传图片过程中，需要展示图片并选择多张图片。使用UICollectionView来展示图片，如果将UIImage数据直接保存在数据源中，当用户图片数量巨大时，应用很容易内存溢出然后直接挂掉。为了避免直接将图片数据直接读取进内存，可以使用PHAsset。PHAsset代表了一张图片，或一段视频，其中仅保存了图片的相关信息，而没有保存图片数据，所以UICollectionView得数据源采用PHAsset可以方便地解决多图内存溢出的问题。<code>此外，在数据源中采用PHAsset，可以在读取图片数据时控制分辨率，在读取缩略图时，选择一个低分辨率；在读取大图时，选择一个高分辨率，非常灵活自由</code>。</p>
+<h4 id="cell中定义PHAsset成员变量"><a href="#cell中定义PHAsset成员变量" class="headerlink" title="cell中定义PHAsset成员变量"></a>cell中定义PHAsset成员变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">typedef void(^SelectedBlock)(BOOL select);</span><br><span class="line"></span><br><span class="line">@interface YBImgPickerViewCell : UICollectionViewCell</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) PHAsset *asset;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation YBImgPickerViewCell</span><br><span class="line"></span><br><span class="line">- (void)setAsset:(PHAsset *)asset</span><br><span class="line">&#123;</span><br><span class="line">    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];</span><br><span class="line">    options.synchronous = YES;</span><br><span class="line">    </span><br><span class="line">    CGSize size = CGSizeMake(asset.pixelWidth/20, asset.pixelHeight/20);</span><br><span class="line">    </span><br><span class="line">    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) &#123;</span><br><span class="line">        self.mainImageView.image = result;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>上面代码中size的尺寸在原图的基础上缩小了20倍，这个cell就适合于做缩略图；如果size选择PHImageManagerMaximumSize，那么就是原始尺寸，适合于浏览大图。顶部动态图就是从缩略图转到大图的一个例子，使用PHAsset来传递图片元信息，然后在需要获取图片的时候选择合适的分辨率。</p>
 
       
     </div>
@@ -210,13 +199,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/07/IOS单例/">IOS单例</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/01/弹出UITextField在键盘上方/">弹出UITextField在键盘上方</a>
+              <a href="/2016/08/08/聚合新闻API客户端/">聚合新闻API客户端</a>
             
           </div>
         </div>
@@ -335,7 +322,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">This post does not have a Table Of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#cell中定义PHAsset成员变量"><span class="nav-number">1.</span> <span class="nav-text">cell中定义PHAsset成员变量</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
