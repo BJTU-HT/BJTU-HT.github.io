@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/08/29/蘑菇街TeamTalk服务器端LoginServer分析/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
 <meta property="og:description" content="LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
-<meta property="og:updated_time" content="2016-08-29T14:53:50.000Z">
+<meta property="og:updated_time" content="2016-08-29T15:08:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蘑菇街TeamTalk服务器端LoginServer分析">
 <meta name="twitter:description" content="LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
@@ -317,19 +317,19 @@
 <p>LoginServer的参数配置文件loginserver.conf：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClientListenIP=0.0.0.0		# can use multiple ip, seperate by &apos;;&apos;</span><br><span class="line">ClientPort=8008</span><br><span class="line">HttpListenIP=0.0.0.0</span><br><span class="line">HttpPort=8080</span><br><span class="line">MsgServerListenIP=0.0.0.0 	# can use multiple ip, seperate by &apos;;&apos;</span><br><span class="line">MsgServerPort=8100</span><br><span class="line"></span><br><span class="line">msfs=http://127.0.0.1:8700/</span><br><span class="line"></span><br><span class="line">discovery=http://127.0.0.1/api/discovery</span><br></pre></td></tr></table></figure>
 <p>HttpListenIP和HttpPort是用户连接的ip和port；MsgServerListIP和MsgServerPort是MsgServer的ip和port。</p>
-<p>###核心类<br>LoginServer的核心类是三个，BaseSocket, EventDispatch, HttpConn。</p>
-<p>####BaseSocket<br>BaseSocket对socket进行了封装，添加了包括建立监听，可读写时的读写成员函数，并保存了针对这个socket的回调函数和回调函数参数。</p>
+<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p>LoginServer的核心类是三个，BaseSocket, EventDispatch, HttpConn。</p>
+<h4 id="BaseSocket"><a href="#BaseSocket" class="headerlink" title="BaseSocket"></a>BaseSocket</h4><p>BaseSocket对socket进行了封装，添加了包括建立监听，可读写时的读写成员函数，并保存了针对这个socket的回调函数和回调函数参数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void OnRead();</span><br><span class="line">void OnWrite();</span><br><span class="line">void OnClose();</span><br><span class="line"></span><br><span class="line">callback_t		m_callback;</span><br><span class="line">void*			m_callback_data;</span><br></pre></td></tr></table></figure>
-<p>####EventDispatch<br>EventDispatch是针对Windows，MAC，Unix三种操作系统I/O复用的功能封装，这里只看针对Unix的。<br>EventDispatch的构造函数CEventDispatch()的核心是epoll_create();<br>AddEvent的核心是注册socket文件描述符epoll_ctl();<br>StartDispatch的核心是epoll_wait()，针对各个可读写的文件描述符进行读写操作。</p>
-<p>####HttpConn<br>HttpConn是针对客户端连接的业务操作，处理一些简单业务的功能，比如当客户端连接上来的socket可读时，为客户分配一个负载比较低的MsgServer。</p>
+<h4 id="EventDispatch"><a href="#EventDispatch" class="headerlink" title="EventDispatch"></a>EventDispatch</h4><p>EventDispatch是针对Windows，MAC，Unix三种操作系统I/O复用的功能封装，这里只看针对Unix的。<br>EventDispatch的构造函数CEventDispatch()的核心是epoll_create();<br>AddEvent的核心是注册socket文件描述符epoll_ctl();<br>StartDispatch的核心是epoll_wait()，针对各个可读写的文件描述符进行读写操作。</p>
+<h4 id="HttpConn"><a href="#HttpConn" class="headerlink" title="HttpConn"></a>HttpConn</h4><p>HttpConn是针对客户端连接的业务操作，处理一些简单业务的功能，比如当客户端连接上来的socket可读时，为客户分配一个负载比较低的MsgServer。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void Close();</span><br><span class="line">void OnConnect(net_handle_t handle);</span><br><span class="line">void OnRead();</span><br><span class="line">void OnWrite();</span><br><span class="line">void OnClose();</span><br><span class="line">void OnTimer(uint64_t curr_tick);</span><br><span class="line">void OnWriteComlete();</span><br></pre></td></tr></table></figure>
-<p>###业务流程<br>BaseSocket和EventDispatch在TeamTalk的代码中，位于server/base/路径下，所以是基本工具类；真正涉及到业务的是HttpConn。<br>服务器端的大致流程就是:</p>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>BaseSocket和EventDispatch在TeamTalk的代码中，位于server/base/路径下，所以是基本工具类；真正涉及到业务的是HttpConn。<br>服务器端的大致流程就是:</p>
 <p>1&gt; 读取配置文件里的ip和port[HttpIP和HttpPort是我们客户端访问的ip和port]，然后利用BaseSocket分别建立监听，并保存监听socket的回调函数和回调参数；<br>2&gt; 监听建立成功后使用I/O复用类EventDispatch注册监听socket；然后EventDispatch调用StartDispatch()等待文件描述符的可读写。</p>
 <p>当有客户连接上来时，<br>3&gt; BaseSocket调用_AcceptNewSocket()进行accept，创建新的客户端BaseSocket，设置相关的成员变量，然后调用回调函数；最终将回调函数修改成了HttpConn中的httpconn_callback()。<br>4&gt; 当新建的BaseSocket可读时，调用BaseSocket的onRead()，最终会调用到HttpConn中的OnRead()。其中包括一个判断:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (strncmp(url.c_str(), &quot;/msg_server&quot;, 11) == 0) &#123;</span><br></pre></td></tr></table></figure>
 <p>这就是我们在IOS客户端中的访问URL为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define SERVER_ADDR                             @&quot;http://192.168.2.6:8080/msg_server&quot;</span><br></pre></td></tr></table></figure>
-<p>###总结<br>上述就是蘑菇街LoginServer的一个简单流程。阅读源代码时，首先能站在一个高度上看清作者的思路，然后再一点一点地弄清楚细节，技术终究会得到提升。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上述就是蘑菇街LoginServer的一个简单流程。阅读源代码时，首先能站在一个高度上看清作者的思路，然后再一点一点地弄清楚细节，技术终究会得到提升。</p>
 
       
     </div>
@@ -503,7 +503,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心类"><span class="nav-number">1.</span> <span class="nav-text">核心类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BaseSocket"><span class="nav-number">1.1.</span> <span class="nav-text">BaseSocket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EventDispatch"><span class="nav-number">1.2.</span> <span class="nav-text">EventDispatch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpConn"><span class="nav-number">1.3.</span> <span class="nav-text">HttpConn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务流程"><span class="nav-number">2.</span> <span class="nav-text">业务流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
