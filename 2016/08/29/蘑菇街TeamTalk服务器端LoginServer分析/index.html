@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="LoginServer主要作用是用于用户登录，将用户分配至一个负载比较小的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
+<meta name="description" content="LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="蘑菇街TeamTalk服务器端LoginServer分析">
 <meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/08/29/蘑菇街TeamTalk服务器端LoginServer分析/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="LoginServer主要作用是用于用户登录，将用户分配至一个负载比较小的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
-<meta property="og:updated_time" content="2016-08-29T14:52:22.000Z">
+<meta property="og:description" content="LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
+<meta property="og:updated_time" content="2016-08-29T14:53:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="蘑菇街TeamTalk服务器端LoginServer分析">
-<meta name="twitter:description" content="LoginServer主要作用是用于用户登录，将用户分配至一个负载比较小的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
+<meta name="twitter:description" content="LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。">
 
 
 
@@ -312,7 +312,7 @@
       
 
       
-        <p>LoginServer主要作用是用于用户登录，将用户分配至一个负载比较小的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。</p>
+        <p>LoginServer主要用于用户登录，将用户分配至一个负载比较低的MsgServer上。LoginServer与客户的连接是短连接，没有心跳保持。</p>
 <a id="more"></a>
 <p>LoginServer的参数配置文件loginserver.conf：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ClientListenIP=0.0.0.0		# can use multiple ip, seperate by &apos;;&apos;</span><br><span class="line">ClientPort=8008</span><br><span class="line">HttpListenIP=0.0.0.0</span><br><span class="line">HttpPort=8080</span><br><span class="line">MsgServerListenIP=0.0.0.0 	# can use multiple ip, seperate by &apos;;&apos;</span><br><span class="line">MsgServerPort=8100</span><br><span class="line"></span><br><span class="line">msfs=http://127.0.0.1:8700/</span><br><span class="line"></span><br><span class="line">discovery=http://127.0.0.1/api/discovery</span><br></pre></td></tr></table></figure>
