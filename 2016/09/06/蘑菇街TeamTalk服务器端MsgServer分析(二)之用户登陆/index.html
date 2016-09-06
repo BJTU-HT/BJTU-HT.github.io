@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="TeamTalk,MsgServer,Epoll,EPOLLOUT," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,16 +84,21 @@
 
 
 
-<meta name="description" content="MsgServer是TeamTalk中最关键的一个server，它和LoginServer,filerServer,RouteServer,DB_Prox_Server都有联系。本文只谈MsgServer与LoginServer的交互的部分。">
+<meta name="description" content="在客户端通过访问服务器端LoginServer获取到MsgServer的地址和端口号后，要连接到MsgServer，并想MsgServer发送一个验证用户名和密码的包；MsgServer在解析这个数据包后，会向DB_Proxy_Server发送一个验证包，DB_Proxy_Server会和数据库交互并返回给MsgServer验证结果，MsgServer会再把结果返回给客户端。
+上述流程涉及到了D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="蘑菇街TeamTalk服务器端MsgServer分析(一)">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/index.html">
+<meta property="og:title" content="蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="MsgServer是TeamTalk中最关键的一个server，它和LoginServer,filerServer,RouteServer,DB_Prox_Server都有联系。本文只谈MsgServer与LoginServer的交互的部分。">
-<meta property="og:updated_time" content="2016-09-06T02:07:53.000Z">
+<meta property="og:description" content="在客户端通过访问服务器端LoginServer获取到MsgServer的地址和端口号后，要连接到MsgServer，并想MsgServer发送一个验证用户名和密码的包；MsgServer在解析这个数据包后，会向DB_Proxy_Server发送一个验证包，DB_Proxy_Server会和数据库交互并返回给MsgServer验证结果，MsgServer会再把结果返回给客户端。
+上述流程涉及到了D">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/UMLer.png">
+<meta property="og:updated_time" content="2016-09-06T03:18:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="蘑菇街TeamTalk服务器端MsgServer分析(一)">
-<meta name="twitter:description" content="MsgServer是TeamTalk中最关键的一个server，它和LoginServer,filerServer,RouteServer,DB_Prox_Server都有联系。本文只谈MsgServer与LoginServer的交互的部分。">
+<meta name="twitter:title" content="蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆">
+<meta name="twitter:description" content="在客户端通过访问服务器端LoginServer获取到MsgServer的地址和端口号后，要连接到MsgServer，并想MsgServer发送一个验证用户名和密码的包；MsgServer在解析这个数据包后，会向DB_Proxy_Server发送一个验证包，DB_Proxy_Server会和数据库交互并返回给MsgServer验证结果，MsgServer会再把结果返回给客户端。
+上述流程涉及到了D">
+<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/UMLer.png">
 
 
 
@@ -114,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/"/>
 
-  <title> 蘑菇街TeamTalk服务器端MsgServer分析(一) | 知其然知其所以然 </title>
+  <title> 蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆 | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +251,7 @@
             
             
               
-                蘑菇街TeamTalk服务器端MsgServer分析(一)
+                蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆
               
             
           </h1>
@@ -258,38 +263,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-01T09:37:40+08:00" content="2016-09-01">
-              2016-09-01
+            <time itemprop="dateCreated" datetime="2016-09-06T10:10:25+08:00" content="2016-09-06">
+              2016-09-06
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/蘑菇街TeamTalk/" itemprop="url" rel="index">
-                    <span itemprop="name">蘑菇街TeamTalk</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/" itemprop="commentsCount"></span>
+                <a href="/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,18 +298,12 @@
       
 
       
-        <p>MsgServer是TeamTalk中最关键的一个server，它和LoginServer,filerServer,RouteServer,DB_Prox_Server都有联系。本文只谈MsgServer与LoginServer的交互的部分。</p>
-<a id="more"></a>
-<p><a href="http://tom555cat.com/2016/08/29/蘑菇街TeamTalk服务器端LoginServer分析/" target="_blank" rel="external">LoginServer</a>中的”MsgServerListenIP”和”MsgServerPort”就是监听MsgServer连接的IP和Port：<br>loginserver.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MsgServerListenIP=192.168.2.6   # can use multiple ip, seperate by &apos;;&apos;</span><br><span class="line">MsgServerPort=8100</span><br></pre></td></tr></table></figure>
-<p>在MsgServer的参数配置文件msgserver.conf中，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ListenIP=192.168.2.6</span><br><span class="line">ListenPort=8000</span><br><span class="line"></span><br><span class="line">LoginServerIP1=192.168.2.6</span><br><span class="line">LoginServerPort1=8100</span><br></pre></td></tr></table></figure>
-<p>其中LoginServerIP1和LoginServerPort1就是loginserver.conf中的MsgServerListenIP和MsgServerPort；<br>ListenIP和ListenPort是MsgServer监听客户连接的监听地址和端口。</p>
-<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p>在MsgServer和LoginServer通信的流程里，除了在<a href="http://tom555cat.com/2016/08/29/蘑菇街TeamTalk服务器端LoginServer分析/" target="_blank" rel="external">LoginServer</a>提到的基础BaseSocket和EventDispatch类，需要关注的新类是base/imconn.h和LoginServConn.h;其中CLoginServConn继承自CImConn；CImConn和CLoginServConn主要功能是提供了socket回调函数，以及在EPOLL各个状态的onRead，onWrite之类的操作。</p>
-<p>imconn.h</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class CImConn : public CRefObject</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">	virtual void OnConnect(net_handle_t handle) &#123; m_handle = handle; &#125;</span><br><span class="line">	virtual void OnConfirm() &#123;&#125;</span><br><span class="line">	virtual void OnRead();</span><br><span class="line">	virtual void OnWrite();</span><br><span class="line">	virtual void OnClose() &#123;&#125;</span><br><span class="line">	virtual void OnTimer(uint64_t curr_tick) &#123;&#125;</span><br><span class="line">    virtual void OnWriteCompelete() &#123;&#125;;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 连接LoginServer的fd的回调函数</span><br><span class="line">void imconn_callback(void* callback_data, uint8_t msg, uint32_t handle, void* pParam);</span><br></pre></td></tr></table></figure>
-<p>其中虚函数在CLoginServConn中得到了实现。</p>
-<h3 id="MsgServer连接LoginServer流程"><a href="#MsgServer连接LoginServer流程" class="headerlink" title="MsgServer连接LoginServer流程"></a>MsgServer连接LoginServer流程</h3><p>1&gt; 利用msgserver.conf中的ListenIP和ListenPort建立监听；<br>2&gt; msg_server.cpp中调用<strong>init_login_serv_conn()</strong> 来连接LoginServer，对于每一个LoginServer(LoginServer可以有很多个，我们这里只设置1个)，调用CLoginServConn:Connect()进行连接，最后将socket和对应的CLoginServConn构建pair存储在CLoginServConn.cpp中的静态变量g_login_server_conn_map中。<br>3&gt; 在EventDispatch中，只要LoginServer accept MsgServer后，对应的socket就会触发EPOLLOUT，详情见:<a href="http://tom555cat.com/2016/09/01/一种触发EPOLLOUT的情形/" target="_blank" rel="external">一种触发EPOLLOUT的情形</a>。最终会回调CLoginServConn::OnConfirm(),向LoginServer发送一个CommandId为”CID_OTHER_MSG_SERV_INFO”的确认包。<br>4&gt; 在LoginServer这一边，监听MsgServer连接的listenfd会调用CLoginConn::HandlePdu(CImPdu<em> pPdu)来处理，最终将MsgServer的<fd,serverinfo>信息保存在LoginServer的map&lt;uint32_t, msg_serv_info_t</fd,serverinfo></em>&gt;  g_msg_serv_info中。当客户连接LoginServer后，就从g_msg_serv_info中选一个负载较低的MsgServer返回给客户端。</p>
+        <p><img src="/images/UMLer.png" alt="Mou icon"></p>
+<p>在客户端通过访问服务器端LoginServer获取到MsgServer的地址和端口号后，要连接到MsgServer，并想MsgServer发送一个验证用户名和密码的包；MsgServer在解析这个数据包后，会向DB_Proxy_Server发送一个验证包，DB_Proxy_Server会和数据库交互并返回给MsgServer验证结果，MsgServer会再把结果返回给客户端。</p>
+<p>上述流程涉及到了DB_Proxy_Server，同LoginServer一样，DB_Proxy_Server也是先启动然后监听等待MsgServer的连接；所有与数据库交互的接口都只有通过MsgServer才能访问。</p>
+<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p>用户登陆验证涉及到的核心类是LoginServConn.h中的CLoginServConn和DBServConn.h中的CDBServConn。MsgServer解析到这一步会发现MsgServer的一个简单的类架构，如顶部的类图所示。</p>
+<p>CImConn是基类，保存了连接到不同服务器【LoginServer和DB_Proxy_Server】的m_handle；<br>HandlePdu()是处理不同类型数据包的处理函数，基类中没有实现，需要子类实现，这就将不同的业务数据处理分开了。<br>OnRead()是通过BaseSocket在Epoll机制下可读时来调用，用来读取数据包。<br>OnConfirm()是当前m_handle在连接的Server端被Accept后触发EPOLLOUT后来调用的，明确m_handle可以读写。</p>
+<p>CLoginServConn和CDBServConn子类中实现了连接Server的Connect()方法，和处理不同数据包的HandlePdu()方法。</p>
 
       
     </div>
@@ -344,28 +324,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/TeamTalk-MsgServer-Epoll-EPOLLOUT/" rel="tag">#TeamTalk,MsgServer,Epoll,EPOLLOUT</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/31/IOS之NSStream体验/" rel="next" title="IOS之NSStream体验">
-                <i class="fa fa-chevron-left"></i> IOS之NSStream体验
+              <a href="/2016/09/01/一种触发EPOLLOUT的情形/" rel="next" title="一种触发EPOLLOUT的情形">
+                <i class="fa fa-chevron-left"></i> 一种触发EPOLLOUT的情形
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/01/一种触发EPOLLOUT的情形/" rel="prev" title="一种触发EPOLLOUT的情形">
-                一种触发EPOLLOUT的情形 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -391,8 +361,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/"
-           data-title="蘑菇街TeamTalk服务器端MsgServer分析(一)" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/01/蘑菇街TeamTalk服务器端MsgServer分析(一)/">
+      <div class="ds-thread" data-thread-key="2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/"
+           data-title="蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/">
       </div>
     
   </div>
@@ -501,7 +471,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心类"><span class="nav-number">1.</span> <span class="nav-text">核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MsgServer连接LoginServer流程"><span class="nav-number">2.</span> <span class="nav-text">MsgServer连接LoginServer流程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心类"><span class="nav-number">1.</span> <span class="nav-text">核心类</span></a></li></ol></div>
             
           </div>
         </section>
