@@ -298,15 +298,12 @@
 
       
         
-          
-            <p><img src="/images/UMLer.png" alt="Mou icon"></p>
-<p>在客户端通过访问服务器端LoginServer获取到MsgServer的地址和端口号后，要连接到MsgServer，并想MsgServer发送一个验证用户名和密码的包；MsgServer在解析这个数据包后，会向DB_Proxy_Server发送一个验证包，DB_Proxy_Server会和数据库交互并返回给MsgServer验证结果，MsgServer会再把结果返回给客户端。</p>
-<p>上述流程涉及到了DB_Proxy_Server，同LoginServer一样，DB_Proxy_Server也是先启动然后监听等待MsgServer的连接；所有与数据库交互的接口都只有通过MsgServer才能访问。</p>
-<h3 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h3><p>用户登陆验证涉及到的核心类是LoginServConn.h中的CLoginServConn和DBServConn.h中的CDBServConn。MsgServer解析到这一步会发现MsgServer的一个简单的类架构，如顶部的类图所示。</p>
-<p>CImConn是基类，保存了连接到不同服务器【LoginServer和DB_Proxy_Server】的m_handle；<br>HandlePdu()是处理不同类型数据包的处理函数，基类中没有实现，需要子类实现，这就将不同的业务数据处理分开了。<br>OnRead()是通过BaseSocket在Epoll机制下可读时来调用，用来读取数据包。<br>OnConfirm()是当前m_handle在连接的Server端被Accept后触发EPOLLOUT后来调用的，明确m_handle可以读写。</p>
-<p>CLoginServConn和CDBServConn子类中实现了连接Server的Connect()方法，和处理不同数据包的HandlePdu()方法。</p>
-
-          
+          <p><img src="/images/UMLer.png" alt="Mou icon"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
