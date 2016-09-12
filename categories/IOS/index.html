@@ -84,18 +84,15 @@
 
 
 
-<meta name="description" content="使用CAShapeLayer画圆圈，效果如下：">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用CAShapeLayer画圆">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/06/22/使用CAShapeLayer画圆/index.html">
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="知其然知其所以然">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/categories/IOS/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="使用CAShapeLayer画圆圈，效果如下：">
-<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/circle.png">
-<meta property="og:updated_time" content="2016-06-22T07:31:13.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用CAShapeLayer画圆">
-<meta name="twitter:description" content="使用CAShapeLayer画圆圈，效果如下：">
-<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/circle.png">
+<meta name="twitter:title" content="知其然知其所以然">
+<meta name="twitter:description">
 
 
 
@@ -116,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/06/22/使用CAShapeLayer画圆/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/categories/IOS/"/>
 
-  <title> 使用CAShapeLayer画圆 | 知其然知其所以然 </title>
+  <title> 分类: IOS | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -139,7 +136,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,132 +224,47 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        IOS
+        <small>分类</small>
+      </h2>
+    </div>
 
     
-      <header class="post-header">
+      
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/09/12/IOS中用户留言功能使用极光推送/" itemprop="url">
               
-                使用CAShapeLayer画圆
+                <span itemprop="name">IOS中用户留言功能使用极光推送</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-22T15:12:24+08:00" content="2016-06-22">
-              2016-06-22
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-09-12T22:07:38+08:00"
+              content="2016-09-12" >
+          09-12
+        </time>
+      </div>
 
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/22/使用CAShapeLayer画圆/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/22/使用CAShapeLayer画圆/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>使用CAShapeLayer画圆圈，效果如下：</p>
-<p><img src="/images/circle.png" alt="Mou icon"></p>
-<a id="more"></a>
-<p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CGFloat radius = 80.0f;</span><br><span class="line">   CGFloat lineWidth = 10.0f;</span><br><span class="line">   CGRect foreCircle_frame = CGRectMake(0,0,radius*2,radius*2);</span><br><span class="line">   </span><br><span class="line">   CAShapeLayer *layer = [CAShapeLayer layer];</span><br><span class="line">   layer.frame = foreCircle_frame;</span><br><span class="line">   UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(radius, radius)</span><br><span class="line">                                                       radius:radius-lineWidth/2</span><br><span class="line">                                                   startAngle:0</span><br><span class="line">                                                     endAngle:M_PI*2</span><br><span class="line">                                                    clockwise:YES];</span><br><span class="line">   layer.path = path.CGPath;</span><br><span class="line">   layer.fillColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.backgroundColor = [UIColor clearColor].CGColor;</span><br><span class="line">   layer.strokeColor = [UIColor blueColor].CGColor;</span><br><span class="line">   layer.lineWidth = lineWidth;</span><br><span class="line">   layer.lineCap = @&quot;round&quot;;</span><br><span class="line">   layer.strokeStart = 0;</span><br><span class="line">   layer.strokeEnd = 1.0;</span><br><span class="line">   [self.view.layer addSublayer:layer];</span><br></pre></td></tr></table></figure>
-<p>直接将代码复制进ViewDidLoad函数中进行测试。<br>圆圈通常用于制作进度条，那么一个常用的进度条制作就是先使用上面代码画一个背景圆圈，然后在相同位置为画上一个前景圆圈。通过设置layer的<kbd>strokeEnd</kbd>属性来设置加载进度，如果设置为1，则表示加载完成。</p>
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/06/17/IOS中Category扩展成员变量/" rel="next" title="IOS中Category扩展成员变量">
-                <i class="fa fa-chevron-left"></i> IOS中Category扩展成员变量
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/23/自定义带Placeholder的UITextView/" rel="prev" title="自定义带Placeholder的UITextView">
-                自定义带Placeholder的UITextView <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+
 
 
           </div>
@@ -360,14 +272,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/06/22/使用CAShapeLayer画圆/"
-           data-title="使用CAShapeLayer画圆" data-url="http://www.duitang.com/blog/?id=497773911/2016/06/22/使用CAShapeLayer画圆/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -387,17 +291,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/100.png"
@@ -465,17 +360,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -579,10 +463,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
 
   
 

@@ -1,0 +1,667 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="推送,极光推送," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="IOS经常给其他用户留言（非即时通信），并将留言推送到其他用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOS中用户留言功能使用极光推送">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/index.html">
+<meta property="og:site_name" content="知其然知其所以然">
+<meta property="og:description" content="IOS经常给其他用户留言（非即时通信），并将留言推送到其他用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/jpush.png">
+<meta property="og:updated_time" content="2016-09-12T14:48:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IOS中用户留言功能使用极光推送">
+<meta name="twitter:description" content="IOS经常给其他用户留言（非即时通信），并将留言推送到其他用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/jpush.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/"/>
+
+  <title> IOS中用户留言功能使用极光推送 | 知其然知其所以然 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知其然知其所以然</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                IOS中用户留言功能使用极光推送
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-12T22:07:38+08:00" content="2016-09-12">
+              2016-09-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/IOS/" itemprop="url" rel="index">
+                    <span itemprop="name">IOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/12/IOS中用户留言功能使用极光推送/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/12/IOS中用户留言功能使用极光推送/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/jpush.png" alt="Mou icon"></p>
+<p>IOS经常给其他用户留言（非即时通信），并将留言推送到其他用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。</p>
+<a id="more"></a>
+<p>这里不介绍IOS应用集成极光推送的过程，详细过程可以参考官方文档。</p>
+<h3 id="注册别名"><a href="#注册别名" class="headerlink" title="注册别名"></a>注册别名</h3><p>首先介绍极光推送中的一个概念:alias，即别名，用别名来标识一个用户。一个设备只能绑定一个别名，但多个设备可以绑定同一个别名。一次推送最多 1000 个。<br>给用户留言需要知道这个用户的基本信息，比如知道了这个用户的id，这时就可以将这个id当做极光推送中的”alias”别名进行推送。</p>
+<p>当用户在IOS客户端登陆成功后，就可以注册别名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[JPUSHService setTags:nil alias:user_id callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">- (void)tagsAliasCallback:(int)iResCode</span><br><span class="line">                     tags:(NSSet *)tags</span><br><span class="line">                    alias:(NSString *)alias</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;rescode: %d, \ntags: %@, \nalias: %@\n&quot;, iResCode, tags , alias);</span><br><span class="line">    if (iResCode == 0) &#123;</span><br><span class="line">        NSLog(@&quot;注册别名成功!&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        NSLog(@&quot;注册别名失败!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用服务端PUSH-API进行推送测试"><a href="#使用服务端PUSH-API进行推送测试" class="headerlink" title="使用服务端PUSH API进行推送测试"></a>使用服务端PUSH API进行推送测试</h3><p>详见<a href="http://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/" target="_blank" rel="external">极光推送PUSH API</a><br>在注册别名后，就可以使用服务端PUSH API进行推送测试了，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  -X POST -v https://api.jpush.cn/v3/push -H &quot;Content-Type: application/json&quot; -u &quot;6551d271a567a3964fc2xxxx:ca50ff1a84a054697465xxxx&quot; -d &apos;&#123;&quot;platform&quot;:&quot;ios&quot;,&quot;audience&quot;:&#123;&quot;alias&quot;:[&quot;MiaSK&quot;]&#125;,&quot;notification&quot;:&#123;&quot;alert&quot;:&quot;Hi,JPush !&quot;,&quot;ios&quot;:&#123;&quot;sound&quot;:&quot;sound.caf&quot;,&quot;badge&quot;:&quot;+1&quot;,&quot;extras&quot;:&#123;&quot;ios-key1&quot;:&quot;ios-value1&quot;&#125;&#125;&#125;,&quot;options&quot;:&#123;&quot;time_to_live&quot;:&quot;60&quot;,&quot;apns_production&quot;:&quot;false&quot;&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
+<p>“6551d271a567a3964fc2xxxx:ca50ff1a84a054697465xxxx”是AppKey:Master Secret;<br>“alias”:[“MiaSK”]中的”MiaSK”就是一个alias，可以推送多个alias;<br>“apns_production”:”false”表示使用开发环境进行推送。<br>在Mac终端里面输入上述命令后(使用你自己的AppKey:Master,自己的alias)，看到下面输出，或者你手机收到了推送消息，则表明成功了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">tom555cat$ curl  -X POST -v https://api.jpush.cn/v3/push -H &quot;Content-Type: 964fc2bb43:ca50ff1a84a054697465d364&quot; -d &apos;&#123;&quot;platform&quot;:&quot;ios&quot;,&quot;audience&quot;:&#123;&quot;alias&quot;:[&quot;MiaSK&quot;]&#125;,&quot;notification&quot;:&#123;&quot;alert&quot;:&quot;Hi,JPush !&quot;,&quot;ios&quot;:&#123;&quot;sound&quot;:&quot;sound.caf&quot;,&quot;badge&quot;:&quot;+1&quot;,&quot;extras&quot;:&#123;&quot;ios-key1&quot;:&quot;ios-value1&quot;&#125;&#125;&#125;,&quot;options&quot;:&#123;&quot;time_to_live&quot;:&quot;60&quot;,&quot;apns_production&quot;:&quot;false&quot;&#125;&#125;&apos;</span><br><span class="line">*   Trying 113.31.136.60...</span><br><span class="line">* Connected to api.jpush.cn (113.31.136.60) port 443 (#0)</span><br><span class="line">* TLS 1.2 connection using TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span><br><span class="line">* Server certificate: *.jpush.cn</span><br><span class="line">* Server certificate: GeoTrust SSL CA - G3</span><br><span class="line">* Server certificate: GeoTrust Global CA</span><br><span class="line">* Server auth using Basic with user &apos;6551d271a567a3964fc2bb43&apos;</span><br><span class="line">&gt; POST /v3/push HTTP/1.1</span><br><span class="line">&gt; Host: api.jpush.cn</span><br><span class="line">&gt; Authorization: Basic NjU1MWQyNzFhNTY3YTM5NjRmYzJiYjQzOmNhNTBmZjjkODRhMDU0Njk3NDY1ZDM2NA==</span><br><span class="line">&gt; User-Agent: curl/7.43.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt; Content-Type: application/json</span><br><span class="line">&gt; Content-Length: 224</span><br><span class="line">&gt; </span><br><span class="line">* upload completely sent off: 224 out of 224 bytes</span><br><span class="line">&lt; HTTP/1.1 200 OK</span><br><span class="line">&lt; Server: nginx</span><br><span class="line">&lt; Date: Mon, 12 Sep 2016 07:32:51 GMT</span><br><span class="line">&lt; Content-Type: application/json</span><br><span class="line">&lt; Transfer-Encoding: chunked</span><br><span class="line">&lt; Connection: keep-alive</span><br><span class="line">&lt; X-Rate-Limit-Limit: 600</span><br><span class="line">&lt; X-Rate-Limit-Remaining: 599</span><br><span class="line">&lt; X-Rate-Limit-Reset: 60</span><br><span class="line">&lt; </span><br><span class="line">* Connection #0 to host api.jpush.cn left intact</span><br><span class="line">&#123;&quot;sendno&quot;:&quot;0&quot;,&quot;msg_id&quot;:&quot;1853741753&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的输出来看，提交的http请求头部有一个”Authorization: Basic NjU1MWQyNzFhNTY3YTM…”字段，这个字段的值是由base64(appKey:masterSecret)生成的，这里我们就可以把这个值记录下来。</p>
+<h3 id="curl转化为NSURLSession"><a href="#curl转化为NSURLSession" class="headerlink" title="curl转化为NSURLSession"></a>curl转化为NSURLSession</h3><p>使用Push API测试推送成功后，接下来就需要将这个http请求改成IOS的请求，首先将JSON部分转化成NSMutableDictionary，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// audience象字典</span><br><span class="line">NSMutableDictionary *audienceDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">[audienceDic setObject:@[model.toUserID] forKey:@&quot;alias&quot;];</span><br><span class="line">// notification字典</span><br><span class="line">NSMutableDictionary *notificationDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">[notificationDic setObject:model.content forKey:@&quot;alert&quot;];</span><br><span class="line">// ios设置字典</span><br><span class="line">NSMutableDictionary *iosDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">[iosDic setObject:@&quot;sound.caf&quot; forKey:@&quot;sound&quot;];</span><br><span class="line">[iosDic setObject:@&quot;+1&quot; forKey:@&quot;badge&quot;];</span><br><span class="line">[iosDic setObject:[[NSMutableDictionary alloc] initWithObjectsAndKeys:@&quot;ios-key1&quot;, @&quot;ios-value1&quot;, nil] forKey:@&quot;extras&quot;];</span><br><span class="line">[notificationDic setObject:iosDic forKey:@&quot;ios&quot;];</span><br><span class="line">// options字典</span><br><span class="line">NSMutableDictionary *optionsDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">[optionsDic setObject:@&quot;60&quot; forKey:@&quot;time_to_live&quot;];</span><br><span class="line">[optionsDic setObject:@&quot;false&quot; forKey:@&quot;apns_production&quot;];</span><br><span class="line"></span><br><span class="line">// 汇总</span><br><span class="line">NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];</span><br><span class="line">[jsonDic setObject:@&quot;ios&quot; forKey:@&quot;platform&quot;];</span><br><span class="line">[jsonDic setObject:audienceDic forKey:@&quot;audience&quot;];</span><br><span class="line">[jsonDic setObject:notificationDic forKey:@&quot;notification&quot;];</span><br><span class="line">[jsonDic setObject:optionsDic forKey:@&quot;options&quot;];</span><br><span class="line"></span><br><span class="line">// 推送</span><br><span class="line">NSError *parseError = nil;</span><br><span class="line">NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDic options:NSJSONWritingPrettyPrinted error:&amp;parseError];</span><br><span class="line">NSLog(@&quot;%@&quot;, [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);</span><br></pre></td></tr></table></figure>
+<p>jsonDic是最终转化后的字典，然后以再转化成NSData形式jsonData；可以通过打印jsonData来检查是否转化成功。</p>
+<p>然后设置NSMutableURLRequest的头部和数据部分,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@&quot;https://api.jpush.cn/v3/push&quot;]];</span><br><span class="line">[request setValue:@&quot;Basic NjU1MWQyNzFhNTY3YTM5NjRmYzxxxjQzOmNhNTBmZjFhODRhMDU0Njk3NDY1ZDM2NA==&quot; forHTTPHeaderField:@&quot;Authorization&quot;];</span><br><span class="line">[request setHTTPMethod:@&quot;POST&quot;];</span><br><span class="line">[request setValue:@&quot;application/json&quot; forHTTPHeaderField:@&quot;Content-Type&quot;];</span><br><span class="line">[request setHTTPBody:jsonData];</span><br><span class="line"></span><br><span class="line">NSURLSession *session = [NSURLSession sharedSession];</span><br><span class="line">NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line">    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];</span><br><span class="line">    NSLog(@&quot;%@&quot;,dict);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">[task resume];</span><br></pre></td></tr></table></figure>
+<p>根据第二部分得到的http请求头部信息，我们为request的头部设置了”Authorization”和”Content-Type”字段。这里就将curl请求转换成了IOS中的NSURLSession，用户在留言成功后，就可以调用上述IOS代码，修改用户的alias字段和推送内容alert字段，进行留言推送。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推送-极光推送/" rel="tag">#推送,极光推送</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆/" rel="next" title="蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆">
+                <i class="fa fa-chevron-left"></i> 蘑菇街TeamTalk服务器端MsgServer分析(二)之用户登陆
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/12/IOS中用户留言功能使用极光推送/"
+           data-title="IOS中用户留言功能使用极光推送" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/100.png"
+               alt="tom555cat" />
+          <p class="site-author-name" itemprop="name">tom555cat</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="王辰龙的博客" target="_blank">王辰龙的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://itunes.apple.com/cn/app/poker2048/id1082986656?mt=8" title="IOS作品Poker2048" target="_blank">IOS作品Poker2048</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册别名"><span class="nav-number">1.</span> <span class="nav-text">注册别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用服务端PUSH-API进行推送测试"><span class="nav-number">2.</span> <span class="nav-text">使用服务端PUSH API进行推送测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl转化为NSURLSession"><span class="nav-number">3.</span> <span class="nav-text">curl转化为NSURLSession</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tom555cat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tom555cat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
