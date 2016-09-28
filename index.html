@@ -440,7 +440,7 @@
 
       
         
-          <p>隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。<br>MsgServer如何才能在Epoll的可读时，根据socket就来确定对应的操作?</p>
+          <p>隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。<br>MsgServer如何才能在Epoll可读时，根据socket就来确定对应的操作?</p>
 <p>TeamTalk使用CBaseSocket对socket进行了封装，其中包含了针对这个socket的一些回调操作；在Epoll返回时，针对每一个socket进行检索:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CBaseSocket* pSocket = FindBaseSocket(ev_fd);</span><br></pre></td></tr></table></figure>
 <p>根据之前保存的SocketMap来查询ev_fd对应的CBaseSocket，然后ev_fd就找到了自己对应的回调函数。</p>
