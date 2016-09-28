@@ -84,15 +84,22 @@
 
 
 
-<meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="知其然知其所以然">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/categories/IOS/index.html">
+<meta name="description" content="隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。MsgServer如何才能在Epoll的可读时，根据socket就来确定对应的操作?
+TeamTalk使用CBaseSocket对socket进行了封装，其中包含了针对这个socket的一些回调操作；在Epoll返回时，针对每一个socket进行检索:
+1CBaseSocket* pSocket = FindB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description">
+<meta property="og:description" content="隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。MsgServer如何才能在Epoll的可读时，根据socket就来确定对应的操作?
+TeamTalk使用CBaseSocket对socket进行了封装，其中包含了针对这个socket的一些回调操作；在Epoll返回时，针对每一个socket进行检索:
+1CBaseSocket* pSocket = FindB">
+<meta property="og:updated_time" content="2016-09-28T16:06:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="知其然知其所以然">
-<meta name="twitter:description">
+<meta name="twitter:title" content="蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息">
+<meta name="twitter:description" content="隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。MsgServer如何才能在Epoll的可读时，根据socket就来确定对应的操作?
+TeamTalk使用CBaseSocket对socket进行了封装，其中包含了针对这个socket的一些回调操作；在Epoll返回时，针对每一个socket进行检索:
+1CBaseSocket* pSocket = FindB">
 
 
 
@@ -113,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/categories/IOS/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/"/>
 
-  <title> 分类: IOS | 知其然知其所以然 </title>
+  <title> 蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息 | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +143,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,47 +231,134 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        IOS
-        <small>分类</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T10:06:45+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>隔了一段时间又回来看TeamTalk，忘了一些东西，在重新捡起来的时候有新获得一些东西。<br>MsgServer如何才能在Epoll的可读时，根据socket就来确定对应的操作?</p>
+<p>TeamTalk使用CBaseSocket对socket进行了封装，其中包含了针对这个socket的一些回调操作；在Epoll返回时，针对每一个socket进行检索:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CBaseSocket* pSocket = FindBaseSocket(ev_fd);</span><br></pre></td></tr></table></figure>
+<p>根据之前保存的SocketMap来查询ev_fd对应的CBaseSocket，然后ev_fd就找到了自己对应的回调函数。</p>
+<a id="more"></a>
+<p>要描述清用户发送消息和接收消息的流程，还要补上用户登验证后的一些流程。</p>
+<h4 id="用户验证"><a href="#用户验证" class="headerlink" title="用户验证"></a>用户验证</h4><p>1&gt; 用户将“CID_LOGIN_REQ_USERLOGIN”报文发送给MsgServer后，MsgServer会创建CImUser对象，并在这个对象内部保存客户端与MsgServer的connection；<br>2&gt; MsgServer还会继续将这个用户验证报文”CID_OTHER_VALIDATE_REQ”发送给DBProxyServer，DBProxyServer把验证结果”CID_OTHER_VALIDATE_RSP”报文发送回MsgServer；<br>3&gt; 如果通过验证，MsgServer会将客户端的<socket, connection="">保存起来；</socket,></p>
+<h4 id="用户发送消息和接收消息"><a href="#用户发送消息和接收消息" class="headerlink" title="用户发送消息和接收消息"></a>用户发送消息和接收消息</h4><p>1&gt; 客户端发送”IM_MSG_DATA”(769)报文给MsgServer；MsgServer收到报文后会将客户端报文发送给DBProxyServer，DBProxyServer将用户发送的消息存入数据库，并给MsgServer发送”CID_MSG_DATA”(769)报文；<br>2&gt; MsgServer收到DBProxyServer的报文后，会给发送消息的客户端发送一个”CID_MSG_DATA_ACK”报文，然后根据之前保存的用户CImUser对应的connection，分别给发送者和接收者发送了之前消息发送方发送的报文。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/09/12/IOS中用户留言功能使用极光推送/" itemprop="url">
-              
-                <span itemprop="name">IOS中用户留言功能使用极光推送</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-12T22:07:38+08:00"
-              content="2016-09-12" >
-          09-12
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/12/IOS中用户留言功能使用极光推送/" rel="next" title="IOS中用户留言功能使用极光推送">
+                <i class="fa fa-chevron-left"></i> IOS中用户留言功能使用极光推送
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/27/蘑菇街TeamTalk-IOS客户端发送报文/" rel="prev" title="蘑菇街TeamTalk IOS客户端发送报文">
+                蘑菇街TeamTalk IOS客户端发送报文 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -272,6 +366,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/"
+           data-title="蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/27/蘑菇街TeamTalk服务器端MsgServer分析(三)之用户发送消息/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -291,8 +393,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/100.png"
@@ -360,6 +471,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户验证"><span class="nav-number">1.</span> <span class="nav-text">用户验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户发送消息和接收消息"><span class="nav-number">2.</span> <span class="nav-text">用户发送消息和接收消息</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -463,6 +585,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
