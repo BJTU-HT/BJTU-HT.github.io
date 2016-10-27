@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合obj_setAssociatedObject和obj_getAssociatedObject方法来扩展成员变量。">
+<meta name="description" content="objective-c链式编程，就是要达到像masonry一样的使用方式，如下所示:
+1234make.top.equalTo(self.mas_topLayoutGuide); make.left.equalTo(self.view);make.right.equalTo(self.view);make.height.equalTo(@40);
+在C++中，加减乘除运算通常会采用这样的链式操作来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IOS中Category扩展成员变量">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/06/17/IOS中Category扩展成员变量/index.html">
+<meta property="og:title" content="objective-c链式编程">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/10/27/objective-c链式编程/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合obj_setAssociatedObject和obj_getAssociatedObject方法来扩展成员变量。">
-<meta property="og:updated_time" content="2016-06-28T02:13:49.000Z">
+<meta property="og:description" content="objective-c链式编程，就是要达到像masonry一样的使用方式，如下所示:
+1234make.top.equalTo(self.mas_topLayoutGuide); make.left.equalTo(self.view);make.right.equalTo(self.view);make.height.equalTo(@40);
+在C++中，加减乘除运算通常会采用这样的链式操作来">
+<meta property="og:updated_time" content="2016-10-27T07:27:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IOS中Category扩展成员变量">
-<meta name="twitter:description" content="Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合obj_setAssociatedObject和obj_getAssociatedObject方法来扩展成员变量。">
+<meta name="twitter:title" content="objective-c链式编程">
+<meta name="twitter:description" content="objective-c链式编程，就是要达到像masonry一样的使用方式，如下所示:
+1234make.top.equalTo(self.mas_topLayoutGuide); make.left.equalTo(self.view);make.right.equalTo(self.view);make.height.equalTo(@40);
+在C++中，加减乘除运算通常会采用这样的链式操作来">
 
 
 
@@ -114,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/06/17/IOS中Category扩展成员变量/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/10/27/objective-c链式编程/"/>
 
-  <title> IOS中Category扩展成员变量 | 知其然知其所以然 </title>
+  <title> objective-c链式编程 | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -246,7 +252,7 @@
             
             
               
-                IOS中Category扩展成员变量
+                objective-c链式编程
               
             
           </h1>
@@ -258,19 +264,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-17T11:13:50+08:00" content="2016-06-17">
-              2016-06-17
+            <time itemprop="dateCreated" datetime="2016-10-27T14:03:27+08:00" content="2016-10-27">
+              2016-10-27
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS架构探索/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS架构探索</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/17/IOS中Category扩展成员变量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/17/IOS中Category扩展成员变量/" itemprop="commentsCount"></span>
+                <a href="/2016/10/27/objective-c链式编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/objective-c链式编程/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -293,24 +318,17 @@
       
 
       
-        <p>Category能够在不继承的情况下为一个类扩展方法，但是不能扩展成员变量；可以通过结合<kbd>obj_setAssociatedObject</kbd>和<kbd>obj_getAssociatedObject</kbd>方法来扩展成员变量。<br><a id="more"></a></p>
-<h4 id="obj-setAssociatedObject"><a href="#obj-setAssociatedObject" class="headerlink" title="obj_setAssociatedObject"></a>obj_setAssociatedObject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void objc_setAssociatedObject(id object, void *key, id value, objc_AssociationPolicy policy)</span><br></pre></td></tr></table></figure>
-<p>参数object就是被附加成员变量的对象，在category中object参数一般使用self；<br>参数key就是这个“成员变量附加”的key，当获取这个成员变量时，就需要通过这个key来获取;<br>参数id就是这个变量的值；<br>参数policy的类型是objc_AssociationPolicy,文档是这么解释的,”Type to specify the behavior of an association.”</p>
-<p>object_AssociationPolicy有5种值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">enum &#123;</span><br><span class="line">   OBJC_ASSOCIATION_ASSIGN = 0,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1,</span><br><span class="line">   OBJC_ASSOCIATION_COPY_NONATOMIC = 3,</span><br><span class="line">   OBJC_ASSOCIATION_RETAIN = 01401,</span><br><span class="line">   OBJC_ASSOCIATION_COPY = 01403</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>其中，OBJC_ASSOCIATION_RETAIN_NONATOMIC是“Specifies a strong reference to the associated object, and that the association is not made atomically”.<br>这个参数的作用就是描述我们要添加的成员变量的”@property (nonatomic, strong)”之类的属性。</p>
-<h4 id="obj-getAssociatedObject"><a href="#obj-getAssociatedObject" class="headerlink" title="obj_getAssociatedObject"></a>obj_getAssociatedObject</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id objc_getAssociatedObject(id object, void *key)</span><br></pre></td></tr></table></figure>
-<p>参数object指明要从哪个对象获取成员变量，在category中object一般使用self；<br>参数key就是在obj_setAssociatedObject中指明的key。</p>
-<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>下边这个例子是创建一个UITextField的category，使在创建UITextField的时候可以指定一个自定的UIView作为键盘。</p>
-<p>UITextField+RYNumberKeyboard.h<br>引用头文件：#import <uikit uikit.h="">，#import “RYNumberKeyboard.h”</uikit></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@interface UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">@property (nonatomic, assign) RYInputType ry_inputType;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
-<p>UITextField+RYNumberKeyboard.m<br>引用头文件：#import “UITextField+RYNumberKeyboard.h”，#import <objc runtime.h=""></objc></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@implementation UITextField (RYNumberKeyboard)</span><br><span class="line"></span><br><span class="line">- (void)setRy_inputType:(RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    RYNumberKeyboard *inputView = [[RYNumberKeyboard alloc] initWithInputType:ry_inputType];</span><br><span class="line">    self.inputView = inputView;</span><br><span class="line">    objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (RYInputType)ry_inputType</span><br><span class="line">&#123;</span><br><span class="line">    return [objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在设置成员变量中:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, @(ry_inputType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br></pre></td></tr></table></figure>
-<p>其中的”_cmd” is a hidden argument passed to every method that is the current selector.就相当于self之于当前类一样。<br>@(ry_inputType)将int类型的ry_inputType转换成NSString。<br>读取成员变量中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[objc_getAssociatedObject(self, @selector(setRy_inputType:)) integerValue]</span><br></pre></td></tr></table></figure>
-<p>通过@selector(setRy_inputType:)来获取响应成员函数的_cmd。</p>
+        <p>objective-c链式编程，就是要达到像masonry一样的使用方式，如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make.top.equalTo(self.mas_topLayoutGuide); </span><br><span class="line">make.left.equalTo(self.view);</span><br><span class="line">make.right.equalTo(self.view);</span><br><span class="line">make.height.equalTo(@40);</span><br></pre></td></tr></table></figure>
+<p>在C++中，加减乘除运算通常会采用这样的链式操作来完成，通过重载操作符返回非const自身引用来实现;同理，在objective-c中，也需要返回一个自身指针，其次如果要避免使用’’’[]’’’，而使用’’’()’’’，就需要使用block。</p>
+<a id="more"></a>
+<p>看下面一个例子:</p>
+<p>CalculatorMaker.h</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@interface CalculatorMaker : NSObject</span><br><span class="line">@property (nonatomic, assign) int result;</span><br><span class="line"></span><br><span class="line">- (CalculatorMaker *(^)(int))add;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>CalculatorMaker.m</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@implementation CalculatorMaker</span><br><span class="line"></span><br><span class="line">- (CalculatorMaker *(^)(int))add</span><br><span class="line">&#123;</span><br><span class="line">    return ^id(int x) &#123;</span><br><span class="line">    self.result += x;</span><br><span class="line">    return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>add方法返回类型是一个block，这个block的返回类型是(CalculatorMaker *)，若果要调用add，就可以下面链式来完成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CalculatorMaker *c = [[CalculatorMaker alloc] init];</span><br><span class="line">NSLog(@&quot;结果是:%d&quot;, [c.add(1).add(1).add(999) result]);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -336,17 +354,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/外键导致OGG进程异常/" rel="next" title="外键导致OGG进程异常">
-                <i class="fa fa-chevron-left"></i> 外键导致OGG进程异常
+              <a href="/2016/10/04/蘑菇街TeamTalk-iOS客户端接收报文/" rel="next" title="蘑菇街TeamTalk iOS客户端接收报文">
+                <i class="fa fa-chevron-left"></i> 蘑菇街TeamTalk iOS客户端接收报文
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/22/使用CAShapeLayer画圆/" rel="prev" title="使用CAShapeLayer画圆">
-                使用CAShapeLayer画圆 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -372,8 +386,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/17/IOS中Category扩展成员变量/"
-           data-title="IOS中Category扩展成员变量" data-url="http://www.duitang.com/blog/?id=497773911/2016/06/17/IOS中Category扩展成员变量/">
+      <div class="ds-thread" data-thread-key="2016/10/27/objective-c链式编程/"
+           data-title="objective-c链式编程" data-url="http://www.duitang.com/blog/?id=497773911/2016/10/27/objective-c链式编程/">
       </div>
     
   </div>
@@ -482,7 +496,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#obj-setAssociatedObject"><span class="nav-number">1.</span> <span class="nav-text">obj_setAssociatedObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#obj-getAssociatedObject"><span class="nav-number">2.</span> <span class="nav-text">obj_getAssociatedObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">3.</span> <span class="nav-text">Example</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
