@@ -248,6 +248,130 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/10/Redis之文章投票/" itemprop="url">
+                  Redis之文章投票
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-10T09:25:08+08:00" content="2017-01-10">
+              2017-01-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/10/Redis之文章投票/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/Redis之文章投票/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>文章投票中使用Redis</p>
+<p>文章的得分会随着时间逐渐降低，所以需要使用一个time zset和score zset</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//time</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332065417.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332075503.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332082035.26 article:100716</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange time 0 -1 withscores</span><br><span class="line">1) &quot;article:100408&quot;</span><br><span class="line">2) &quot;1332065417.47&quot;</span><br><span class="line">3) &quot;article:100635&quot;</span><br><span class="line">4) &quot;1332075503.49&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332082035.26&quot;</span><br><span class="line"></span><br><span class="line">//score</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332164063.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332174713.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332225027.26 article:100716</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange score 0 -1 withscores</span><br><span class="line">1) &quot;article:100635&quot;</span><br><span class="line">2) &quot;1332164063.49&quot;</span><br><span class="line">3) &quot;article:100408&quot;</span><br><span class="line">4) &quot;1332174713.47&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332225027.26&quot;</span><br></pre></td></tr></table></figure>
+<p>为了阻止一个用户给一篇文章多次投票，为每一篇文章创建一个已投票用户set</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:234487</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:253378</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:364680</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:132097</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:350917</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers voted:100408</span><br><span class="line">1) &quot;user:132097&quot;</span><br><span class="line">2) &quot;user:364680&quot;</span><br><span class="line">3) &quot;user:253378&quot;</span><br><span class="line">4) &quot;user:234487&quot;</span><br><span class="line">5) &quot;user:350917&quot;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/22/仿凤凰FMiOS客户端/" itemprop="url">
                   仿凤凰FMiOS客户端
                 </a>
@@ -1312,128 +1436,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/01/一种触发EPOLLOUT的情形/" itemprop="url">
-                  一种触发EPOLLOUT的情形
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-01T23:03:14+08:00" content="2016-09-01">
-              2016-09-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/服务器端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">服务器端开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/01/一种触发EPOLLOUT的情形/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/一种触发EPOLLOUT的情形/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>epoll在服务器端EPOLLOUT触发的情况，一般是服务器端在往客户端发送大于缓冲区容量的数据时，每当缓存区有空闲空间可以继续接收数据时，此时epoll_wait就会返回EPOLLOUT事件。我们这里要谈到的是客户端触发EPOLLOUT，因为存在这样一种情况，<strong>服务器端同时做客户端去访问其他服务器，通过实验我们得出结论，当客户端在connect上服务器端时，也会触发EPOLLOUT</strong>。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/01/一种触发EPOLLOUT的情形/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1479,7 +1481,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1487,7 +1489,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1496,7 +1498,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1551,7 +1553,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
