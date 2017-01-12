@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="文章投票中使用Redis
-文章的得分会随着时间逐渐降低，所以需要使用一个time zset和score zset
-1234567891011121314151617181920212223242526272829303132//time127.0.0.1:6379&amp;gt; zadd time 1332065417.47 article:100408(integer) 1127.0.0.1:6379">
+<meta name="description" content="文章投票中使用Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis之文章投票">
 <meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2017/01/10/Redis之文章投票/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="文章投票中使用Redis
-文章的得分会随着时间逐渐降低，所以需要使用一个time zset和score zset
-1234567891011121314151617181920212223242526272829303132//time127.0.0.1:6379&amp;gt; zadd time 1332065417.47 article:100408(integer) 1127.0.0.1:6379">
-<meta property="og:updated_time" content="2017-01-11T05:41:36.000Z">
+<meta property="og:description" content="文章投票中使用Redis">
+<meta property="og:updated_time" content="2017-01-12T00:41:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis之文章投票">
-<meta name="twitter:description" content="文章投票中使用Redis
-文章的得分会随着时间逐渐降低，所以需要使用一个time zset和score zset
-1234567891011121314151617181920212223242526272829303132//time127.0.0.1:6379&amp;gt; zadd time 1332065417.47 article:100408(integer) 1127.0.0.1:6379">
+<meta name="twitter:description" content="文章投票中使用Redis">
 
 
 
@@ -319,8 +313,9 @@
 
       
         <p>文章投票中使用Redis</p>
+<a id="more"></a>
 <p>文章的得分会随着时间逐渐降低，所以需要使用一个time zset和score zset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//time</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332065417.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332075503.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time 1332082035.26 article:100716</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange time 0 -1 withscores</span><br><span class="line">1) &quot;article:100408&quot;</span><br><span class="line">2) &quot;1332065417.47&quot;</span><br><span class="line">3) &quot;article:100635&quot;</span><br><span class="line">4) &quot;1332075503.49&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332082035.26&quot;</span><br><span class="line"></span><br><span class="line">//score</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332164063.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332174713.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score 1332225027.26 article:100716</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange score 0 -1 withscores</span><br><span class="line">1) &quot;article:100635&quot;</span><br><span class="line">2) &quot;1332164063.49&quot;</span><br><span class="line">3) &quot;article:100408&quot;</span><br><span class="line">4) &quot;1332174713.47&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332225027.26&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//time</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd time: 1332065417.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time: 1332075503.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd time: 1332082035.26 article:100716</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange time: 0 -1 withscores</span><br><span class="line">1) &quot;article:100408&quot;</span><br><span class="line">2) &quot;1332065417.47&quot;</span><br><span class="line">3) &quot;article:100635&quot;</span><br><span class="line">4) &quot;1332075503.49&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332082035.26&quot;</span><br><span class="line"></span><br><span class="line">//score</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zadd score: 1332164063.49 article:100635</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score: 1332174713.47 article:100408</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd score: 1332225027.26 article:100716</span><br><span class="line">(integer) 1</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; zrange score: 0 -1 withscores</span><br><span class="line">1) &quot;article:100635&quot;</span><br><span class="line">2) &quot;1332164063.49&quot;</span><br><span class="line">3) &quot;article:100408&quot;</span><br><span class="line">4) &quot;1332174713.47&quot;</span><br><span class="line">5) &quot;article:100716&quot;</span><br><span class="line">6) &quot;1332225027.26&quot;</span><br></pre></td></tr></table></figure>
 <p>为了阻止一个用户给一篇文章多次投票，为每一篇文章创建一个已投票用户set</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:234487</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:253378</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:364680</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:132097</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd voted:100408 user:350917</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers voted:100408</span><br><span class="line">1) &quot;user:132097&quot;</span><br><span class="line">2) &quot;user:364680&quot;</span><br><span class="line">3) &quot;user:253378&quot;</span><br><span class="line">4) &quot;user:234487&quot;</span><br><span class="line">5) &quot;user:350917&quot;</span><br></pre></td></tr></table></figure>
 
@@ -361,6 +356,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/11/Swift使用Protobuf/" rel="prev" title="Swift使用Protobuf">
+                Swift使用Protobuf <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -432,7 +431,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -440,7 +439,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
