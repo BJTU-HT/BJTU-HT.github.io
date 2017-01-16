@@ -318,7 +318,7 @@
       
         
           
-            <p>在swift中使用MD5时，需要使用ObjC的头文件#import <commoncrypto commoncrypto.h="">。<br>在swift中新建一个XXX.h 头文件，将“#import <commoncrypto commoncrypto.h="">”复制进去。<br>在Target-&gt;Build Settings中找到Objective-C Bridging Header, 将新建的XXX.h写进去，就可以了。</commoncrypto></commoncrypto></p>
+            <p>在swift中使用MD5时，需要使用ObjC的头文件#import <commoncrypto commoncrypto.h="">。<br>在swift中新建一个bridge-header.h头文件，将“#import <commoncrypto commoncrypto.h="">”复制进去。<br>在Target-&gt;Build Settings中找到Objective-C Bridging Header, 写入./TeamTalkSwift/bridge-header.h，就可以了，其中TeamTalkSwift是项目名称。</commoncrypto></commoncrypto></p>
 
           
         
