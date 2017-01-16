@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2017/01/11/Swift使用Protobuf/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
 <meta property="og:description" content="具体操作流程见: https://github.com/apple/swift-protobuf生成protoc-gen-swift文件后，将protoc-gen-swift的文件路径加入到PATH路径。.proto文件是描述协议的文件，Teamtalk源码的pb文件夹中包含.proto文件，无需自己去写。protoc程序需要从google的github上下载: https://github.co">
-<meta property="og:updated_time" content="2017-01-12T00:42:11.000Z">
+<meta property="og:updated_time" content="2017-01-13T05:51:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift使用Protobuf">
 <meta name="twitter:description" content="具体操作流程见: https://github.com/apple/swift-protobuf生成protoc-gen-swift文件后，将protoc-gen-swift的文件路径加入到PATH路径。.proto文件是描述协议的文件，Teamtalk源码的pb文件夹中包含.proto文件，无需自己去写。protoc程序需要从google的github上下载: https://github.co">
@@ -313,6 +313,9 @@
 
       
         <p>具体操作流程见: <a href="https://github.com/apple/swift-protobuf" target="_blank" rel="external">https://github.com/apple/swift-protobuf</a><br>生成protoc-gen-swift文件后，将protoc-gen-swift的文件路径加入到PATH路径。<br>.proto文件是描述协议的文件，Teamtalk源码的pb文件夹中包含.proto文件，无需自己去写。<br>protoc程序需要从google的github上下载: <a href="https://github.com/google/protobuf/releases/tag/v3.0.0" target="_blank" rel="external">https://github.com/google/protobuf/releases/tag/v3.0.0</a><br>Mac下直接下载protoc-3.00-osx-x86_64.zip，解压后将protoc文件路径加入PATH中，就可以使用protoc将.proto转化成.pb.swift了。</p>
+<p>转换成swift后常用的函数在<a href="https://github.com/apple/swift-protobuf/blob/master/Documentation/API.md，但是当前版本转换后的swift中看不到类似于下面这些方法，" target="_blank" rel="external">https://github.com/apple/swift-protobuf/blob/master/Documentation/API.md，但是当前版本转换后的swift中看不到类似于下面这些方法，</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init(protobuf: Data) throws &#123;</span><br><span class="line">init(protobuf: Data, extensions: ProtobufExtensionSet? = nil) throws</span><br></pre></td></tr></table></figure>
+<p>这些方法目前都写在了框架中，我们直接调用就可以了。</p>
 
       
     </div>
@@ -345,6 +348,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/16/Swift调用objective-c/" rel="prev" title="Swift调用objective-c">
+                Swift调用objective-c <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -416,7 +423,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
