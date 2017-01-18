@@ -318,7 +318,10 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static let sharedInstance = Singleton()</span><br><span class="line"></span><br><span class="line">    class func instance() -&gt; Singleton &#123;</span><br><span class="line">        return sharedInstance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>In Swift, you can simply use a static type property, which is guaranteed to be lazily initialized only once, even when accessed across multiple threads simultaneously:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Singleton &#123;</span><br><span class="line">    static let sharedInstance = Singleton()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If you need to perform additional setup beyond initialization, you can assign the result of the invocation of a closure to the global constant:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Singleton &#123;</span><br><span class="line">    static let sharedInstance: Singleton = &#123;</span><br><span class="line">        let instance = Singleton()</span><br><span class="line">        // setup code</span><br><span class="line">        return instance</span><br><span class="line">    &#125;()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
