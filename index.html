@@ -248,6 +248,254 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/19/TeamTalk服务器端发送报文/" itemprop="url">
+                  TeamTalk服务器端发送报文
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-19T23:12:17+08:00" content="2017-01-19">
+              2017-01-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/蘑菇街TeamTalk/" itemprop="url" rel="index">
+                    <span itemprop="name">蘑菇街TeamTalk</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/19/TeamTalk服务器端发送报文/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/19/TeamTalk服务器端发送报文/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>发送报文是通过调用CImConn的SendPdu()函数来实现的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int SendPdu(CImPdu* pPdu) &#123; return Send(pPdu-&gt;GetBuffer(), pPdu-&gt;GetLength()); &#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/19/TeamTalk服务器端发送报文/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/19/StreamDelegate连接服务器测试/" itemprop="url">
+                  StreamDelegate连接服务器测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-19T15:18:49+08:00" content="2017-01-19">
+              2017-01-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/19/StreamDelegate连接服务器测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/19/StreamDelegate连接服务器测试/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h3 id="客户端代码"><a href="#客户端代码" class="headerlink" title="客户端代码"></a>客户端代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">class DDTcpClientManager: NSObject, StreamDelegate &#123;</span><br><span class="line">var inStream: InputStream? = nil</span><br><span class="line">var outStream: OutputStream? = nil</span><br><span class="line"></span><br><span class="line">static let sharedInstance = DDTcpClientManager()</span><br><span class="line"></span><br><span class="line">// ip 192.168.54.134, port 7778</span><br><span class="line">func connect(ipAdr: String, port: Int, status: Int) &#123;</span><br><span class="line">print(&quot;mogujie mtalk client :connect ipAdr: \(ipAdr) port:\(port)&quot;)</span><br><span class="line">var tempInput: InputStream? = nil</span><br><span class="line">var tempOutput: OutputStream? = nil</span><br><span class="line">Stream.getStreamsToHost(withName: ipAdr, port: port, inputStream: &amp;tempInput, outputStream: &amp;tempOutput)</span><br><span class="line"></span><br><span class="line">self.inStream = tempInput!</span><br><span class="line">self.outStream = tempOutput!</span><br><span class="line"></span><br><span class="line">self.inStream?.delegate = self</span><br><span class="line">self.outStream?.delegate = self</span><br><span class="line"></span><br><span class="line">self.inStream?.schedule(in: RunLoop.current, forMode: .defaultRunLoopMode)</span><br><span class="line">self.outStream?.schedule(in: RunLoop.current, forMode: .defaultRunLoopMode)</span><br><span class="line"></span><br><span class="line">self.inStream?.open()</span><br><span class="line">self.outStream?.open()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func stream(_ aStream: Stream, handle eventCode: Stream.Event) &#123;</span><br><span class="line">switch eventCode &#123;</span><br><span class="line">case Stream.Event.openCompleted:</span><br><span class="line">p_handleConnectOpenCompletedStream(aStream: aStream)</span><br><span class="line">case Stream.Event.hasBytesAvailable:</span><br><span class="line">p_handleEventHasBytesAvailableStream(aStream: aStream)</span><br><span class="line">case Stream.Event.hasSpaceAvailable:</span><br><span class="line">p_handleEventHasSpaceAvailableStream(aStream: aStream)</span><br><span class="line">case Stream.Event.errorOccurred:</span><br><span class="line">p_handleEventErrorOccurredStream(aStream: aStream)</span><br><span class="line">case Stream.Event.endEncountered:</span><br><span class="line">p_handleEventEndEncounteredStream(aStream: aStream)</span><br><span class="line">default:</span><br><span class="line">print(&quot;Event type: EventNone&quot;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private func p_handleConnectOpenCompletedStream(aStream: Stream) &#123;</span><br><span class="line">//print(&quot;handleConnectOpenCompleted&quot;)</span><br><span class="line">if aStream == outStream &#123;</span><br><span class="line">print(&quot;connect open complete!&quot;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private func p_handleEventHasBytesAvailableStream(aStream: Stream) &#123;</span><br><span class="line">//print(&quot;has bytes available&quot;)</span><br><span class="line">var buffer = [UInt8](repeating: 0, count: 2)</span><br><span class="line">if aStream == self.inStream &#123;</span><br><span class="line">let len = self.inStream?.read(&amp;buffer, maxLength: buffer.count)</span><br><span class="line">if len! &gt; 0 &#123;</span><br><span class="line">let output = String.init(bytes: buffer, encoding: String.Encoding.utf8)!</span><br><span class="line">if output != &quot;&quot; &#123;</span><br><span class="line">print(&quot;\(output)&quot;)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private func p_handleEventHasSpaceAvailableStream(aStream: Stream) &#123;</span><br><span class="line">//print(&quot;has space available&quot;)</span><br><span class="line">let myString = &quot;Hello World!&quot;</span><br><span class="line">let encodeDataArray = [UInt8](myString.utf8)</span><br><span class="line">self.outStream?.write(encodeDataArray, maxLength: encodeDataArray.count)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private func p_handleEventEndEncounteredStream(aStream: Stream) &#123;</span><br><span class="line">print(&quot;handle eventEndEncountered&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private func p_handleEventErrorOccurredStream(aStream: Stream) &#123;</span><br><span class="line">print(&quot;handle eventErrorOccurred&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端连接服务器的测试代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let ip = &quot;192.168.54.134&quot;</span><br><span class="line">let port = 7778</span><br><span class="line">DDTcpClientManager.sharedInstance.connect(ipAdr: ip, port: port, status: 1)</span><br></pre></td></tr></table></figure>
+<h3 id="服务器端代码"><a href="#服务器端代码" class="headerlink" title="服务器端代码"></a>服务器端代码</h3><p>服务器的功能是接收客户端发送过来的字符串，然后再返回给客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">//============================================================================</span><br><span class="line">// Name        : EchoServer.cpp</span><br><span class="line">// Author      : </span><br><span class="line">// Version     :</span><br><span class="line">// Copyright   : Your copyright notice</span><br><span class="line">// Description : Hello World in C++, Ansi-style</span><br><span class="line">//============================================================================</span><br><span class="line"></span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;netinet/in.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">const unsigned int PORT = 7778;</span><br><span class="line">const unsigned int LISTEN_NUM = 128;</span><br><span class="line">const unsigned int MAXLINE = 1024;</span><br><span class="line"></span><br><span class="line">void* doit(void *arg)</span><br><span class="line">&#123;</span><br><span class="line">pthread_detach(pthread_self());</span><br><span class="line">char buf[MAXLINE];</span><br><span class="line">int connfd = (int)arg;</span><br><span class="line">int n = 0;</span><br><span class="line">while((n = recv(connfd, buf, sizeof(buf), 0)) &gt; 0)&#123;</span><br><span class="line">send(connfd, buf, n, 0);</span><br><span class="line">&#125;</span><br><span class="line">if(n == -1)&#123;</span><br><span class="line">printf(&quot;receive error\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line">close(connfd);</span><br><span class="line">return NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">struct sockaddr_in cliaddr, serveraddr;</span><br><span class="line">int listenfd, connfd;</span><br><span class="line">socklen_t clilen;</span><br><span class="line">pthread_t tid;</span><br><span class="line"></span><br><span class="line">listenfd = socket(AF_INET, SOCK_STREAM, 0);</span><br><span class="line"></span><br><span class="line">bzero(&amp;serveraddr, sizeof(serveraddr));</span><br><span class="line">serveraddr.sin_family = AF_INET;</span><br><span class="line">serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);</span><br><span class="line">serveraddr.sin_port = htons(PORT);</span><br><span class="line"></span><br><span class="line">if(bind(listenfd, (struct sockaddr *)&amp;serveraddr, sizeof(serveraddr)) == -1)&#123;</span><br><span class="line">printf(&quot;bind error\n&quot;);</span><br><span class="line">return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(listen(listenfd,LISTEN_NUM) == -1)&#123;</span><br><span class="line">printf(&quot;listen error\n&quot;);</span><br><span class="line">return -1;</span><br><span class="line">&#125;</span><br><span class="line">for(;;)&#123;</span><br><span class="line">clilen = sizeof(cliaddr);</span><br><span class="line">connfd = accept(listenfd, (struct sockaddr *)&amp;cliaddr, &amp;clilen);</span><br><span class="line">if(connfd&gt;0)&#123;</span><br><span class="line">if(pthread_create(&amp;tid, NULL, doit, (void *)connfd))&#123;</span><br><span class="line">printf(&quot;pthread create error\n&quot;);</span><br><span class="line">return -1;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">close(listenfd);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/16/Swift单例/" itemprop="url">
                   Swift单例
                 </a>
@@ -1182,252 +1430,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/04/蘑菇街TeamTalk-iOS客户端接收报文/" itemprop="url">
-                  蘑菇街TeamTalk iOS客户端接收报文
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-04T17:21:11+08:00" content="2016-10-04">
-              2016-10-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/蘑菇街TeamTalk/" itemprop="url" rel="index">
-                    <span itemprop="name">蘑菇街TeamTalk</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/04/蘑菇街TeamTalk-iOS客户端接收报文/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/蘑菇街TeamTalk-iOS客户端接收报文/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/TeamTalk_receiveData.png" alt="Mou icon"></p>
-<p>TeamTalk的iOS客户端接收服务器发来报文的处理架构。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/04/蘑菇街TeamTalk-iOS客户端接收报文/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/27/蘑菇街TeamTalk-IOS客户端发送报文/" itemprop="url">
-                  蘑菇街TeamTalk iOS客户端发送报文
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-27T15:34:40+08:00" content="2016-09-27">
-              2016-09-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/蘑菇街TeamTalk/" itemprop="url" rel="index">
-                    <span itemprop="name">蘑菇街TeamTalk</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/27/蘑菇街TeamTalk-IOS客户端发送报文/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/蘑菇街TeamTalk-IOS客户端发送报文/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/teamtalk_ios.png" alt="Mou icon"></p>
-<p>TeamTalk的iOS客户端向服务器端发送报文的架构。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/27/蘑菇街TeamTalk-IOS客户端发送报文/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1473,7 +1475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
