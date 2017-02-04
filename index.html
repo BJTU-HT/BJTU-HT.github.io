@@ -248,6 +248,313 @@
             
               
                 
+                <a class="post-title-link" href="/2017/01/31/Swift中使用FMDB/" itemprop="url">
+                  Swift中使用FMDB
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-31T09:24:11+08:00" content="2017-01-31">
+              2017-01-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/31/Swift中使用FMDB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/31/Swift中使用FMDB/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>转载自: <a href="http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB">http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB</a></p>
+<p>首先去github上下载fmdb，<a href="https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下">https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下</a></p>
+<p><img src="/images/Xcode_6_fmdb_source_files.png" alt="Mou icon"></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/31/Swift中使用FMDB/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/29/Swift-Objective-C-C-C-混合编程/" itemprop="url">
+                  Swift,Objective-C,C,C++混合编程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-29T11:09:06+08:00" content="2017-01-29">
+              2017-01-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/29/Swift-Objective-C-C-C-混合编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/29/Swift-Objective-C-C-C-混合编程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>YES.</p>
+<p>You can mix Swift, C, C++, Objective-C &amp; Objective-C++ files in the same Xcode project.</p>
+<p>C</p>
+<p>// Declaration: C.h</p>
+<p>#ifndef C_h</p>
+<p>#define C_h</p>
+<p>#ifdef __cplusplus<br>extern “C” {</p>
+<p>#endif<br>void hello_c(const char * name);</p>
+<p>#ifdef __cplusplus<br>}</p>
+<p>#endif</p>
+<p>#endif /<em> C_h </em>/</p>
+<p>// Definition: C.c</p>
+<p>#include “C.h”</p>
+<p>#include <stdio.h><br>void hello_c(const char * name) {<br>printf(“Hello %s in C\n”, name);<br>}<br>C++</stdio.h></p>
+<p>// Declaration: CPP.hpp</p>
+<p>#pragma once</p>
+<p>#include <string><br>class CPP {<br>public:<br>void hello_cpp(const std::string&amp; name);<br>};</string></p>
+<p>// Definition: CPP.cpp</p>
+<p>#include “CPP.hpp”</p>
+<p>#include <iostream><br>using namespace std;<br>void CPP::hello_cpp(const std::string&amp; name) {<br>cout &lt;&lt; “Hello “ &lt;&lt; name &lt;&lt; “ in C++” &lt;&lt; endl;<br>}<br>Objective-C wrapper for C++</iostream></p>
+<p>// Declaration: CPP-Wrapper.h</p>
+<p>#import <foundation foundation.h=""><br>@interface CPP_Wrapper : NSObject</foundation></p>
+<ul>
+<li>(void)hello_cpp_wrapped:(NSString *)name;<br>@end</li>
+</ul>
+<p>// Definition: CPP-Wrapper.mm</p>
+<p>#import “CPP-Wrapper.h”</p>
+<p>#include “CPP.hpp”<br>@implementation CPP_Wrapper</p>
+<ul>
+<li>(void)hello_cpp_wrapped:(NSString *)name {<br>CPP cpp;<br>cpp.hello_cpp([name cStringUsingEncoding:NSUTF8StringEncoding]);<br>}<br>@end<br>Objective-C</li>
+</ul>
+<p>// Declaration: Objective-C.h</p>
+<p>#import <foundation foundation.h=""><br>@interface Objective_C : NSObject</foundation></p>
+<ul>
+<li>(void)hello_objectiveC:(NSString *)name;<br>@end</li>
+</ul>
+<p>// Definition: Objective-C.m</p>
+<p>#import “Objective-C.h”<br>@implementation Objective_C</p>
+<ul>
+<li>(void)hello_objectiveC:(NSString*)name {<br>printf(“Hello %s in Objective-C\n”, [name cStringUsingEncoding:NSUTF8StringEncoding]);<br>}<br>@end<br>Objective-C++</li>
+</ul>
+<p>// Declaration: Objective-CPP.h</p>
+<p>#import <foundation foundation.h=""><br>@interface Objective_CPP : NSObject</foundation></p>
+<ul>
+<li>(void)hello_objectiveCpp:(NSString *)name;<br>@end</li>
+</ul>
+<p>// Definition: Objective-CPP.mm</p>
+<p>#include <iostream></iostream></p>
+<p>#import “Objective-CPP.h”<br>using namespace std;<br>@implementation Objective_CPP</p>
+<ul>
+<li>(void)hello_objectiveCpp:(NSString *)name {<br>cout &lt;&lt; “Hello “ &lt;&lt; [name cStringUsingEncoding:NSUTF8StringEncoding] &lt;&lt; “ in Objective-C++\n”;<br>}<br>@end<br>Swift</li>
+</ul>
+<p>// Declaration &amp; definition: Swift.swift<br>class Swift {<br>func hello_swift(name: String) {<br>print(“Hello (name) in Swift”)<br>}<br>}<br>Bridging-Header.h</p>
+<p>Cannot import CPP.hpp header file, not because of it’s naming convention, but because it contains the class keyword.</p>
+<p>#import “C.h”</p>
+<p>#import “CPP-Wrapper.h”</p>
+<p>#import “Objective-C.h”</p>
+<p>#import “Objective-CPP.h”<br>Invocation from Swift</p>
+<p>// Invoke C<br>hello_c(“World”.cStringUsingEncoding(NSUTF8StringEncoding))</p>
+<p>// Can’t Invoke C++ without a wrapper<br>// CPP().hello_cpp(“World”.cStringUsingEncoding(NSUTF8StringEncoding))<br>// Invoke C++ through Objective-C<br>CPP_Wrapper().hello_cpp_wrapped(“World”)</p>
+<p>// Invoke Objective-C<br>Objective_C().hello_objectiveC(“World”)</p>
+<p>// Invoke Objective-C++<br>Objective_CPP().hello_objectiveCpp(“World”)</p>
+<p>// Invoke Swift<br>Swift().hello_swift(“World”)<br>Output</p>
+<p>Hello World in C<br>Hello World in C++<br>Hello World in Objective-C<br>Hello World in Objective-C++<br>Hello World in Swift</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/01/24/Swift中String和char数组的转换/" itemprop="url">
                   Swift中String和char数组的转换
                 </a>
@@ -1203,228 +1510,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/03/UILabel图文混排/" itemprop="url">
-                  UILabel图文混排
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-03T10:50:19+08:00" content="2016-11-03">
-              2016-11-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/03/UILabel图文混排/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/UILabel图文混排/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/text_image.png" alt="Mou icon"></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/03/UILabel图文混排/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/28/ReactiveCocoa-Tutorial-The-Definitive-Introduction-Part-1-2/" itemprop="url">
-                  ReactiveCocoa Tutorial - The Definitive Introduction: Part 1/2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-28T23:41:53+08:00" content="2016-10-28">
-              2016-10-28
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/28/ReactiveCocoa-Tutorial-The-Definitive-Introduction-Part-1-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/ReactiveCocoa-Tutorial-The-Definitive-Introduction-Part-1-2/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1470,7 +1555,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

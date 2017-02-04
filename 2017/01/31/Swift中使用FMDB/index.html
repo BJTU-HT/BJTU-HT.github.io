@@ -1,0 +1,661 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="转载自: http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB
+首先去github上下载fmdb，https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift中使用FMDB">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2017/01/31/Swift中使用FMDB/index.html">
+<meta property="og:site_name" content="知其然知其所以然">
+<meta property="og:description" content="转载自: http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB
+首先去github上下载fmdb，https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/Xcode_6_fmdb_source_files.png">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/Xcode_8_ios_10_sqlite_bridging_header.png">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/Ios_10_sqlite_ui.png">
+<meta property="og:updated_time" content="2017-01-31T02:08:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift中使用FMDB">
+<meta name="twitter:description" content="转载自: http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB
+首先去github上下载fmdb，https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下">
+<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/Xcode_6_fmdb_source_files.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2017/01/31/Swift中使用FMDB/"/>
+
+  <title> Swift中使用FMDB | 知其然知其所以然 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知其然知其所以然</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift中使用FMDB
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-31T09:24:11+08:00" content="2017-01-31">
+              2017-01-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/31/Swift中使用FMDB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/31/Swift中使用FMDB/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载自: <a href="http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB" target="_blank" rel="external">http://www.techotopia.com/index.php/An_Example_SQLite_based_iOS_8_Application_using_Swift_and_FMDB</a></p>
+<p>首先去github上下载fmdb，<a href="https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下" target="_blank" rel="external">https://github.com/ccgus/fmdb.git，打开项目后将fmdb复制到你自己的项目下</a></p>
+<p><img src="/images/Xcode_6_fmdb_source_files.png" alt="Mou icon"></p>
+<a id="more"></a>
+<p>在将fmdb复制到Swift项目中时，会提示创建bridging header,</p>
+<p><img src="/images/Xcode_8_ios_10_sqlite_bridging_header.png" alt="Mou icon"></p>
+<p>然后在创建的bridging header中引入FMDB.h文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;FMDB.h&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="在viewController中创建界面"><a href="#在viewController中创建界面" class="headerlink" title="在viewController中创建界面"></a>在viewController中创建界面</h2><p><img src="/images/Ios_10_sqlite_ui.png" alt="Mou icon"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line"></span><br><span class="line">    @IBOutlet weak var name: UITextField!</span><br><span class="line">    @IBOutlet weak var address: UITextField!</span><br><span class="line">    @IBOutlet weak var phone: UITextField!</span><br><span class="line">    @IBOutlet weak var status: UILabel!</span><br><span class="line"></span><br><span class="line">    var databasePath = String()</span><br><span class="line"></span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @IBAction func saveData(_ sender: AnyObject) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @IBAction func findContact(_ sender: AnyObject) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="viewDidLoad"><a href="#viewDidLoad" class="headerlink" title="viewDidLoad()"></a>viewDidLoad()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line"></span><br><span class="line">    let filemgr = FileManager.default</span><br><span class="line">    let dirPaths = filemgr.urls(for: .documentDirectory, in: .userDomainMask)</span><br><span class="line"></span><br><span class="line">    databasePath = dirPaths[0].appendingPathComponent(&quot;contacts.db&quot;).path</span><br><span class="line"></span><br><span class="line">    if !filemgr.fileExists(atPath: databasePath as String) &#123;</span><br><span class="line"></span><br><span class="line">        let contactDB = FMDatabase(path: databasePath as String)</span><br><span class="line"></span><br><span class="line">        if contactDB == nil &#123;</span><br><span class="line">            print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (contactDB?.open())! &#123;</span><br><span class="line">            let sql_stmt = &quot;CREATE TABLE IF NOT EXISTS CONTACTS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT)&quot;</span><br><span class="line">            if !(contactDB?.executeStatements(sql_stmt))! &#123;</span><br><span class="line">                print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">            contactDB?.close()</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="saveData"><a href="#saveData" class="headerlink" title="saveData()"></a>saveData()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func saveData(_ sender: AnyObject) &#123;</span><br><span class="line">    let contactDB = FMDatabase(path: databasePath as String)</span><br><span class="line"></span><br><span class="line">    if (contactDB?.open())! &#123;</span><br><span class="line"></span><br><span class="line">        let insertSQL = &quot;INSERT INTO CONTACTS (name, address, phone) VALUES (&apos;\(name.text!)&apos;, &apos;\(address.text!)&apos;, &apos;\(phone.text!)&apos;)&quot;</span><br><span class="line"></span><br><span class="line">        let result = contactDB?.executeUpdate(insertSQL, withArgumentsIn: nil)</span><br><span class="line"></span><br><span class="line">        if !result! &#123;</span><br><span class="line">            status.text = &quot;Failed to add contact&quot;</span><br><span class="line">            print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            status.text = &quot;Contact Added&quot;</span><br><span class="line">            name.text = &quot;&quot;</span><br><span class="line">            address.text = &quot;&quot;</span><br><span class="line">            phone.text = &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="findContact"><a href="#findContact" class="headerlink" title="findContact()"></a>findContact()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@IBAction func findContact(_ sender: AnyObject) &#123;</span><br><span class="line">    let contactDB = FMDatabase(path: databasePath as String)</span><br><span class="line"></span><br><span class="line">    if (contactDB?.open())! &#123;</span><br><span class="line">        let querySQL = &quot;SELECT address, phone FROM CONTACTS WHERE name = &apos;\(name.text!)&apos;&quot;</span><br><span class="line"></span><br><span class="line">        let results:FMResultSet? = contactDB?.executeQuery(querySQL,withArgumentsIn: nil)</span><br><span class="line"></span><br><span class="line">        if results?.next() == true &#123;</span><br><span class="line">            address.text = results?.string(forColumn: &quot;address&quot;)</span><br><span class="line">            phone.text = results?.string(forColumn: &quot;phone&quot;)</span><br><span class="line">            status.text = &quot;Record Found&quot;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            status.text = &quot;Record not found&quot;</span><br><span class="line">            address.text = &quot;&quot;</span><br><span class="line">            phone.text = &quot;&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        contactDB?.close()</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        print(&quot;Error: \(contactDB?.lastErrorMessage())&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/29/Swift-Objective-C-C-C-混合编程/" rel="next" title="Swift,Objective-C,C,C++混合编程">
+                <i class="fa fa-chevron-left"></i> Swift,Objective-C,C,C++混合编程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/31/Swift中使用FMDB/"
+           data-title="Swift中使用FMDB" data-url="http://www.duitang.com/blog/?id=497773911/2017/01/31/Swift中使用FMDB/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/100.png"
+               alt="tom555cat" />
+          <p class="site-author-name" itemprop="name">tom555cat</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="王辰龙的博客" target="_blank">王辰龙的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://itunes.apple.com/cn/app/poker2048/id1082986656?mt=8" title="IOS作品Poker2048" target="_blank">IOS作品Poker2048</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在viewController中创建界面"><span class="nav-number">1.</span> <span class="nav-text">在viewController中创建界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#viewDidLoad"><span class="nav-number">2.</span> <span class="nav-text">viewDidLoad()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#saveData"><span class="nav-number">3.</span> <span class="nav-text">saveData()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#findContact"><span class="nav-number">4.</span> <span class="nav-text">findContact()</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tom555cat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tom555cat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
