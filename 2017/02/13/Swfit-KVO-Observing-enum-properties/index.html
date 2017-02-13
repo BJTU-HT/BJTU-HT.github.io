@@ -84,18 +84,19 @@
 
 
 
-<meta name="description" content="SDWebImage框架的代码调用大致流程，先上一张手画图：">
+<meta name="description" content="转自stackoverflow:http://stackoverflow.com/questions/27292918/swift-kvo-observing-enum-properties
+swift中对enum成员使用KVO.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SDWebImage框架大致流程">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/07/28/SDWebImage框架大致流程/index.html">
+<meta property="og:title" content="Swfit KVO - Observing enum properties">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2017/02/13/Swfit-KVO-Observing-enum-properties/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="SDWebImage框架的代码调用大致流程，先上一张手画图：">
-<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/IMG_0569.png">
-<meta property="og:updated_time" content="2016-07-28T14:58:58.000Z">
+<meta property="og:description" content="转自stackoverflow:http://stackoverflow.com/questions/27292918/swift-kvo-observing-enum-properties
+swift中对enum成员使用KVO.">
+<meta property="og:updated_time" content="2017-02-13T01:56:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SDWebImage框架大致流程">
-<meta name="twitter:description" content="SDWebImage框架的代码调用大致流程，先上一张手画图：">
-<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/IMG_0569.png">
+<meta name="twitter:title" content="Swfit KVO - Observing enum properties">
+<meta name="twitter:description" content="转自stackoverflow:http://stackoverflow.com/questions/27292918/swift-kvo-observing-enum-properties
+swift中对enum成员使用KVO.">
 
 
 
@@ -116,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/07/28/SDWebImage框架大致流程/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2017/02/13/Swfit-KVO-Observing-enum-properties/"/>
 
-  <title> SDWebImage框架大致流程 | 知其然知其所以然 </title>
+  <title> Swfit KVO - Observing enum properties | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +249,7 @@
             
             
               
-                SDWebImage框架大致流程
+                Swfit KVO - Observing enum properties
               
             
           </h1>
@@ -260,19 +261,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T22:05:20+08:00" content="2016-07-28">
-              2016-07-28
+            <time itemprop="dateCreated" datetime="2017-02-13T09:52:18+08:00" content="2017-02-13">
+              2017-02-13
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/28/SDWebImage框架大致流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/SDWebImage框架大致流程/" itemprop="commentsCount"></span>
+                <a href="/2017/02/13/Swfit-KVO-Observing-enum-properties/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/Swfit-KVO-Observing-enum-properties/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -295,20 +315,14 @@
       
 
       
-        <p>SDWebImage框架的代码调用大致流程，先上一张手画图：<br><img src="/images/IMG_0569.png" alt="Mou icon"></p>
+        <p>转自stackoverflow:<br><a href="http://stackoverflow.com/questions/27292918/swift-kvo-observing-enum-properties" target="_blank" rel="external">http://stackoverflow.com/questions/27292918/swift-kvo-observing-enum-properties</a></p>
+<p>swift中对enum成员使用KVO.</p>
 <a id="more"></a>
-<h3 id="左边图"><a href="#左边图" class="headerlink" title="左边图"></a>左边图</h3><p>使用SDWebImage，最简单的方式是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[imageView sd_setImageWithURL:url]</span><br></pre></td></tr></table></figure>
-<p>上面涉及的到sd_setImageWithURL就是手画图左边UIImageView+WebCache中的【- (void)sd_setImageWithURL:(NSURL *)url】方法，而该方法会直接调用左图下面的那个方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">- (void)sd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder </span><br><span class="line">                                                 options:(SDWebImageOptions)options </span><br><span class="line">                                    progress:(SDWebImageDownloaderProgressBlock)progressBlock </span><br><span class="line">                             completed(SDWebImageCompletionBlock)completedBlock </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">	id &lt;SDWebImageOperation&gt; operation = </span><br><span class="line">	[SDWebImageManager.sharedManager downloadImageWithURL:url </span><br><span class="line">	                                              options:options </span><br><span class="line">	                                             progress:progressBlock </span><br><span class="line">	                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) &#123;</span><br><span class="line">	...</span><br><span class="line">	 wself.image = image;</span><br><span class="line">     [wself setNeedsLayout];</span><br><span class="line">	...</span><br><span class="line">	&#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面调用的SDWebImageManager的【downloadImageWithURL…】定义了它的completed block, 在block中我们可以看到当前uiimageview拿到了image，并设置了setNeedsLayout；该函数在中间图中定义。</p>
-<h3 id="中间图"><a href="#中间图" class="headerlink" title="中间图"></a>中间图</h3><p>左边图会调用中间图SDWebImageManager中的【downloadImageWithURL…】方法，而在这个方法中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (id &lt;SDWebImageOperation&gt;)downloadImageWithURL:(NSURL *)url</span><br><span class="line">                                         options:(SDWebImageOptions)options</span><br><span class="line">                                        progress:(SDWebImageDownloaderProgressBlock)progressBlock</span><br><span class="line">                               completed:(SDWebImageCompletionWithFinishedBlock)completedBlock </span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    operation.cacheOperation = [self.imageCache queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) &#123;</span><br><span class="line">    	...</span><br><span class="line">    	completedBlock(image, nil, cacheType, YES, url); // 回调左边图中定义的completed block</span><br><span class="line">    	...</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面调用了SDImageCache中的【queryDiskCacheForKey…】方法，并定义了它的done block，该函数在右边图定义</p>
-<h3 id="右边图"><a href="#右边图" class="headerlink" title="右边图"></a>右边图</h3><p>中间图调用了SDImageCache的【queryDiskCacheForKey…】方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (NSOperation *)queryDiskCacheForKey:(NSString *)key </span><br><span class="line">                                 done:(SDWebImageQueryCompletedBlock)doneBlock &#123;</span><br><span class="line">    </span><br><span class="line">    ...                             </span><br><span class="line">   	// 在内存缓存中查找到</span><br><span class="line">    UIImage *image = [self imageFromMemoryCacheForKey:key];</span><br><span class="line">    if (image) &#123;</span><br><span class="line">        doneBlock(image, SDImageCacheTypeMemory);    // 回调中间图定义的done block</span><br><span class="line">        return nil;</span><br><span class="line">    &#125;</span><br><span class="line">	....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们这里只举了一个直接从内存缓存中获取到图片的例子，主要为了了解调用的大致流程。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SDWebImage的主调用框架是使用block来实现的，看上去比较复杂，基本思想就是三个类A,B,C;<br>类A在调用类B的成员函数时，提供了block参数，使类B可以在某些时候调用类A的block；<br>类B调用类C的函数时，也提供了block参数，类C完成处理时，调用类B提供的block。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">class SomeModel: NSObject &#123;</span><br><span class="line">    @objc enum ItemState: Int &#123;</span><br><span class="line">    case Ready, Set, Go</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dynamic var state = ItemState.Ready</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class EnumObserverExample: NSObject &#123;</span><br><span class="line">    private let model: SomeModel</span><br><span class="line"></span><br><span class="line">    init(model: SomeModel) &#123;</span><br><span class="line">        self.model = model</span><br><span class="line">        super.init()</span><br><span class="line">        self.model.addObserver(self, forKeyPath: &quot;state&quot;, options: NSKeyValueObservingOptions.initial, context: nil)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    deinit &#123;</span><br><span class="line">        model.removeObserver(self, forKeyPath: &quot;state&quot;, context: nil)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) &#123;</span><br><span class="line">        if keyPath == &quot;state&quot; &#123;</span><br><span class="line">        print(&quot;Observed state change to \(model.state.rawValue)&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改变SomeModel的state,观察输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let model = SomeModel()</span><br><span class="line">let observer = EnumObserverExample(model: model)</span><br><span class="line">model.state = .Set</span><br><span class="line">model.state = .Go</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Observed state change to 0</span><br><span class="line">Observed state change to 1</span><br><span class="line">Observed state change to 2</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -334,17 +348,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/27/使用-synchronized指南/" rel="next" title="使用@synchronized指南">
-                <i class="fa fa-chevron-left"></i> 使用@synchronized指南
+              <a href="/2017/01/31/Swift中使用FMDB/" rel="next" title="Swift中使用FMDB">
+                <i class="fa fa-chevron-left"></i> Swift中使用FMDB
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/29/SDWebImage之下载图片/" rel="prev" title="SDWebImage之下载图片">
-                SDWebImage之下载图片 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -370,8 +380,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/28/SDWebImage框架大致流程/"
-           data-title="SDWebImage框架大致流程" data-url="http://www.duitang.com/blog/?id=497773911/2016/07/28/SDWebImage框架大致流程/">
+      <div class="ds-thread" data-thread-key="2017/02/13/Swfit-KVO-Observing-enum-properties/"
+           data-title="Swfit KVO - Observing enum properties" data-url="http://www.duitang.com/blog/?id=497773911/2017/02/13/Swfit-KVO-Observing-enum-properties/">
       </div>
     
   </div>
@@ -480,7 +490,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#左边图"><span class="nav-number">1.</span> <span class="nav-text">左边图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间图"><span class="nav-number">2.</span> <span class="nav-text">中间图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右边图"><span class="nav-number">3.</span> <span class="nav-text">右边图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
