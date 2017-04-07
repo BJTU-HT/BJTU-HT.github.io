@@ -1,0 +1,656 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="仿照闲鱼发布选择图片功能的一个demo
+功能有3个页面:1&amp;gt; 相册页面 AlbumsViewController2&amp;gt; 相册缩略图页面 AlbumDetailCollectionViewController3&amp;gt; 相册预览图页面 AlbumDetailPreviewViewController
+页面之间的跳转如下：入口 -&amp;gt; AlbumsViewController &amp;lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift低仿闲鱼发布相册功能">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2017/04/01/Swift低仿闲鱼发布相册功能/index.html">
+<meta property="og:site_name" content="知其然知其所以然">
+<meta property="og:description" content="仿照闲鱼发布选择图片功能的一个demo
+功能有3个页面:1&amp;gt; 相册页面 AlbumsViewController2&amp;gt; 相册缩略图页面 AlbumDetailCollectionViewController3&amp;gt; 相册预览图页面 AlbumDetailPreviewViewController
+页面之间的跳转如下：入口 -&amp;gt; AlbumsViewController &amp;lt;">
+<meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/album.gif">
+<meta property="og:updated_time" content="2017-04-01T07:44:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift低仿闲鱼发布相册功能">
+<meta name="twitter:description" content="仿照闲鱼发布选择图片功能的一个demo
+功能有3个页面:1&amp;gt; 相册页面 AlbumsViewController2&amp;gt; 相册缩略图页面 AlbumDetailCollectionViewController3&amp;gt; 相册预览图页面 AlbumDetailPreviewViewController
+页面之间的跳转如下：入口 -&amp;gt; AlbumsViewController &amp;lt;">
+<meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/album.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2017/04/01/Swift低仿闲鱼发布相册功能/"/>
+
+  <title> Swift低仿闲鱼发布相册功能 | 知其然知其所以然 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">知其然知其所以然</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Swift低仿闲鱼发布相册功能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-01T15:37:27+08:00" content="2017-04-01">
+              2017-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/01/Swift低仿闲鱼发布相册功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/Swift低仿闲鱼发布相册功能/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/album.gif" alt="Mou icon"></p>
+<p>仿照闲鱼发布选择图片功能的一个demo</p>
+<h3 id="功能有3个页面"><a href="#功能有3个页面" class="headerlink" title="功能有3个页面:"></a>功能有3个页面:</h3><p>1&gt; 相册页面 AlbumsViewController<br>2&gt; 相册缩略图页面 AlbumDetailCollectionViewController<br>3&gt; 相册预览图页面 AlbumDetailPreviewViewController</p>
+<p>页面之间的跳转如下：<br>入口 -&gt; AlbumsViewController &lt;-&gt; AlbumDetailCollectionViewController &lt;-&gt; AlbumDetailPreviewViewController</p>
+<h3 id="数据部分主要有2部分："><a href="#数据部分主要有2部分：" class="headerlink" title="数据部分主要有2部分："></a>数据部分主要有2部分：</h3><p>1&gt; 当前浏览相册 CurrentAlbumAssetModule<br>2&gt; 已经选中的图片 ChosenPhotosModule<br>在进入一个相册后，CurrentAlbumAssetModule保存了当前相册的图片以及其是否被选中的状态；当进入另一个相册后，CurrentAlbumAssetModule中的数据就会更新为另一个相册的内容。<br>ChosenPhotosModule中包含了提交图片之前所选择的图片信息。</p>
+<h3 id="图片提交功能自定义"><a href="#图片提交功能自定义" class="headerlink" title="图片提交功能自定义"></a>图片提交功能自定义</h3><p>3个页面都可以提交当前选择的图片，选择通过什么方式提交可以在3个页面的如下位置添加自己的处理代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.chosenPhotoView?.sendButtonClickedClosure = &#123;</span><br><span class="line">    DDLog(&quot;图片信息保存在ChosenPhotosModule.sharedInstance.chosenPhotoArray&quot;)</span><br><span class="line">    DDLog(&quot;在这里配置你的发送相片操作&quot;)</span><br><span class="line">    _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 4])!, animated: true)   // 返回上上上层</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h6><p><a href="https://github.com/tom555cat/Album.git" target="_blank" rel="external">https://github.com/tom555cat/Album.git</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/Swift初始化总结/" rel="next" title="Swift初始化总结">
+                <i class="fa fa-chevron-left"></i> Swift初始化总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/01/Swift低仿闲鱼发布相册功能/"
+           data-title="Swift低仿闲鱼发布相册功能" data-url="http://www.duitang.com/blog/?id=497773911/2017/04/01/Swift低仿闲鱼发布相册功能/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/100.png"
+               alt="tom555cat" />
+          <p class="site-author-name" itemprop="name">tom555cat</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.wangchenlong.org/" title="王辰龙的博客" target="_blank">王辰龙的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://itunes.apple.com/cn/app/poker2048/id1082986656?mt=8" title="IOS作品Poker2048" target="_blank">IOS作品Poker2048</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能有3个页面"><span class="nav-number">1.</span> <span class="nav-text">功能有3个页面:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据部分主要有2部分："><span class="nav-number">2.</span> <span class="nav-text">数据部分主要有2部分：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片提交功能自定义"><span class="nav-number">3.</span> <span class="nav-text">图片提交功能自定义</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#下载地址"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">下载地址</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tom555cat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tom555cat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

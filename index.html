@@ -248,6 +248,502 @@
             
               
                 
+                <a class="post-title-link" href="/2017/04/01/Swift低仿闲鱼发布相册功能/" itemprop="url">
+                  Swift低仿闲鱼发布相册功能
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-01T15:37:27+08:00" content="2017-04-01">
+              2017-04-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/01/Swift低仿闲鱼发布相册功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/Swift低仿闲鱼发布相册功能/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/album.gif" alt="Mou icon"></p>
+<p>仿照闲鱼发布选择图片功能的一个demo</p>
+<h3 id="功能有3个页面"><a href="#功能有3个页面" class="headerlink" title="功能有3个页面:"></a>功能有3个页面:</h3><p>1&gt; 相册页面 AlbumsViewController<br>2&gt; 相册缩略图页面 AlbumDetailCollectionViewController<br>3&gt; 相册预览图页面 AlbumDetailPreviewViewController</p>
+<p>页面之间的跳转如下：<br>入口 -&gt; AlbumsViewController &lt;-&gt; AlbumDetailCollectionViewController &lt;-&gt; AlbumDetailPreviewViewController</p>
+<h3 id="数据部分主要有2部分："><a href="#数据部分主要有2部分：" class="headerlink" title="数据部分主要有2部分："></a>数据部分主要有2部分：</h3><p>1&gt; 当前浏览相册 CurrentAlbumAssetModule<br>2&gt; 已经选中的图片 ChosenPhotosModule<br>在进入一个相册后，CurrentAlbumAssetModule保存了当前相册的图片以及其是否被选中的状态；当进入另一个相册后，CurrentAlbumAssetModule中的数据就会更新为另一个相册的内容。<br>ChosenPhotosModule中包含了提交图片之前所选择的图片信息。</p>
+<h3 id="图片提交功能自定义"><a href="#图片提交功能自定义" class="headerlink" title="图片提交功能自定义"></a>图片提交功能自定义</h3><p>3个页面都可以提交当前选择的图片，选择通过什么方式提交可以在3个页面的如下位置添加自己的处理代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">self.chosenPhotoView?.sendButtonClickedClosure = &#123;</span><br><span class="line">    DDLog(&quot;图片信息保存在ChosenPhotosModule.sharedInstance.chosenPhotoArray&quot;)</span><br><span class="line">    DDLog(&quot;在这里配置你的发送相片操作&quot;)</span><br><span class="line">    _ = self.navigationController?.popToViewController((self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 4])!, animated: true)   // 返回上上上层</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h6><p><a href="https://github.com/tom555cat/Album.git" target="_blank" rel="external">https://github.com/tom555cat/Album.git</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/30/Swift初始化总结/" itemprop="url">
+                  Swift初始化总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-30T11:11:50+08:00" content="2017-03-30">
+              2017-03-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Swift/" itemprop="url" rel="index">
+                    <span itemprop="name">Swift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/30/Swift初始化总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/Swift初始化总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Swift在初始化过程中遇到的一些问题，这里结合理论总结一下。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/30/Swift初始化总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/22/TeamTalk从会话获取聊天信息流程/" itemprop="url">
+                  TeamTalk从会话获取聊天信息流程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-22T15:11:37+08:00" content="2017-03-22">
+              2017-03-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/TeamTalk/" itemprop="url" rel="index">
+                    <span itemprop="name">TeamTalk</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/22/TeamTalk从会话获取聊天信息流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/TeamTalk从会话获取聊天信息流程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这是一个涉及到IM业务层面的一个话题，源码层面稍微有一些复杂，这里专门记录一下这个流程。</p>
+<p>输入了一条消息并点击发送后，会在本地存放这条消息，消息id以100000偏移；当得到服务器这条消息发送成功的返回结果时，删除这条记录，并插入id修正后的消息记录。</p>
+<p>在进入一个会话之前，清理掉内存保留的会话消息，</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/02/ReactiveCocoa基础概念理解/" itemprop="url">
+                  ReactiveCocoa基础概念理解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-02T10:24:45+08:00" content="2017-03-02">
+              2017-03-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ReactiveCocoa/" itemprop="url" rel="index">
+                    <span itemprop="name">ReactiveCocoa</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/02/ReactiveCocoa基础概念理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/02/ReactiveCocoa基础概念理解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基于一个基本的RACSignal使用方式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">-(RACSignal *)signInSignal &#123;</span><br><span class="line">    // part 1:[RACSignal createSignal]来获得signal</span><br><span class="line">    return [RACSignal createSignal:^RACDisposable *(id&lt;RACSubscriber&gt; subscriber) &#123;</span><br><span class="line">        [self.signInService </span><br><span class="line">        signInWithUsername:self.usernameTextField.text </span><br><span class="line">        password:self.passwordTextField.text</span><br><span class="line">        complete:^(BOOL success) &#123;</span><br><span class="line"></span><br><span class="line">        // part 3: 进入didSubscribe，通过[subscriber sendNext:]来执行next block</span><br><span class="line">            [subscriber sendNext:@(success)];</span><br><span class="line">            [subscriber sendCompleted];</span><br><span class="line">        &#125;];</span><br><span class="line">        return nil;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// part 2 : [signal subscribeNext:]来获得subscriber，然后进行subscription</span><br><span class="line">[[self signInSignal] subscribeNext:^(id x) &#123; </span><br><span class="line">    NSLog(@&quot;Sign in result: %@&quot;, x); </span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<h2 id="signal-amp-didSubscribe"><a href="#signal-amp-didSubscribe" class="headerlink" title="signal &amp; didSubscribe"></a>signal &amp; didSubscribe</h2><p>创建signal时需要提供signal需要处理的一些事情(这些事情是由某一个调度去异步处理的)，需要处理的事情是一个叫做didSubscribe的block，这个didSubscribe最终保存在signal的属性_didSubscribe中。</p>
+<p>【当signal被subscribeNext了，就会执行signal的didSubscribe】</p>
+<h2 id="subscribe-amp-subscriber-amp-subscribeNext"><a href="#subscribe-amp-subscriber-amp-subscribeNext" class="headerlink" title="subscribe &amp; subscriber &amp; subscribeNext"></a>subscribe &amp; subscriber &amp; subscribeNext</h2><p>当对Signal执行subscribeNext时，提供了一个nextBlock，此时会创建一个RACSubscriber，RACSubscriber的next成员保存了nextBlock，然后在去调用subscribe。<br>subscribe去调度signal的didSubscribe，而didSubscribe这个block的参数就是发起subscribeNext的RACSubscriber。</p>
+<h2 id="sendNext"><a href="#sendNext" class="headerlink" title="sendNext"></a>sendNext</h2><p>在异步调度didSubscribe的过程中，会对Signal的subscribeNext发起者RACSubscriber调用sendNext，执行RACSubscriber的nexBlock。</p>
+<h3 id="replayLazily和replay的区别"><a href="#replayLazily和replay的区别" class="headerlink" title="replayLazily和replay的区别"></a>replayLazily和replay的区别</h3><p>replay里自动connect了，自动订阅了sourceSignal；replayLazily需要用户自己来订阅，而订阅的内容只执行一次。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/21/Swift-Property总结/" itemprop="url">
                   Swift-Property总结
                 </a>
@@ -961,498 +1457,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/19/StreamDelegate连接服务器测试/" itemprop="url">
-                  StreamDelegate连接服务器测试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-19T15:18:49+08:00" content="2017-01-19">
-              2017-01-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/19/StreamDelegate连接服务器测试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/19/StreamDelegate连接服务器测试/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>服务器端是C编写的一个echo程序，即返回客户端发来的信息，客户端是采用了Stream的Swift程序。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/19/StreamDelegate连接服务器测试/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/16/Swift单例/" itemprop="url">
-                  Swift单例
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-16T16:04:12+08:00" content="2017-01-16">
-              2017-01-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/16/Swift单例/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/Swift单例/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>In Swift, you can simply use a static type property, which is guaranteed to be lazily initialized only once, even when accessed across multiple threads simultaneously:</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/16/Swift单例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/16/Swift调用objective-c/" itemprop="url">
-                  Swift调用objective-c
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-16T10:41:59+08:00" content="2017-01-16">
-              2017-01-16
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/16/Swift调用objective-c/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/Swift调用objective-c/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在swift中使用MD5时，需要使用ObjC的头文件#import <commoncrypto commoncrypto.h="">。<br>在swift中新建一个bridge-header.h头文件，将“#import <commoncrypto commoncrypto.h="">”复制进去。<br>在Target-&gt;Build Settings中找到Objective-C Bridging Header, 写入./TeamTalkSwift/bridge-header.h，就可以了，其中TeamTalkSwift是项目名称。</commoncrypto></commoncrypto></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/11/Swift使用Protobuf/" itemprop="url">
-                  Swift使用Protobuf
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-11T15:35:35+08:00" content="2017-01-11">
-              2017-01-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Swift/" itemprop="url" rel="index">
-                    <span itemprop="name">Swift</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/11/Swift使用Protobuf/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/Swift使用Protobuf/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>具体操作流程见: <a href="https://github.com/apple/swift-protobuf" target="_blank" rel="external">https://github.com/apple/swift-protobuf</a><br>生成protoc-gen-swift文件后，将protoc-gen-swift的文件路径加入到PATH路径。<br>.proto文件是描述协议的文件，Teamtalk源码的pb文件夹中包含.proto文件，无需自己去写。<br>protoc程序需要从google的github上下载: <a href="https://github.com/google/protobuf/releases/tag/v3.0.0" target="_blank" rel="external">https://github.com/google/protobuf/releases/tag/v3.0.0</a><br>Mac下直接下载protoc-3.00-osx-x86_64.zip，解压后将protoc文件路径加入PATH中，就可以使用protoc将.proto转化成.pb.swift了。</p>
-<p>转换成swift后常用的函数在<a href="https://github.com/apple/swift-protobuf/blob/master/Documentation/API.md，但是当前版本转换后的swift中看不到类似于下面这些方法，" target="_blank" rel="external">https://github.com/apple/swift-protobuf/blob/master/Documentation/API.md，但是当前版本转换后的swift中看不到类似于下面这些方法，</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">init(protobuf: Data) throws &#123;</span><br><span class="line">init(protobuf: Data, extensions: ProtobufExtensionSet? = nil) throws</span><br></pre></td></tr></table></figure>
-<p>这些方法目前都写在了框架中，我们直接调用就可以了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1493,7 +1502,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1501,7 +1510,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
