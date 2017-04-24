@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="知其然知其所以然">
 <meta property="og:description" content="以下是SDWebImage的主线程同步调用宏定义:
 123456#define dispatch_main_sync_safe(block)\    if ([NSThread isMainThread]) &amp;#123;\        block();\    &amp;#125; else &amp;#123;\        dispatch_sync(dispatch_get_main_queue(),">
-<meta property="og:updated_time" content="2017-04-24T02:37:35.000Z">
+<meta property="og:updated_time" content="2017-04-24T02:38:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS主线程同步调用">
 <meta name="twitter:description" content="以下是SDWebImage的主线程同步调用宏定义:
@@ -348,13 +348,15 @@
 <ol>
 <li>I create a workerQ queue that points to a funnelQ queue. In real code this is useful if you have several “worker” queues and you want to resume/suspend all at once (which is achieved by resuming/updating their target funnelQ queue).</li>
 <li>I may funnel my worker queues at any point in time, so to know if they are funneled or not, I tag funnelQ with the word “funnel”.</li>
-<li><p>Down the road I dispatch_sync something to workerQ, and for whatever reason I want to dispatch_sync to funnelQ, but avoiding a dispatch_sync to the current queue, so I check for the tag and act accordingly. Because the get walks up the hierarchy, the value won’t be found in workerQ but it will be found in funnelQ. This is a way of finding out if any queue in the hierarchy is the one where we stored the value. And therefore, to prevent a dispatch_sync to the current queue.<br>If you are wondering about the functions that read/write context data, there are three:</p>
-</li>
-<li><p>dispatch_queue_set_specific: Write to a queue.</p>
-</li>
-<li>dispatch_queue_get_specific: Read from a queue.</li>
-<li>dispatch_get_specific: Convenience function to read from the current queue.<br>The key is compared by pointer, and never dereferenced. The last parameter in the setter is a destructor to release the key.</li>
+<li>Down the road I dispatch_sync something to workerQ, and for whatever reason I want to dispatch_sync to funnelQ, but avoiding a dispatch_sync to the current queue, so I check for the tag and act accordingly. Because the get walks up the hierarchy, the value won’t be found in workerQ but it will be found in funnelQ. This is a way of finding out if any queue in the hierarchy is the one where we stored the value. And therefore, to prevent a dispatch_sync to the current queue.</li>
 </ol>
+<p>If you are wondering about the functions that read/write context data, there are three:</p>
+<ol>
+<li>dispatch_queue_set_specific: Write to a queue.</li>
+<li>dispatch_queue_get_specific: Read from a queue.</li>
+<li>dispatch_get_specific: Convenience function to read from the current queue.</li>
+</ol>
+<p>The key is compared by pointer, and never dereferenced. The last parameter in the setter is a destructor to release the key.</p>
 <p>If you are wondering about “pointing one queue to another”, it means exactly that. For example, I can point a queue A to the main queue, and it will cause all blocks in the queue A to run in the main queue (usually this is done for UI updates).</p>
 
       
