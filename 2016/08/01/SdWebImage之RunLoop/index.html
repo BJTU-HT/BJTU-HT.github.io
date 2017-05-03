@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/08/01/SdWebImage之RunLoop/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
 <meta property="og:description" content="在SDWebImage中的SDWebImageDownloaderOperation的start函数中，调用了CFRunLoopRun()，我们来看一下CFRunLoopRun到底是做什么的，起到了什么作用。">
-<meta property="og:updated_time" content="2017-04-21T07:59:13.000Z">
+<meta property="og:updated_time" content="2017-04-26T07:10:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SDWebImage之RunLoop">
 <meta name="twitter:description" content="在SDWebImage中的SDWebImageDownloaderOperation的start函数中，调用了CFRunLoopRun()，我们来看一下CFRunLoopRun到底是做什么的，起到了什么作用。">
@@ -314,7 +314,7 @@
       
         <p>在SDWebImage中的SDWebImageDownloaderOperation的start函数中，调用了CFRunLoopRun()，我们来看一下CFRunLoopRun到底是做什么的，起到了什么作用。</p>
 <a id="more"></a>
-<p>每一个线程有一个runloop,既不可以创建，也不能销毁线程的runloop。Core Foundation根据需求为你创建，通过<code>CFRunLoopGetMain</code>可以获得当前线程的runloop。调用CFRunLoopRun可以使当前线程的runloop以默认模式运行起来，知道调用<code>CFRunLoopStop</code>来停止runloop。你也可以调用<code>CFRunLoopRunInMode</code>来使当前线程的runloop以指定模式运行起来一段时间或者知道runloop被停止。【runloop只能在请求模式至少有一个source或者timer可监控的情况下运行起来。】</p>
+<p>每一个线程有一个runloop,既不可以创建，也不能销毁线程的runloop。Core Foundation根据需求为你创建，通过<code>CFRunLoopGetMain</code>可以获得当前线程的runloop。调用CFRunLoopRun可以使当前线程的runloop以默认模式运行起来，直到调用<code>CFRunLoopStop</code>来停止runloop。你也可以调用<code>CFRunLoopRunInMode</code>来使当前线程的runloop以指定模式运行起来一段时间或者知道runloop被停止。【runloop只能在请求模式至少有一个source或者timer可监控的情况下运行起来。】</p>
 <p>一般主线程会自动运行runloop，我们一般情况下不会去管。在其他子线程中，如果需要我们需要去管理。使用runloop后，可以把线程想象成进入了一个循环；如果没有这个循环，子线程完成任务后，这个线程就结束了。所以如果需要一个线程处理各种事件而不让它结束，就需要运行runloop。</p>
 <p>在SDWebImageDownloaderOperation中，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (void)start&#123;</span><br><span class="line">	...</span><br><span class="line">	self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">	if(self.connection)&#123;</span><br><span class="line">		...</span><br><span class="line">		CFRunLoopRun()</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -427,7 +427,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
