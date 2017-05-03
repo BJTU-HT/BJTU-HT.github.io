@@ -92,7 +92,7 @@ Asynchronous Versus Synchronous OperationsOperation默认是synchronous，synchr
 <meta property="og:site_name" content="知其然知其所以然">
 <meta property="og:description" content="主要说一下Asynchronous和Synchronous的区别，Concurrent和Non-concurrent的区别。
 Asynchronous Versus Synchronous OperationsOperation默认是synchronous，synchronous的operation执行时不需要创建额外的线程，只是在当前线程执行，task执行完成后返回。Asynchronous的o">
-<meta property="og:updated_time" content="2017-05-03T02:52:45.000Z">
+<meta property="og:updated_time" content="2017-05-03T02:54:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSOperation理解">
 <meta name="twitter:description" content="主要说一下Asynchronous和Synchronous的区别，Concurrent和Non-concurrent的区别。
@@ -321,9 +321,9 @@ Asynchronous Versus Synchronous OperationsOperation默认是synchronous，synchr
 <p>根据文档的描述，放在NSoperationQueue中的operation都是asynchronous的。</p>
 <h2 id="Concurrent-Versus-non-concurrent-Operations"><a href="#Concurrent-Versus-non-concurrent-Operations" class="headerlink" title="Concurrent Versus non-concurrent Operations"></a>Concurrent Versus non-concurrent Operations</h2><p>文档里有如下一段描述:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In the context of an NSOperation object, the terms concurrent and non-concurrent do not necessarily refer to the side-by-side execution of threads. Instead, a non-concurrent operation is one that executes using the environment that is provided for it while a concurrent operation is responsible for setting up its own execution environment.</span><br></pre></td></tr></table></figure>
-<p>来自stackoverflow[^stackedit]的解释：</p>
-<ol>
-<li>[^stackedit]<a href="http://stackoverflow.com/questions/1646795/nsoperationqueue-and-concurrent-vs-non-concurrent" target="_blank" rel="external">http://stackoverflow.com/questions/1646795/nsoperationqueue-and-concurrent-vs-non-concurrent</a><br>]</li>
+<p>来自stackoverflow[1]的解释：</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ol>
+<li><a href="http://stackoverflow.com/questions/1646795/nsoperationqueue-and-concurrent-vs-non-concurrent" target="_blank" rel="external">http://stackoverflow.com/questions/1646795/nsoperationqueue-and-concurrent-vs-non-concurrent</a></li>
 </ol>
 
       
@@ -492,7 +492,7 @@ Asynchronous Versus Synchronous OperationsOperation默认是synchronous，synchr
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Asynchronous-Versus-Synchronous-Operations"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Versus Synchronous Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concurrent-Versus-non-concurrent-Operations"><span class="nav-number">2.</span> <span class="nav-text">Concurrent Versus non-concurrent Operations</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Asynchronous-Versus-Synchronous-Operations"><span class="nav-number">1.</span> <span class="nav-text">Asynchronous Versus Synchronous Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concurrent-Versus-non-concurrent-Operations"><span class="nav-number">2.</span> <span class="nav-text">Concurrent Versus non-concurrent Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
           </div>
         </section>
