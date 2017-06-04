@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="IOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta name="description" content="iOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IOS中用户留言功能使用极光推送">
-<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/index.html">
+<meta property="og:title" content="iOS中用户留言功能使用极光推送">
+<meta property="og:url" content="http://www.duitang.com/blog/?id=497773911/2016/09/12/iOS中用户留言功能使用极光推送/index.html">
 <meta property="og:site_name" content="知其然知其所以然">
-<meta property="og:description" content="IOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta property="og:description" content="iOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
 <meta property="og:image" content="http://www.duitang.com/blog/?id=497773911/images/jpush.png">
-<meta property="og:updated_time" content="2016-11-03T02:49:43.000Z">
+<meta property="og:updated_time" content="2017-06-04T03:02:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IOS中用户留言功能使用极光推送">
-<meta name="twitter:description" content="IOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
+<meta name="twitter:title" content="iOS中用户留言功能使用极光推送">
+<meta name="twitter:description" content="iOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。">
 <meta name="twitter:image" content="http://www.duitang.com/blog/?id=497773911/images/jpush.png">
 
 
@@ -116,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/"/>
+  <link rel="canonical" href="http://www.duitang.com/blog/?id=497773911/2016/09/12/iOS中用户留言功能使用极光推送/"/>
 
-  <title> IOS中用户留言功能使用极光推送 | 知其然知其所以然 </title>
+  <title> iOS中用户留言功能使用极光推送 | 知其然知其所以然 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -248,7 +248,7 @@
             
             
               
-                IOS中用户留言功能使用极光推送
+                iOS中用户留言功能使用极光推送
               
             
           </h1>
@@ -290,8 +290,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/12/IOS中用户留言功能使用极光推送/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/12/IOS中用户留言功能使用极光推送/" itemprop="commentsCount"></span>
+                <a href="/2016/09/12/iOS中用户留言功能使用极光推送/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/12/iOS中用户留言功能使用极光推送/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,9 +315,9 @@
 
       
         <p><img src="/images/jpush.png" alt="Mou icon"></p>
-<p>IOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。</p>
+<p>iOS中经常遇到给其他用户留言（非即时通信），并将留言推送到用户这种需求。极光推送是一个不错的选择，极光推送可以按”alias”别名进行推送，极大地增加了推送的灵活性。</p>
 <a id="more"></a>
-<p>这里不介绍IOS应用集成极光推送的过程，详细过程可以参考官方文档。</p>
+<p>这里不介绍iOS应用集成极光推送的过程，详细过程可以参考官方文档。</p>
 <h3 id="注册别名"><a href="#注册别名" class="headerlink" title="注册别名"></a>注册别名</h3><p>首先介绍极光推送中的一个概念:alias，即别名，用别名来标识一个用户。一个设备只能绑定一个别名，但多个设备可以绑定同一个别名。一次推送最多 1000 个。<br>给用户留言需要知道这个用户的基本信息，比如知道了这个用户的id，这时就可以将这个id当做极光推送中的”alias”别名进行推送。</p>
 <p>当用户在IOS客户端登陆成功后，就可以注册别名：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[JPUSHService setTags:nil alias:user_id callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:self];</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">- (void)tagsAliasCallback:(int)iResCode</span><br><span class="line">                     tags:(NSSet *)tags</span><br><span class="line">                    alias:(NSString *)alias</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;rescode: %d, \ntags: %@, \nalias: %@\n&quot;, iResCode, tags , alias);</span><br><span class="line">    if (iResCode == 0) &#123;</span><br><span class="line">        NSLog(@&quot;注册别名成功!&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        NSLog(@&quot;注册别名失败!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -399,8 +399,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/12/IOS中用户留言功能使用极光推送/"
-           data-title="IOS中用户留言功能使用极光推送" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/12/IOS中用户留言功能使用极光推送/">
+      <div class="ds-thread" data-thread-key="2016/09/12/iOS中用户留言功能使用极光推送/"
+           data-title="iOS中用户留言功能使用极光推送" data-url="http://www.duitang.com/blog/?id=497773911/2016/09/12/iOS中用户留言功能使用极光推送/">
       </div>
     
   </div>
@@ -445,7 +445,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -453,7 +453,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
